@@ -50,7 +50,7 @@ export default function AboutPage() {
         <motion.div
           className="container mx-auto px-4 md:px-6 text-center"
           initial="hidden"
-          animate="visible"
+          animate="visible" // Changed from whileInView
           viewport={{ once: true }}
           variants={heroTextVariants}
         >
@@ -81,6 +81,7 @@ export default function AboutPage() {
                 textAlignment="left"
                 titleClassName="text-primary"
                 className="mb-0"
+                animateOnLoad={true} // Added prop
               />
                <p className="text-muted-foreground">
                 We believe that technology, when wielded creatively and strategically, can unlock unprecedented opportunities. Our journey is one of continuous learning, adaptation, and a relentless pursuit of delivering impactful results for our partners.
@@ -96,12 +97,13 @@ export default function AboutPage() {
             title="Mission &amp; Vision"
             subtitle="Guiding our strategies and inspiring our actions."
             titleClassName="text-primary"
+            animateOnLoad={true} // Added prop
           />
           <motion.div
             className="grid md:grid-cols-2 gap-8"
             variants={cardContainerVariants}
             initial="hidden"
-            animate="visible"
+            animate="visible" // Changed from whileInView
             viewport={{ once: true, amount: 0.1 }}
           >
             <motion.div variants={cardItemVariants}>
@@ -139,12 +141,13 @@ export default function AboutPage() {
           <SectionHeader
             title="Core Values That Define Us"
             subtitle="These principles are at the heart of everything we do at Praszo, guiding our interactions and decisions."
+            animateOnLoad={true} // Added prop
           />
           <motion.div
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
             variants={cardContainerVariants}
             initial="hidden"
-            animate="visible"
+            animate="visible" // Changed from whileInView
             viewport={{ once: true, amount: 0.1 }}
           >
             {coreValues.map((value) => (
@@ -172,6 +175,7 @@ export default function AboutPage() {
             title="Meet the Innovators"
             subtitle="Praszo is powered by a diverse team of passionate strategists, creative designers, skilled developers, and dedicated project managers. Our collective expertise and collaborative spirit are the cornerstones of your success."
             titleClassName="text-primary"
+            // animateOnLoad={false} // Default, so it will use whileInView - this section is lower
           />
           <motion.div
             className="max-w-3xl mx-auto rounded-xl overflow-hidden shadow-xl"
