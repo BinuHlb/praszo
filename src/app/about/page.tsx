@@ -50,8 +50,8 @@ export default function AboutPage() {
         <motion.div
           className="container mx-auto px-4 md:px-6 text-center"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+          animate="visible" // Changed from whileInView
+          viewport={{ once: true }} // Still useful for performance if animate is conditional
           variants={heroTextVariants}
         >
           <h1 className="text-4xl md:text-5xl font-bold font-headline mb-4">About Praszo</h1>
@@ -225,3 +225,5 @@ export default function AboutPage() {
     </>
   );
 }
+
+    
