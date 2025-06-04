@@ -168,9 +168,7 @@ export default function Navbar() {
                   isMenuDropdownActive && "text-primary"
                 )}
               >
-                <a> {/* This 'a' tag will get button's styles and DropdownMenuTrigger's props */}
-                  Menu <ChevronDown className="ml-1 h-4 w-4" />
-                </a>
+                Menu <ChevronDown className="ml-1 h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
