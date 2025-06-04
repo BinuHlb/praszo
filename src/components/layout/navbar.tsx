@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, ChevronDown, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button'; // Import buttonVariants
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import {
   DropdownMenu,
@@ -20,7 +20,7 @@ import AnimatedLogo from '@/components/icons/animated-logo';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
-import { getProductBySlug } from '@/data/mock-data'; // Assuming products data is fetched/available
+import { getProductBySlug } from '@/data/mock-data';
 import type { Product } from '@/lib/types';
 
 
@@ -141,7 +141,14 @@ export default function Navbar() {
     };
   }, []);
 
-  const isMenuDropdownActive = megaMenuItems.some(item => pathname === item.href) || isMenuDropdownOpen;
+  // Delay application of active state based on client-side info until mounted
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+  
+  const pathMatchesMegaMenu = mounted ? megaMenuItems.some(item => pathname === item.href) : false;
+  const isMenuDropdownActive = pathMatchesMegaMenu || (mounted && isMenuDropdownOpen);
   
 
   return (
@@ -151,26 +158,23 @@ export default function Navbar() {
       )}>
       <div className="container mx-auto flex h-full items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
-          <AnimatedLogo  />
+          <AnimatedLogo />
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex flex-1 items-center justify-between mx-4 sm:mx-6 lg:mx-8">
           {/* Mega Menu Dropdown - Aligned to the left within the nav space */}
           <DropdownMenu open={isMenuDropdownOpen} onOpenChange={setIsMenuDropdownOpen} modal={false}>
-            <DropdownMenuTrigger asChild
+            <DropdownMenuTrigger
               onMouseEnter={handleMenuMouseEnter}
               onMouseLeave={handleMenuMouseLeave}
+              className={cn(
+                buttonVariants({ variant: 'ghost' }), // Get base button styles
+                "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2", // Specific overrides and original classes
+                isMenuDropdownActive && "text-primary"
+              )}
             >
-              <Button
-                variant="ghost"
-                className={cn(
-                  "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2",
-                  isMenuDropdownActive && "text-primary"
-                )}
-              >
-                Menu <ChevronDown className="ml-1 h-4 w-4" />
-              </Button>
+              Menu <ChevronDown className="ml-1 h-4 w-4" />
             </DropdownMenuTrigger>
             <DropdownMenuContent
               className="w-screen left-0 bg-background shadow-xl border-t data-[side=bottom]:slide-in-from-top-4" 
@@ -264,8 +268,7 @@ export default function Navbar() {
             <SheetContent side="right" className="w-full max-w-xs bg-card p-6">
               <div className="mb-6 flex items-center">
                 <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
-                  <AnimatedLogo className="h-8 w-8" />
-                  
+                  <AnimatedLogo />
                 </Link>
               </div>
               <nav className="flex flex-col space-y-1">
@@ -303,3 +306,5 @@ export default function Navbar() {
     </header>
   );
 }
+
+    
