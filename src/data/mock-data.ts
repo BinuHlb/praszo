@@ -9,7 +9,7 @@ export const products: Product[] = [
     tagline: 'Streamline Your Workflow, Amplify Results with Practice.', 
     description: 'Our flagship project management application, Practice, is designed for modern teams. Intuitive, powerful, and fully customizable to fit your unique processes.', 
     longDescription: 'Practice is more than just a task manager; it\'s a comprehensive platform that brings clarity, collaboration, and efficiency to your projects. From initial planning to final delivery, Practice empowers your team to achieve more with less stress. Features include advanced task management, real-time collaboration, resource allocation, progress tracking, and insightful reporting.', 
-    image: '/assets/images/hero-banner.png',
+    image: '/assets/images/hero-banner.png', 
     dataAiHint: 'software interface',
     type: 'app',
     slug: 'practice', 
@@ -22,9 +22,10 @@ export const products: Product[] = [
     interactiveDemo: {
       title: "Explore Practice", 
       description: "See how Practice can transform your project management. Visualize workflows and feature integrations.", 
-      imageUrl: "https://placehold.co/500x300.png",
+      imageUrl: "https://placehold.co/1200x675.png", 
       dataAiHint: 'dashboard analytics',
-      link: "/products/practice#demo" // Updated link
+      link: "/products/practice#demo",
+      videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" 
     },
     testimonials: [
       { id: 't1', quote: "Practice revolutionized how we manage projects. It's a game changer!", author: "Jane Doe", company: "Innovatech Ltd.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile woman" }, 

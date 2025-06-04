@@ -16,6 +16,7 @@ export interface Product {
     imageUrl?: string;
     dataAiHint?: string;
     link?: string; // Link to a demo page or Codepen etc.
+    videoUrl?: string; // URL for the video to be played in-place
   };
   type: 'app' | 'service';
   slug: string;
