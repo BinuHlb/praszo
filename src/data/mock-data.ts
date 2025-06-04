@@ -9,7 +9,7 @@ export const products: Product[] = [
     tagline: 'Streamline Your Workflow, Amplify Results with Practice.', 
     description: 'Our flagship project management application, Practice, is designed for modern teams. Intuitive, powerful, and fully customizable to fit your unique processes.', 
     longDescription: 'Practice is more than just a task manager; it\'s a comprehensive platform that brings clarity, collaboration, and efficiency to your projects. From initial planning to final delivery, Practice empowers your team to achieve more with less stress. Features include advanced task management, real-time collaboration, resource allocation, progress tracking, and insightful reporting.', 
-    image: '/assets/images/practice.svg',
+    image: '/assets/images/hero-banner.png',
     dataAiHint: 'software interface',
     type: 'app',
     slug: 'practice', 

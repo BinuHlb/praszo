@@ -43,7 +43,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                 </Link>
               </Button>
             </div>
-            <div className="animate-fade-in rounded-xl shadow-xl border border-primary-foreground/20 overflow-hidden">
+            <div className="animate-fade-in rounded-xl border-primary-foreground/20 overflow-hidden">
                 <Image
                   src={product.image}
                   alt={product.name}
