@@ -6,6 +6,7 @@ import Image from 'next/image';
 import useEmblaCarousel from 'embla-carousel-react';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import SectionHeader from '@/components/layout/section-header';
 
 const partnerLogosList = [
   { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 1', dataAiHint: 'company logo' },
@@ -36,9 +37,11 @@ export default function PartnerLogos() {
   return (
     <section className="py-12 md:py-20 bg-secondary">
       <div className="container mx-auto px-4 md:px-6">
-        <h2 className="text-3xl font-bold font-headline text-center mb-10 text-primary">
-          Trusted By Leading Companies
-        </h2>
+        <SectionHeader 
+          title="Trusted By Leading Companies"
+          titleClassName="text-primary"
+          className="mb-10"
+        />
         <div className="relative">
           <div className="overflow-hidden py-4" ref={emblaRef}>
             <div className="flex -ml-4"> {/* Embla container: negative margin for gap simulation */}
@@ -84,4 +87,3 @@ export default function PartnerLogos() {
     </section>
   );
 }
-

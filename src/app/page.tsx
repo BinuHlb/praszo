@@ -6,6 +6,7 @@ import PartnerLogos from '@/components/sections/partner-logos';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import SectionHeader from '@/components/layout/section-header';
 
 export default function HomePage() {
   return (
@@ -15,12 +16,10 @@ export default function HomePage() {
       <ServicesOverview />
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-12 animate-slide-up">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline mb-4">Experience Our Solutions</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-              Dive deeper into how our flagship project management tool can revolutionize your workflow.
-            </p>
-          </div>
+          <SectionHeader 
+            title="Experience Our Solutions"
+            subtitle="Dive deeper into how our flagship project management tool can revolutionize your workflow."
+          />
           <div className="max-w-3xl mx-auto animate-fade-in">
             <InteractiveDemoPlaceholder 
               title="NexusFlow PM: Visualize Your Success"

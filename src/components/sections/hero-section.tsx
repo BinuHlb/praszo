@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import AnimatedBorderBox from '@/components/ui/animated-border-box';
 import Image from 'next/image';
 import { ChevronRight } from 'lucide-react';
 
@@ -22,22 +21,20 @@ export default function HeroSection() {
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="/products/project-management-app">Explore NexusFlow PM</Link>
+              <Link href="/project-management-app">Explore NexusFlow PM</Link>
             </Button>
           </div>
         </div>
-        <div className="animate-fade-in">
-          <AnimatedBorderBox borderRadius="rounded-xl">
-            <Image
-              src="https://placehold.co/600x450.png"
-              alt="Digital Agency Concept"
-              width={600}
-              height={450}
-              className="rounded-xl object-cover" /* Matched border radius */
-              data-ai-hint="team collaboration"
-              priority
-            />
-          </AnimatedBorderBox>
+        <div className="animate-fade-in rounded-xl shadow-lg border overflow-hidden">
+          <Image
+            src="https://placehold.co/600x450.png"
+            alt="Digital Agency Concept"
+            width={600}
+            height={450}
+            className="rounded-xl object-cover w-full h-auto"
+            data-ai-hint="team collaboration"
+            priority
+          />
         </div>
       </div>
     </section>

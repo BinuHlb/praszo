@@ -7,7 +7,7 @@ import Link from 'next/link';
 import TestimonialCard from '@/components/shared/testimonial-card';
 import CaseStudyCard from '@/components/shared/case-study-card';
 import InteractiveDemoPlaceholder from '@/components/sections/interactive-demo-placeholder';
-import AnimatedBorderBox from '@/components/ui/animated-border-box';
+import SectionHeader from '@/components/layout/section-header';
 
 interface ProductPageProps {
   params: { productId: string };
@@ -43,17 +43,15 @@ export default function ProductPage({ params }: ProductPageProps) {
                 </Link>
               </Button>
             </div>
-            <div className="animate-fade-in">
-               <AnimatedBorderBox borderRadius="rounded-xl" className="shadow-xl"> {/* Moved shadow here */}
+            <div className="animate-fade-in rounded-xl shadow-xl border overflow-hidden">
                 <Image
                   src={product.image}
                   alt={product.name}
                   width={600}
                   height={400}
-                  className="rounded-xl object-cover" // Matched border radius, removed shadow
+                  className="rounded-xl object-cover w-full h-auto"
                   data-ai-hint={product.dataAiHint}
                 />
-              </AnimatedBorderBox>
             </div>
           </div>
         </div>
@@ -61,14 +59,18 @@ export default function ProductPage({ params }: ProductPageProps) {
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto space-y-6 mb-12 animate-slide-up">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline text-center text-primary">Detailed Overview</h2>
-            <p className="text-lg text-muted-foreground text-center text-balance">{product.longDescription}</p>
+          <div className="max-w-3xl mx-auto animate-slide-up mb-12">
+            <SectionHeader 
+              title="Detailed Overview"
+              subtitle={product.longDescription}
+              titleClassName="text-primary"
+              textAlignment="center"
+            />
           </div>
 
           {product.features && product.features.length > 0 && (
             <div className="mb-16">
-              <h3 className="text-2xl md:text-3xl font-bold font-headline text-center mb-10">Key Features & Benefits</h3>
+              <SectionHeader title="Key Features & Benefits" className="mb-10" />
               <div className="grid sm:grid-cols-2 gap-8">
                 {product.features.map((feature, index) => (
                   <div key={feature.title} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>
@@ -91,7 +93,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
           {product.interactiveDemo && (
             <section id="demo" className="mb-16">
-              <h3 className="text-2xl md:text-3xl font-bold font-headline text-center mb-10">Interactive Experience</h3>
+              <SectionHeader title="Interactive Experience" className="mb-10" />
               <div className="max-w-3xl mx-auto animate-fade-in">
                 <InteractiveDemoPlaceholder 
                   title={product.interactiveDemo.title}
@@ -106,7 +108,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
           {product.caseStudies && product.caseStudies.length > 0 && (
             <section className="mb-16">
-              <h3 className="text-2xl md:text-3xl font-bold font-headline text-center mb-10">Success Stories</h3>
+              <SectionHeader title="Success Stories" className="mb-10" />
               <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
                 {product.caseStudies.map((study, index) => (
                   <div key={study.id} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>
@@ -119,7 +121,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
           {product.testimonials && product.testimonials.length > 0 && (
             <section>
-              <h3 className="text-2xl md:text-3xl font-bold font-headline text-center mb-10">Client Testimonials</h3>
+              <SectionHeader title="Client Testimonials" className="mb-10" />
               <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
                 {product.testimonials.map((testimonial, index) => (
                   <div key={testimonial.id} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>

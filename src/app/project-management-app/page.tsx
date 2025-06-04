@@ -6,6 +6,7 @@ import { products, getProductBySlug } from '@/data/mock-data';
 import Link from 'next/link';
 import TestimonialCard from '@/components/shared/testimonial-card';
 import InteractiveDemoPlaceholder from '@/components/sections/interactive-demo-placeholder';
+import SectionHeader from '@/components/layout/section-header';
 
 export default function ProjectManagementAppPage() {
   const app = getProductBySlug('project-management-app');
@@ -71,16 +72,15 @@ export default function ProjectManagementAppPage() {
 
       <section className="py-16 md:py-24 bg-secondary">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center mb-12 animate-slide-up">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary mb-4">Powerful Features, Effortless Control</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto text-balance">
-              NexusFlow PM is packed with features designed to enhance productivity and collaboration.
-            </p>
-          </div>
+          <SectionHeader 
+            title="Powerful Features, Effortless Control"
+            subtitle="NexusFlow PM is packed with features designed to enhance productivity and collaboration."
+            titleClassName="text-primary"
+          />
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <div key={feature.title} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>
-                <Card className="h-full shadow-lg rounded-lg"> {/* Ensuring Card has rounded-lg if ABB default was used */}
+                <Card className="h-full shadow-lg rounded-lg">
                   <CardHeader>
                     <div className="flex items-center gap-3">
                       {feature.icon && <feature.icon className="h-8 w-8 text-primary" />}
@@ -100,12 +100,13 @@ export default function ProjectManagementAppPage() {
       {app.interactiveDemo && (
         <section id="demo" className="py-16 md:py-24 bg-background">
           <div className="container mx-auto px-4 md:px-6">
-            <div className="text-center mb-12 animate-slide-up">
-              <h2 className="text-3xl md:text-4xl font-bold font-headline mb-4">{app.interactiveDemo.title}</h2>
-            </div>
-            <div className="max-w-4xl mx-auto animate-fade-in">
+            <SectionHeader 
+              title={app.interactiveDemo.title}
+              className="mb-0" // Adjust margin as InteractiveDemoPlaceholder likely has its own
+            />
+            <div className="max-w-4xl mx-auto animate-fade-in mt-12"> {/* Added mt-12 to replace SectionHeader's mb-12 */}
               <InteractiveDemoPlaceholder 
-                title="Live Demo: NexusFlow PM"
+                title="Live Demo: NexusFlow PM" // This title is now on SectionHeader, maybe remove from here or adjust
                 description={app.interactiveDemo.description}
                 imageUrl={app.interactiveDemo.imageUrl || "https://placehold.co/1200x675.png"}
                 dataAiHint={app.interactiveDemo.dataAiHint || "software dashboard"}
@@ -118,7 +119,7 @@ export default function ProjectManagementAppPage() {
       {app.testimonials && app.testimonials.length > 0 && (
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
-            <h2 className="text-3xl md:text-4xl font-bold font-headline text-center mb-12 animate-slide-up">What Our Users Say</h2>
+            <SectionHeader title="What Our Users Say" />
             <div className="grid md:grid-cols-2 gap-8">
               {app.testimonials.map((testimonial, index) => (
                  <div key={testimonial.id} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>
