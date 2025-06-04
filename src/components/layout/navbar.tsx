@@ -2,7 +2,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image'; // Added for mega menu
+import Image from 'next/image';
 import { Menu, ChevronDown, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
@@ -11,47 +11,23 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  // DropdownMenuSub, // No longer needed for desktop mega menu
-  // DropdownMenuSubTrigger, // No longer needed for desktop mega menu
-  // DropdownMenuSubContent, // No longer needed for desktop mega menu
-  // DropdownMenuPortal, // No longer needed for desktop mega menu
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+  DropdownMenuPortal,
 } from "@/components/ui/dropdown-menu";
 import { useState, useEffect, useRef } from 'react';
 import AnimatedLogo from '@/components/icons/animated-logo';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
-import { getProductBySlug } from '@/data/mock-data'; // Added
-import type { Product } from '@/lib/types'; // Added
+import { getProductBySlug } from '@/data/mock-data';
+import type { Product } from '@/lib/types';
 
 // Define navigation structures
 const mainNavLinks: Array<{ href: string; label: string }> = [
   { href: '/', label: 'Home' },
   { href: '/contact', label: 'Contact Us' },
-];
-
-// For Mobile Menu - keeping the original dropdown structure for "Services"
-const mobileDropdownNavLinks: Array<{ href?: string; label: string; subItems?: Array<{ href: string; label: string }> }> = [
-  { href: '/practice', label: 'Practice' },
-  {
-    label: 'Services',
-    subItems: [
-      { href: '/products/web-development', label: 'Web Solutions' },
-      { href: '/products/digital-marketing', label: 'Marketing' },
-    ],
-  },
-  { href: '/products/verify', label: 'Verify' },
-  { href: '/products/modify', label: 'Modify' },
-  { href: '/products/docs', label: 'Docs' },
-];
-
-const ctaLink = { href: '/contact', label: 'Get a Quote' };
-
-// For mobile menu, combine all items.
-const allNavItemsForMobile = [
-  ...mainNavLinks,
-  ...mobileDropdownNavLinks.flatMap(item => item.subItems ? [{label: item.label, isGroupLabel: true, href: undefined}, ...item.subItems] : [item]),
-  ctaLink,
 ];
 
 interface MegaMenuItem {
@@ -74,9 +50,10 @@ const productSlugsForMegaMenu = [
 const megaMenuItems: MegaMenuItem[] = productSlugsForMegaMenu.map(slug => {
   const product = getProductBySlug(slug);
   if (!product) {
+    // Fallback for slugs not found in mock-data, though ideally all should exist
     return { 
-      href: `/${slug}`, 
-      label: slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()), // Basic title case
+      href: `/${slug}`, // Adjust if services have a /products/ prefix
+      label: slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
       image: 'https://placehold.co/150x100.png', 
       dataAiHint: 'placeholder', 
       description: 'Product information coming soon.' 
@@ -90,6 +67,36 @@ const megaMenuItems: MegaMenuItem[] = productSlugsForMegaMenu.map(slug => {
     description: product.tagline,
   };
 }).filter(Boolean) as MegaMenuItem[];
+
+
+const ctaLink = { href: '/contact', label: 'Get a Quote' };
+
+// For mobile menu - combine all items.
+const mobileDropdownNavLinks: Array<{ href?: string; label: string; subItems?: Array<{ href: string; label: string }> }> = [
+  { href: '/practice', label: 'Practice' },
+  {
+    label: 'Services',
+    subItems: [
+      { href: '/products/web-development', label: 'Web Solutions' },
+      { href: '/products/digital-marketing', label: 'Marketing' },
+    ],
+  },
+  { href: '/products/verify', label: 'Verify' },
+  { href: '/products/modify', label: 'Modify' },
+  { href: '/products/docs', label: 'Docs' },
+];
+
+const allNavItemsForMobile = [
+  ...mainNavLinks,
+  ...mobileDropdownNavLinks.flatMap(item => {
+    if (item.subItems) {
+      // Create a non-linkable group label for "Services"
+      return [{ label: item.label, isGroupLabel: true, href: undefined }, ...item.subItems];
+    }
+    return [item];
+  }),
+  ctaLink,
+];
 
 
 export default function Navbar() {
@@ -110,7 +117,7 @@ export default function Navbar() {
   const handleMenuMouseLeave = () => {
     menuDropdownTimerRef.current = setTimeout(() => {
       setIsMenuDropdownOpen(false);
-    }, 300);
+    }, 300); // 300ms delay to allow moving to content
   };
 
   useEffect(() => {
@@ -155,6 +162,7 @@ export default function Navbar() {
             </Button>
           ))}
 
+          {/* Mega Menu Dropdown */}
           <DropdownMenu open={isMenuDropdownOpen} onOpenChange={setIsMenuDropdownOpen}>
             <DropdownMenuTrigger asChild
               onMouseEnter={handleMenuMouseEnter}
@@ -174,19 +182,19 @@ export default function Navbar() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
-              className="w-screen max-w-lg md:max-w-xl lg:max-w-2xl p-6 shadow-xl rounded-xl" // Adjusted for mega menu
+              className="w-[min(90vw,1200px)] p-6 shadow-xl rounded-xl"
               onMouseEnter={handleMenuMouseEnter}
               onMouseLeave={handleMenuMouseLeave}
-              align="start" // Align to the start of the trigger
-              sideOffset={10} // Give some space from the trigger
+              align="start" 
+              sideOffset={4} // Reduced sideOffset
             >
               <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8">
                 {megaMenuItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className="group flex flex-col items-start p-3 rounded-lg hover:bg-accent transition-colors"
-                    onClick={() => setIsMenuDropdownOpen(false)} // Close menu on click
+                    className="group flex flex-col items-start p-3 rounded-lg hover:bg-accent/50 transition-colors" // Added hover:bg-accent/50
+                    onClick={() => setIsMenuDropdownOpen(false)} 
                   >
                     <div className="relative w-full aspect-[4/3] rounded-md overflow-hidden mb-3 shadow-md">
                       <Image
@@ -198,7 +206,10 @@ export default function Navbar() {
                         className="group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
-                    <h3 className="text-md font-semibold font-headline text-popover-foreground group-hover:text-primary mb-1">{item.label}</h3>
+                    <h3 className={cn(
+                      "text-md font-semibold font-headline text-popover-foreground group-hover:text-primary mb-1",
+                      pathname === item.href && "text-primary"
+                    )}>{item.label}</h3>
                     <p className="text-xs text-muted-foreground line-clamp-2">{item.description}</p>
                   </Link>
                 ))}
@@ -233,7 +244,7 @@ export default function Navbar() {
               </div>
               <nav className="flex flex-col space-y-1">
                 {allNavItemsForMobile.map((item) => {
-                  if ((item as any).isGroupLabel) {
+                  if ((item as any).isGroupLabel) { // Type assertion for isGroupLabel
                     return (
                       <div key={`${item.label}-group-header`} className="px-0 pt-3 pb-1 text-sm font-semibold text-muted-foreground">
                         {item.label}
@@ -243,11 +254,11 @@ export default function Navbar() {
                   return (
                     <SheetClose asChild key={item.label}>
                       <Link
-                        href={item.href!}
+                        href={item.href!} // item.href will exist for non-group-labels
                         className={cn(
                           "block text-lg font-medium text-foreground hover:text-primary transition-colors py-1.5",
                            item.href && pathname === item.href && "text-primary",
-                           item.label === ctaLink.label && "mt-3 pt-3 border-t border-border"
+                           item.label === ctaLink.label && "mt-3 pt-3 border-t border-border" // Style "Get a Quote" differently
                         )}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
@@ -264,3 +275,4 @@ export default function Navbar() {
     </header>
   );
 }
+
