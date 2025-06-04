@@ -22,7 +22,7 @@ export default function PartnerLogos() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ 
     loop: true, 
     align: 'start',
-    slidesToScroll: 'auto', // Changed from 1 to 'auto'
+    slidesToScroll: 'auto',
   });
 
   const scrollPrev = React.useCallback(() => {
@@ -45,7 +45,7 @@ export default function PartnerLogos() {
               {partnerLogosList.map((logo, index) => (
                 <div 
                   key={index} 
-                  className="relative flex-[0_0_auto] min-w-0 pl-4 basis-1/4 md:basis-1/8" /* Embla slide: pl-4 for gap, basis-1/4 for mobile (4 logos), md:basis-1/8 for desktop (8 logos) */
+                  className="relative flex-[0_0_auto] min-w-0 pl-4 basis-1/4 sm:basis-1/8" /* Embla slide: pl-4 for gap, basis-1/4 for mobile (4 logos), sm:basis-1/8 for small screens and up (8 logos) */
                 >
                   <div className="flex items-center justify-center h-[100px] p-3 bg-card rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out transform hover:scale-105">
                     <Image
@@ -64,7 +64,7 @@ export default function PartnerLogos() {
           <Button
             variant="outline"
             size="icon"
-            className="absolute left-0 top-1/2 -translate-y-1/2 transform -translate-x-4 md:-translate-x-6 z-10 rounded-full bg-card hover:bg-muted hidden md:flex"
+            className="absolute left-0 top-1/2 -translate-y-1/2 transform -translate-x-4 md:-translate-x-6 z-10 rounded-full bg-card hover:bg-muted hidden sm:flex"
             onClick={scrollPrev}
             aria-label="Previous partner logos"
           >
@@ -73,7 +73,7 @@ export default function PartnerLogos() {
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-0 top-1/2 -translate-y-1/2 transform translate-x-4 md:translate-x-6 z-10 rounded-full bg-card hover:bg-muted hidden md:flex"
+            className="absolute right-0 top-1/2 -translate-y-1/2 transform translate-x-4 md:translate-x-6 z-10 rounded-full bg-card hover:bg-muted hidden sm:flex"
             onClick={scrollNext}
             aria-label="Next partner logos"
           >
