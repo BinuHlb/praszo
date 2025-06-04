@@ -34,12 +34,12 @@ export default function HeroSection() {
         </div>
         <div className="animate-fade-in rounded-xl shadow-lg border overflow-hidden">
           <Image
-            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
-            alt="AI-generated concept for digital innovation"
+            src="/assets/images/hero-banner.jpg" // Updated path
+            alt="Modern digital solutions and teamwork" // Updated alt text
             width={600}
             height={450}
             className="rounded-xl object-cover w-full h-auto"
-            data-ai-hint="digital innovation abstract"
+            data-ai-hint="business team collaboration" // Updated AI hint
             priority
           />
         </div>
