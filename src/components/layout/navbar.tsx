@@ -68,7 +68,7 @@ export default function Navbar() {
   const handleMenuMouseLeave = () => {
     menuDropdownTimerRef.current = setTimeout(() => {
       setIsMenuDropdownOpen(false);
-    }, 200); // Adjust delay as needed (e.g., 200ms)
+    }, 300); // Increased delay
   };
 
   useEffect(() => {
@@ -222,7 +222,7 @@ export default function Navbar() {
               </div>
               <nav className="flex flex-col space-y-1">
                 {allNavItemsForMobile.map((item) => {
-                  if ((item as any).isGroupLabel) {
+                  if ((item as any).isGroupLabel) { // Type assertion for isGroupLabel
                     return (
                       <div key={`${item.label}-group-header`} className="px-0 pt-3 pb-1 text-sm font-semibold text-muted-foreground">
                         {item.label}
