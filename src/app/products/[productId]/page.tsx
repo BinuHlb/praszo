@@ -1,5 +1,5 @@
 
-import { getProductBySlug, products as allProductsData } from '@/data/mock-data'; // Import allProductsData
+import { getProductBySlug, products as allProductsData } from '@/data/mock-data'; 
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -15,12 +15,10 @@ interface ProductPageProps {
 }
 
 export async function generateStaticParams() {
-  // Use the imported allProductsData
-  return allProductsData
-    .filter(p => p.type === 'service') // Keep filtering for services
-    .map((product) => ({
-      productId: product.slug,
-    }));
+  // Generate paths for all products (apps and services)
+  return allProductsData.map((product) => ({
+    productId: product.slug,
+  }));
 }
 
 export default function ProductPage({ params }: ProductPageProps) {

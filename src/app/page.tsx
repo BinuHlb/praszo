@@ -28,7 +28,7 @@ export default function HomePage() {
               description="Get a hands-on feel for Practice's intuitive interface and powerful features. See how it simplifies complex project management tasks and boosts team productivity."
               imageUrl="https://placehold.co/800x450.png"
               dataAiHint="project dashboard"
-              link="/practice#demo"
+              link="/products/practice#demo" // Updated link
             />
           </div>
         </div>

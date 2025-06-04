@@ -89,7 +89,7 @@ export default function InteractiveQuestionnaire() {
               Ready to see how Practice can transform your project management and help you achieve your goals?
             </p>
             <Button size="lg" asChild className="text-lg py-6 px-8">
-              <Link href="/practice" legacyBehavior passHref>
+              <Link href="/products/practice" legacyBehavior passHref> 
                 <a>
                   <span className="flex items-center">
                     Discover Practice <ArrowRight className="ml-2 h-5 w-5" />

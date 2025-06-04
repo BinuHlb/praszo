@@ -1,7 +1,7 @@
 
 import Link from 'next/link';
 import { Github, Linkedin, Twitter, Phone, Mail, MapPin } from 'lucide-react';
-import AnimatedLogoDark from '@/components/icons/animated-logo-dark'; // Changed import
+import AnimatedLogoDark from '@/components/icons/animated-logo-dark'; 
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -13,7 +13,7 @@ export default function Footer() {
           {/* Column 1: Praszo & Socials */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2 mb-2">
-              <AnimatedLogoDark /> {/* Changed to AnimatedLogoDark */}
+              <AnimatedLogoDark /> 
             </Link>
             <p className="text-sm text-accent-foreground/80 max-w-xs">
               Elevating businesses with innovative digital solutions and strategic insights to achieve market leadership.
@@ -36,13 +36,13 @@ export default function Footer() {
             <h3 className="text-lg font-semibold font-headline mb-4">Explore</h3>
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/" className="hover:text-accent-foreground/70 transition-colors">Home</Link></li>
-              <li><Link href="/practice" className="hover:text-accent-foreground/70 transition-colors">Practice</Link></li>
+              <li><Link href="/products/practice" className="hover:text-accent-foreground/70 transition-colors">Practice</Link></li>
               <li><Link href="/products/verify" className="hover:text-accent-foreground/70 transition-colors">Verify</Link></li>
               <li><Link href="/products/modify" className="hover:text-accent-foreground/70 transition-colors">Modify</Link></li>
               <li><Link href="/products/docs" className="hover:text-accent-foreground/70 transition-colors">Docs</Link></li>
               <li><Link href="/products/web-development" className="hover:text-accent-foreground/70 transition-colors">Web Solutions</Link></li>
               <li><Link href="/products/digital-marketing" className="hover:text-accent-foreground/70 transition-colors">Digital Marketing</Link></li>
-              <li><Link href="/practice#demo" className="hover:text-accent-foreground/70 transition-colors">Interactive Demo</Link></li>
+              <li><Link href="/products/practice#demo" className="hover:text-accent-foreground/70 transition-colors">Interactive Demo</Link></li>
             </ul>
           </div>
 

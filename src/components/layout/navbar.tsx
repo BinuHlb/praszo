@@ -51,10 +51,9 @@ const productSlugsForMegaMenu = [
 // Dynamically create mega menu items from product data
 const megaMenuItems: MegaMenuItem[] = productSlugsForMegaMenu.map(slug => {
   const product = getProductBySlug(slug);
-  // Fallback for cases where product might not be found, though ideally all slugs are valid
   if (!product) {
     return { 
-      href: slug.startsWith('http') ? slug : (product?.type === 'app' ? `/${slug}` : `/products/${slug}`), // Basic href generation
+      href: slug.startsWith('http') ? slug : `/products/${slug}`, // Basic href generation
       label: slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()), // Generate a label from slug
       image: 'https://placehold.co/150x100.png', // Placeholder image
       dataAiHint: 'placeholder', // Placeholder AI hint
@@ -62,7 +61,7 @@ const megaMenuItems: MegaMenuItem[] = productSlugsForMegaMenu.map(slug => {
     };
   }
   return {
-    href: product.type === 'app' ? `/${product.slug}` : `/products/${product.slug}`,
+    href: `/products/${product.slug}`, // Ensure all mega menu items use /products/slug
     label: product.name,
     image: product.image,
     dataAiHint: product.dataAiHint,
@@ -76,7 +75,7 @@ const ctaLink = { href: '/contact', label: 'Get a Quote' };
 
 // For mobile menu - combine all items.
 const mobileDropdownNavLinks: Array<{ href?: string; label:string; subItems?: Array<{ href: string; label: string }> }> = [
-  { href: '/practice', label: 'Practice' },
+  { href: '/products/practice', label: 'Practice' }, // Updated
   {
     label: 'Services', // Group label for mobile
     subItems: [ // These match some of the mega menu items but are structured for mobile
@@ -141,7 +140,6 @@ export default function Navbar() {
     };
   }, []);
 
-  // Delay application of active state based on client-side info until mounted
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
     setMounted(true);
@@ -161,9 +159,7 @@ export default function Navbar() {
           <AnimatedLogo />
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex flex-1 items-center justify-between mx-4 sm:mx-6 lg:mx-8">
-          {/* Mega Menu Dropdown - Aligned to the left within the nav space */}
           <DropdownMenu open={isMenuDropdownOpen} onOpenChange={setIsMenuDropdownOpen} modal={false}>
             <DropdownMenuTrigger
               onMouseEnter={handleMenuMouseEnter}
@@ -184,7 +180,7 @@ export default function Navbar() {
               onMouseEnter={handleMenuMouseEnter}
               onMouseLeave={handleMenuMouseLeave}
             >
-              <div className="container mx-auto px-4 md:px-6 py-6"> {/* Container for content alignment */}
+              <div className="container mx-auto px-4 md:px-6 py-6">
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-8">
                   {megaMenuItems.map((item) => (
                     <Link
@@ -218,14 +214,14 @@ export default function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Grouped Home and Contact Us links - Aligned to the right within the nav space */}
           <div className="flex items-center space-x-1">
             {mainNavLinks.length > 0 && (
               <Link
                 key={mainNavLinks[0].label} // Home
                 href={mainNavLinks[0].href}
                 className={cn(
-                  "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2 rounded-md transition-colors",
+                  buttonVariants({ variant: 'ghost', size: 'default' }),
+                  "text-sm font-medium hover:bg-transparent",
                   pathname === mainNavLinks[0].href && "text-primary"
                 )}
               >
@@ -237,7 +233,8 @@ export default function Navbar() {
                 key={mainNavLinks[1].label} // Contact Us
                 href={mainNavLinks[1].href}
                 className={cn(
-                  "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2 rounded-md transition-colors",
+                  buttonVariants({ variant: 'ghost', size: 'default' }),
+                  "text-sm font-medium hover:bg-transparent",
                   pathname === mainNavLinks[1].href && "text-primary"
                 )}
               >
@@ -275,7 +272,6 @@ export default function Navbar() {
               </div>
               <nav className="flex flex-col space-y-1">
                  {allNavItemsForMobile.map((item) => {
-                  // Check if item is a group label (for 'Services' in mobile)
                   if ((item as any).isGroupLabel) { 
                     return (
                       <div key={`${item.label}-group-header`} className="px-0 pt-3 pb-1 text-sm font-semibold text-muted-foreground">
@@ -283,15 +279,14 @@ export default function Navbar() {
                       </div>
                     );
                   }
-                  // Regular link item
                   return (
                     <SheetClose asChild key={item.label}>
                       <Link
-                        href={item.href!} // Assert href is present for link items
+                        href={item.href!} 
                         className={cn(
                           "block text-lg font-medium text-foreground hover:text-primary transition-colors py-1.5",
-                           item.href && pathname === item.href && "text-primary", // Active link styling
-                           item.label === ctaLink.label && "mt-3 pt-3 border-t border-border" // Special styling for CTA
+                           item.href && pathname === item.href && "text-primary", 
+                           item.label === ctaLink.label && "mt-3 pt-3 border-t border-border"
                         )}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
@@ -308,5 +303,3 @@ export default function Navbar() {
     </header>
   );
 }
-
-    

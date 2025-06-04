@@ -26,20 +26,20 @@ export default function HeroSection() {
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="/practice" legacyBehavior passHref>
+              <Link href="/products/practice" legacyBehavior passHref> 
                 <a>Explore Practice</a>
               </Link>
             </Button>
           </div>
         </div>
-        <div className="animate-fade-in rounded-xl  overflow-hidden">
+        <div className="animate-fade-in rounded-xl shadow-lg border overflow-hidden">
           <Image
-            src="/assets/images/hero-banner.png" // Updated path
-            alt="Modern digital solutions and teamwork" // Updated alt text
+            src="/assets/images/hero-banner.jpg" 
+            alt="Modern digital solutions and teamwork" 
             width={600}
             height={450}
             className="rounded-xl object-cover w-full h-auto"
-            data-ai-hint="business team collaboration" // Updated AI hint
+            data-ai-hint="business team collaboration" 
             priority
           />
         </div>

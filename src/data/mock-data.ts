@@ -1,17 +1,18 @@
+
 import type { Product, CaseStudy, Testimonial } from '@/lib/types';
 import { LayoutDashboard, BarChart3, Users, Settings, Zap, Briefcase, MessageCircle, CheckSquare, Edit3, BookOpen } from 'lucide-react';
 
 export const products: Product[] = [
   {
-    id: 'practice-app', // Changed from pm-app
-    name: 'Practice', // Changed from NexusFlow PM
-    tagline: 'Streamline Your Workflow, Amplify Results with Practice.', // Updated
-    description: 'Our flagship project management application, Practice, is designed for modern teams. Intuitive, powerful, and fully customizable to fit your unique processes.', // Updated
-    longDescription: 'Practice is more than just a task manager; it\'s a comprehensive platform that brings clarity, collaboration, and efficiency to your projects. From initial planning to final delivery, Practice empowers your team to achieve more with less stress. Features include advanced task management, real-time collaboration, resource allocation, progress tracking, and insightful reporting.', // Updated
+    id: 'practice-app', 
+    name: 'Practice', 
+    tagline: 'Streamline Your Workflow, Amplify Results with Practice.', 
+    description: 'Our flagship project management application, Practice, is designed for modern teams. Intuitive, powerful, and fully customizable to fit your unique processes.', 
+    longDescription: 'Practice is more than just a task manager; it\'s a comprehensive platform that brings clarity, collaboration, and efficiency to your projects. From initial planning to final delivery, Practice empowers your team to achieve more with less stress. Features include advanced task management, real-time collaboration, resource allocation, progress tracking, and insightful reporting.', 
     image: '/assets/images/practice.svg',
     dataAiHint: 'software interface',
     type: 'app',
-    slug: 'practice', // Changed from project-management-app
+    slug: 'practice', 
     features: [
       { title: 'Intuitive Dashboard', description: 'Get a clear overview of all your projects at a glance.', icon: LayoutDashboard },
       { title: 'Advanced Task Management', description: 'Create, assign, and track tasks with ease, including subtasks and dependencies.', icon: BarChart3 },
@@ -19,15 +20,15 @@ export const products: Product[] = [
       { title: 'Resource Allocation', description: 'Efficiently manage team workloads and project resources.', icon: Settings },
     ],
     interactiveDemo: {
-      title: "Explore Practice", // Updated
-      description: "See how Practice can transform your project management. Visualize workflows and feature integrations.", // Updated
+      title: "Explore Practice", 
+      description: "See how Practice can transform your project management. Visualize workflows and feature integrations.", 
       imageUrl: "https://placehold.co/500x300.png",
       dataAiHint: 'dashboard analytics',
-      link: "/practice#demo" // Updated
+      link: "/products/practice#demo" // Updated link
     },
     testimonials: [
-      { id: 't1', quote: "Practice revolutionized how we manage projects. It's a game changer!", author: "Jane Doe", company: "Innovatech Ltd.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile woman" }, // Updated
-      { id: 't2', quote: "The best PM tool we've ever used. Highly recommended for Practice.", author: "John Smith", company: "Tech Solutions Inc.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile man" }, // Updated
+      { id: 't1', quote: "Practice revolutionized how we manage projects. It's a game changer!", author: "Jane Doe", company: "Innovatech Ltd.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile woman" }, 
+      { id: 't2', quote: "The best PM tool we've ever used. Highly recommended for Practice.", author: "John Smith", company: "Tech Solutions Inc.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile man" }, 
     ],
   },
   {
