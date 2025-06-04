@@ -150,7 +150,7 @@ export default function Navbar() {
                            item.subItems.some(sub => pathname === sub.href) && "bg-accent text-accent-foreground" // Highlight sub-trigger if a sub-item is active
                         )}>
                           <span>{item.label}</span>
-                          <ChevronRight className="ml-auto h-4 w-4" />
+                          {/* ChevronRight is automatically added by DropdownMenuSubTrigger */}
                         </DropdownMenuSubTrigger>
                         <DropdownMenuPortal>
                           <DropdownMenuSubContent>
