@@ -14,7 +14,6 @@ import {
   DropdownMenuSub,
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
-  DropdownMenuPortal,
 } from "@/components/ui/dropdown-menu";
 import { useState, useEffect, useRef } from 'react';
 import AnimatedLogo from '@/components/icons/animated-logo';
@@ -50,9 +49,8 @@ const productSlugsForMegaMenu = [
 const megaMenuItems: MegaMenuItem[] = productSlugsForMegaMenu.map(slug => {
   const product = getProductBySlug(slug);
   if (!product) {
-    // Fallback for slugs not found in mock-data, though ideally all should exist
     return { 
-      href: product?.type === 'app' ? `/${slug}` : `/products/${slug}`,
+      href: slug.startsWith('http') ? slug : (product?.type === 'app' ? `/${slug}` : `/products/${slug}`),
       label: slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
       image: 'https://placehold.co/150x100.png', 
       dataAiHint: 'placeholder', 
@@ -87,15 +85,16 @@ const mobileDropdownNavLinks: Array<{ href?: string; label: string; subItems?: A
 ];
 
 const allNavItemsForMobile = [
-  ...mainNavLinks,
+  ...mainNavLinks.filter(link => link.href !== '/contact'), // Remove duplicate "Contact Us" if Get a Quote also goes to /contact
   ...mobileDropdownNavLinks.flatMap(item => {
     if (item.subItems) {
-      // Create a non-linkable group label for "Services"
       return [{ label: item.label, isGroupLabel: true, href: undefined }, ...item.subItems];
     }
     return [item];
   }),
-  ctaLink,
+  // Ensure "Contact Us" is present from mainNavLinks if not duplicating from ctaLink
+  ...(mainNavLinks.some(link => link.href === '/contact' && ctaLink.href !== '/contact') ? [{href: '/contact', label: 'Contact Us'}] : []),
+  ctaLink, 
 ];
 
 
@@ -117,7 +116,7 @@ export default function Navbar() {
   const handleMenuMouseLeave = () => {
     menuDropdownTimerRef.current = setTimeout(() => {
       setIsMenuDropdownOpen(false);
-    }, 300); // 300ms delay
+    }, 300); 
   };
 
   useEffect(() => {
@@ -134,11 +133,12 @@ export default function Navbar() {
   }, []);
 
   const isMenuDropdownActive = megaMenuItems.some(item => pathname === item.href) || isMenuDropdownOpen;
+  
 
   return (
     <header className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300 h-16",
-        isScrolled ? "bg-card shadow-lg" : "bg-transparent"
+        isScrolled ? "bg-card/80 backdrop-blur-md shadow-lg border-b border-border/30" : "bg-transparent"
       )}>
       <div className="container mx-auto flex h-full items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
@@ -170,7 +170,7 @@ export default function Navbar() {
             >
               <Button
                 variant="ghost"
-                asChild // Make the Button render its child
+                asChild 
                 className={cn(
                   "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2",
                   isMenuDropdownActive && "text-primary"
@@ -191,7 +191,7 @@ export default function Navbar() {
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-8">
                   {megaMenuItems.map((item) => (
                     <Link
-                      key={item.href}
+                      key={item.label} // Use label as key assuming labels are unique in this context
                       href={item.href}
                       className="group flex flex-col items-start p-3 rounded-lg hover:bg-accent/50 transition-colors"
                       onClick={() => setIsMenuDropdownOpen(false)} 
@@ -244,7 +244,7 @@ export default function Navbar() {
                 </Link>
               </div>
               <nav className="flex flex-col space-y-1">
-                {allNavItemsForMobile.map((item) => {
+                 {allNavItemsForMobile.map((item) => {
                   if ((item as any).isGroupLabel) { 
                     return (
                       <div key={`${item.label}-group-header`} className="px-0 pt-3 pb-1 text-sm font-semibold text-muted-foreground">
@@ -276,4 +276,3 @@ export default function Navbar() {
     </header>
   );
 }
-
