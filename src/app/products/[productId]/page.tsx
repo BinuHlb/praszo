@@ -1,5 +1,5 @@
 
-import { getProductBySlug, products as allProductsData } from '@/data/mock-data'; 
+import { getProductBySlug, products as allProductsData } from '@/data/mock-data';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -34,10 +34,10 @@ export default function ProductPage({ params }: ProductPageProps) {
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-slide-up">
-              <span className="text-sm font-semibold uppercase tracking-wider">{product.type === 'app' ? 'Application' : 'Service'}</span>
-              <h1 className="text-4xl md:text-5xl font-bold font-headline">{product.name}</h1>
+              <span className="text-sm font-semibold uppercase tracking-wider text-primary-foreground">{product.type === 'app' ? 'Application' : 'Service'}</span>
+              <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary-foreground">{product.name}</h1>
               <p className="text-lg md:text-xl text-primary-foreground/90 text-balance">{product.tagline}</p>
-              <Button size="lg" variant="secondary" asChild className="text-primary hover:bg-accent hover:text-accent-foreground">
+              <Button size="lg" variant="secondary" asChild>
                 <Link href={`/contact?product=${encodeURIComponent(product.name)}`}>
                   Inquire About {product.name}
                 </Link>
@@ -60,7 +60,7 @@ export default function ProductPage({ params }: ProductPageProps) {
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 md:px-6">
           <div className="max-w-3xl mx-auto animate-slide-up mb-12">
-            <SectionHeader 
+            <SectionHeader
               title="Detailed Overview"
               subtitle={product.longDescription}
               titleClassName="text-primary"
@@ -95,12 +95,13 @@ export default function ProductPage({ params }: ProductPageProps) {
             <section id="demo" className="mb-16">
               <SectionHeader title="Interactive Experience" className="mb-10" />
               <div className="max-w-3xl mx-auto animate-fade-in">
-                <InteractiveDemoPlaceholder 
+                <InteractiveDemoPlaceholder
                   title={product.interactiveDemo.title}
                   description={product.interactiveDemo.description}
                   imageUrl={product.interactiveDemo.imageUrl}
                   dataAiHint={product.interactiveDemo.dataAiHint}
                   link={product.interactiveDemo.link}
+                  videoUrl={product.interactiveDemo.videoUrl} // Added videoUrl prop
                 />
               </div>
             </section>
