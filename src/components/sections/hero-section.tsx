@@ -32,9 +32,9 @@ export default function HeroSection() {
             </Button>
           </div>
         </div>
-        <div className="animate-fade-in rounded-xl shadow-lg border overflow-hidden">
+        <div className="animate-fade-in rounded-xl overflow-hidden">
           <Image
-            src="/assets/images/hero-banner.jpg" 
+            src="/assets/images/hero-banner.png" 
             alt="Modern digital solutions and teamwork" 
             width={600}
             height={450}
