@@ -75,7 +75,7 @@ const ctaLink = { href: '/contact', label: 'Get a Quote' };
 
 // For mobile menu - combine all items.
 const mobileDropdownNavLinks: Array<{ href?: string; label:string; subItems?: Array<{ href: string; label: string }> }> = [
-  { href: '/products/practice', label: 'Practice' }, // Updated
+  { href: '/products/practice', label: 'Practice' }, 
   {
     label: 'Services', // Group label for mobile
     subItems: [ // These match some of the mega menu items but are structured for mobile
@@ -160,6 +160,7 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden md:flex flex-1 items-center justify-between mx-4 sm:mx-6 lg:mx-8">
+          {/* Mega Menu Dropdown - Aligned to the left within the nav space */}
           <DropdownMenu open={isMenuDropdownOpen} onOpenChange={setIsMenuDropdownOpen} modal={false}>
             <DropdownMenuTrigger
               onMouseEnter={handleMenuMouseEnter}
@@ -171,7 +172,7 @@ export default function Navbar() {
               )}
             >
               <span className="flex items-center">
-                Menu <ChevronDown className="ml-1 h-4 w-4" />
+                 Menu <ChevronDown className="ml-1 h-4 w-4" />
               </span>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -214,6 +215,7 @@ export default function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
+          {/* Grouped "Home" and "Contact Us" links, aligned to the right */}
           <div className="flex items-center space-x-1">
             {mainNavLinks.length > 0 && (
               <Link
@@ -221,7 +223,7 @@ export default function Navbar() {
                 href={mainNavLinks[0].href}
                 className={cn(
                   buttonVariants({ variant: 'ghost', size: 'default' }),
-                  "text-sm font-medium hover:bg-transparent",
+                  "text-sm font-medium", // Removed hover:bg-transparent
                   pathname === mainNavLinks[0].href && "text-primary"
                 )}
               >
@@ -234,7 +236,7 @@ export default function Navbar() {
                 href={mainNavLinks[1].href}
                 className={cn(
                   buttonVariants({ variant: 'ghost', size: 'default' }),
-                  "text-sm font-medium hover:bg-transparent",
+                  "text-sm font-medium", // Removed hover:bg-transparent
                   pathname === mainNavLinks[1].href && "text-primary"
                 )}
               >
