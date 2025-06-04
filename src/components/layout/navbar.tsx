@@ -35,7 +35,7 @@ interface MegaMenuItem {
   label: string;
   image: string;
   dataAiHint: string;
-  description: string;
+  description: string; // Tagline
 }
 
 const productSlugsForMegaMenu = [
@@ -52,7 +52,7 @@ const megaMenuItems: MegaMenuItem[] = productSlugsForMegaMenu.map(slug => {
   if (!product) {
     // Fallback for slugs not found in mock-data, though ideally all should exist
     return { 
-      href: `/${slug}`, // Adjust if services have a /products/ prefix
+      href: product?.type === 'app' ? `/${slug}` : `/products/${slug}`,
       label: slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
       image: 'https://placehold.co/150x100.png', 
       dataAiHint: 'placeholder', 
@@ -117,7 +117,7 @@ export default function Navbar() {
   const handleMenuMouseLeave = () => {
     menuDropdownTimerRef.current = setTimeout(() => {
       setIsMenuDropdownOpen(false);
-    }, 300); // 300ms delay to allow moving to content
+    }, 300); // 300ms delay
   };
 
   useEffect(() => {
@@ -133,7 +133,7 @@ export default function Navbar() {
     };
   }, []);
 
-  const isMenuDropdownActive = megaMenuItems.some(item => pathname === item.href);
+  const isMenuDropdownActive = megaMenuItems.some(item => pathname === item.href) || isMenuDropdownOpen;
 
   return (
     <header className={cn(
@@ -170,49 +170,50 @@ export default function Navbar() {
             >
               <Button
                 variant="ghost"
-                asChild
+                asChild // Make the Button render its child
                 className={cn(
                   "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2",
-                  (isMenuDropdownActive || isMenuDropdownOpen) && "text-primary"
+                  isMenuDropdownActive && "text-primary"
                 )}
               >
-                <a> {/* Button asChild makes this 'a' take button's role */}
+                <a> {/* This 'a' tag will get button's styles and DropdownMenuTrigger's props */}
                   Menu <ChevronDown className="ml-1 h-4 w-4" />
                 </a>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
-              className="w-[min(90vw,1200px)] p-6 shadow-xl rounded-xl"
+              className="w-screen left-0 bg-background shadow-xl border-t data-[side=bottom]:slide-in-from-top-4"
+              sideOffset={4} 
               onMouseEnter={handleMenuMouseEnter}
               onMouseLeave={handleMenuMouseLeave}
-              align="start" 
-              sideOffset={4} // Reduced sideOffset
             >
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8">
-                {megaMenuItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="group flex flex-col items-start p-3 rounded-lg hover:bg-accent/50 transition-colors" // Added hover:bg-accent/50
-                    onClick={() => setIsMenuDropdownOpen(false)} 
-                  >
-                    <div className="relative w-full aspect-[4/3] rounded-md overflow-hidden mb-3 shadow-md">
-                      <Image
-                        src={item.image}
-                        alt={item.label}
-                        layout="fill"
-                        objectFit="cover"
-                        data-ai-hint={item.dataAiHint}
-                        className="group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-                    <h3 className={cn(
-                      "text-md font-semibold font-headline text-popover-foreground group-hover:text-primary mb-1",
-                      pathname === item.href && "text-primary"
-                    )}>{item.label}</h3>
-                    <p className="text-xs text-muted-foreground line-clamp-2">{item.description}</p>
-                  </Link>
-                ))}
+              <div className="container mx-auto px-4 md:px-6 py-6">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-8">
+                  {megaMenuItems.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="group flex flex-col items-start p-3 rounded-lg hover:bg-accent/50 transition-colors"
+                      onClick={() => setIsMenuDropdownOpen(false)} 
+                    >
+                      <div className="relative w-full aspect-[4/3] rounded-md overflow-hidden mb-3 shadow-md">
+                        <Image
+                          src={item.image}
+                          alt={item.label}
+                          layout="fill"
+                          objectFit="cover"
+                          data-ai-hint={item.dataAiHint}
+                          className="group-hover:scale-105 transition-transform duration-300"
+                        />
+                      </div>
+                      <h3 className={cn(
+                        "text-md font-semibold font-headline text-popover-foreground group-hover:text-primary mb-1",
+                        pathname === item.href && "text-primary"
+                      )}>{item.label}</h3>
+                      <p className="text-xs text-muted-foreground line-clamp-2">{item.description}</p>
+                    </Link>
+                  ))}
+                </div>
               </div>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -244,7 +245,7 @@ export default function Navbar() {
               </div>
               <nav className="flex flex-col space-y-1">
                 {allNavItemsForMobile.map((item) => {
-                  if ((item as any).isGroupLabel) { // Type assertion for isGroupLabel
+                  if ((item as any).isGroupLabel) { 
                     return (
                       <div key={`${item.label}-group-header`} className="px-0 pt-3 pb-1 text-sm font-semibold text-muted-foreground">
                         {item.label}
@@ -254,11 +255,11 @@ export default function Navbar() {
                   return (
                     <SheetClose asChild key={item.label}>
                       <Link
-                        href={item.href!} // item.href will exist for non-group-labels
+                        href={item.href!} 
                         className={cn(
                           "block text-lg font-medium text-foreground hover:text-primary transition-colors py-1.5",
                            item.href && pathname === item.href && "text-primary",
-                           item.label === ctaLink.label && "mt-3 pt-3 border-t border-border" // Style "Get a Quote" differently
+                           item.label === ctaLink.label && "mt-3 pt-3 border-t border-border"
                         )}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
