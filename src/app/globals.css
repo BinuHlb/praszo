@@ -16,8 +16,8 @@
     --secondary-foreground: 246 93% 63%; /* Adjusted to new primary */
     --muted: 275 10% 75%;
     --muted-foreground: 275 10% 45%;
-    --accent: 190 80% 55%; /* New Accent: Vibrant Teal (was 285 100% 63%) */
-    --accent-foreground: 275 10% 20%; /* Maintained for contrast */
+    --accent: 217 44% 16%; /* New Accent: Dark Blue #17243a */
+    --accent-foreground: 0 0% 98%; /* New Accent Foreground: Light for contrast */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 275 10% 85%;
@@ -26,7 +26,7 @@
     --radius: 0.5rem;
 
     --chart-1: 246 93% 63%; /* Adjusted to new primary */
-    --chart-2: 190 80% 55%; /* New Accent for charts (was 285 100% 63%) */
+    --chart-2: 217 44% 16%; /* New Accent for charts */
     --chart-3: 275 60% 50%;
     --chart-4: 285 60% 70%;
     --chart-5: 275 30% 60%;
@@ -54,8 +54,8 @@
     --secondary-foreground: 246 93% 75%; /* Adjusted to new dark primary */
     --muted: 275 10% 30%;
     --muted-foreground: 275 10% 65%;
-    --accent: 190 80% 70%; /* New Dark Accent: Lighter Vibrant Teal (was 285 100% 75%) */
-    --accent-foreground: 275 100% 15%; /* Maintained for contrast (very dark purple) */
+    --accent: 217 44% 50%; /* New Dark Accent: Lighter shade of #17243a */
+    --accent-foreground: 0 0% 98%; /* New Dark Accent Foreground: Light for contrast */
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 275 10% 25%;
@@ -63,7 +63,7 @@
     --ring: 246 93% 75%; /* Adjusted to new dark primary */
 
     --chart-1: 246 93% 75%; /* Adjusted to new dark primary */
-    --chart-2: 190 80% 70%; /* New Dark Accent for charts (was 285 100% 75%) */
+    --chart-2: 217 44% 50%; /* New Dark Accent for charts */
     --chart-3: 275 60% 70%;
     --chart-4: 285 60% 80%;
     --chart-5: 275 30% 70%;
