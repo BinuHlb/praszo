@@ -4,6 +4,7 @@ import { Toaster } from '@/components/ui/toaster';
 import Navbar from '@/components/layout/navbar';
 import Footer from '@/components/layout/footer';
 import { ThemeProvider } from 'next-themes';
+import PageTransition from '@/components/layout/page-transition';
 
 export const metadata: Metadata = {
   title: 'Praszo - Innovative Digital Solutions',
@@ -33,7 +34,9 @@ export default function RootLayout({
         >
           <Navbar />
           <main className="flex-grow">
-            {children}
+            <PageTransition>
+              {children}
+            </PageTransition>
           </main>
           <Footer />
           <Toaster />
