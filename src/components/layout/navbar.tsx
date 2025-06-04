@@ -151,7 +151,7 @@ export default function Navbar() {
       <div className="container mx-auto flex h-full items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
           <AnimatedLogo className="h-10 w-10" />
-          <span className="text-2xl font-bold font-headline text-primary">Apex Digital</span>
+          
         </Link>
 
         {/* Desktop Navigation */}
@@ -251,7 +251,7 @@ export default function Navbar() {
               <div className="mb-6 flex items-center">
                 <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
                   <AnimatedLogo className="h-8 w-8" />
-                  <span className="text-xl font-bold font-headline text-primary">Apex Digital</span>
+                  
                 </Link>
               </div>
               <nav className="flex flex-col space-y-1">

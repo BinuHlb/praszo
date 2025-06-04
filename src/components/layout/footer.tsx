@@ -9,11 +9,11 @@ export default function Footer() {
     <footer className="bg-secondary text-secondary-foreground py-12 md:py-16">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
-          {/* Column 1: Apex Digital & Socials */}
+          {/* Column 1: Praszo & Socials */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2 mb-2">
               <AnimatedLogo className="h-10 w-10 text-primary" />
-              <span className="text-2xl font-bold font-headline text-primary">Apex Digital</span>
+              <span className="text-2xl font-bold font-headline text-primary">Praszo</span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
               Elevating businesses with innovative digital solutions and strategic insights to achieve market leadership.
@@ -76,7 +76,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-border pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; {currentYear} Apex Digital. All rights reserved. Designed with passion.</p>
+          <p>&copy; {currentYear} Praszo. All rights reserved. Designed with passion.</p>
         </div>
       </div>
     </footer>

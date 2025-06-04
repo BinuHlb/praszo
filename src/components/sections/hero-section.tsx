@@ -10,7 +10,7 @@ export default function HeroSection() {
       <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
         <div className="space-y-6 animate-slide-up">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-headline tracking-tight text-balance">
-            Elevate Your Business with <span className="text-primary">Apex Digital</span> Solutions
+            Elevate Your Business with <span className="text-primary">Praszo</span> Solutions
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground text-balance">
             We craft innovative digital experiences and powerful software to propel your brand forward. Discover the Apex advantage.
@@ -32,9 +32,9 @@ export default function HeroSection() {
             </Button>
           </div>
         </div>
-        <div className="animate-fade-in rounded-xl shadow-lg border overflow-hidden">
+        <div className="animate-fade-in rounded-xl  overflow-hidden">
           <Image
-            src="/assets/images/hero-banner.jpg" // Updated path
+            src="/assets/images/hero-banner.png" // Updated path
             alt="Modern digital solutions and teamwork" // Updated alt text
             width={600}
             height={450}

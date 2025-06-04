@@ -39,7 +39,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 md:px-6 text-center animate-fade-in">
           <h2 className="text-3xl md:text-4xl font-bold font-headline mb-6">Ready to Transform Your Business?</h2>
           <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-balance">
-            Let's discuss how Apex Digital can help you achieve your goals.
+            Let's discuss how Praszo can help you achieve your goals.
           </p>
           <Button size="lg" variant="secondary" asChild className="text-primary hover:bg-background/90">
             <Link href="/contact" legacyBehavior passHref>

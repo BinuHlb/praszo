@@ -25,7 +25,7 @@ export default function ServicesOverview() {
     <section className="py-16 md:py-24 bg-secondary">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeader 
-          title="Why Choose Apex Digital?"
+          title="Why Choose Praszo?"
           subtitle="We combine cutting-edge technology with creative strategies to deliver solutions that not only meet but exceed expectations. Partner with us for digital excellence."
           titleClassName="text-primary"
         />

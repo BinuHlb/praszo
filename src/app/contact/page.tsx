@@ -76,7 +76,7 @@ export default function ContactPage() {
                 style={{ border:0 }}
                 allowFullScreen={false}
                 loading="lazy"
-                title="Apex Digital Location"
+                title="Praszo Location"
                 referrerPolicy="no-referrer-when-downgrade"
                 data-ai-hint="city map"
               ></iframe>

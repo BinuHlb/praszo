@@ -8,7 +8,7 @@ export const products: Product[] = [
     tagline: 'Streamline Your Workflow, Amplify Results with Practice.', // Updated
     description: 'Our flagship project management application, Practice, is designed for modern teams. Intuitive, powerful, and fully customizable to fit your unique processes.', // Updated
     longDescription: 'Practice is more than just a task manager; it\'s a comprehensive platform that brings clarity, collaboration, and efficiency to your projects. From initial planning to final delivery, Practice empowers your team to achieve more with less stress. Features include advanced task management, real-time collaboration, resource allocation, progress tracking, and insightful reporting.', // Updated
-    image: 'https://placehold.co/600x400.png',
+    image: '/assets/images/practice.svg',
     dataAiHint: 'software interface',
     type: 'app',
     slug: 'practice', // Changed from project-management-app
@@ -67,7 +67,7 @@ export const products: Product[] = [
       { title: 'Social Media Engagement', description: 'Build and nurture your online community.', icon: Zap },
     ],
     testimonials: [
-      { id: 't3', quote: "Apex Digital's marketing strategies took our brand to the next level.", author: "Mike Chan", company: "Growth Co.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile asian man" },
+      { id: 't3', quote: "Praszo's marketing strategies took our brand to the next level.", author: "Mike Chan", company: "Growth Co.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile asian man" },
     ]
   },
   {

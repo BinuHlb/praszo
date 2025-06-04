@@ -1,4 +1,4 @@
-# **App Name**: Apex Digital
+# **App Name**: Praszo
 
 ## Core Features:
 

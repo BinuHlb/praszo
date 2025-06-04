@@ -6,9 +6,9 @@ import Footer from '@/components/layout/footer';
 import { ThemeProvider } from 'next-themes';
 
 export const metadata: Metadata = {
-  title: 'Apex Digital - Innovative Digital Solutions',
-  description: 'Apex Digital offers cutting-edge project management software, bespoke web development, and strategic digital marketing services to elevate your business.',
-  keywords: ['digital agency', 'project management', 'web development', 'digital marketing', 'Apex Digital'],
+  title: 'Praszo - Innovative Digital Solutions',
+  description: 'Praszo offers cutting-edge project management software, bespoke web development, and strategic digital marketing services to elevate your business.',
+  keywords: ['digital agency', 'project management', 'web development', 'digital marketing', 'Praszo'],
 };
 
 export default function RootLayout({
