@@ -93,9 +93,9 @@ const mobileDropdownNavLinks: Array<{ href?: string; label:string; subItems?: Ar
 const allNavItemsForMobile = [
   ...mainNavLinks.filter(link => link.href !== '/contact'), // Avoid duplicate "Contact Us" if CTA link is different
   ...mobileDropdownNavLinks.flatMap(item => {
-    if (item.subItems) {
+    if ((item as any).subItems) { // Type guard for subItems
       // For items with subItems (like "Services"), create a group label then list subItems
-      return [{ label: item.label, isGroupLabel: true, href: undefined }, ...item.subItems];
+      return [{ label: item.label, isGroupLabel: true, href: undefined }, ...(item as any).subItems];
     }
     return [item]; // For direct links
   }),
@@ -171,7 +171,7 @@ export default function Navbar() {
                 mounted && isMenuDropdownActive && "text-primary"
               )}
             >
-              <span className="flex items-center">
+              <span className="flex items-center"> {/* Added span wrapper */}
                  Menu <ChevronDown className="ml-1 h-4 w-4" />
               </span>
             </DropdownMenuTrigger>
@@ -223,7 +223,7 @@ export default function Navbar() {
                 href={mainNavLinks[0].href}
                 className={cn(
                   buttonVariants({ variant: 'ghost', size: 'default' }),
-                  "text-sm font-medium", // Removed hover:bg-transparent
+                  "text-sm font-medium hover:bg-transparent hover:text-primary", // Updated hover
                   pathname === mainNavLinks[0].href && "text-primary"
                 )}
               >
@@ -236,7 +236,7 @@ export default function Navbar() {
                 href={mainNavLinks[1].href}
                 className={cn(
                   buttonVariants({ variant: 'ghost', size: 'default' }),
-                  "text-sm font-medium", // Removed hover:bg-transparent
+                  "text-sm font-medium hover:bg-transparent hover:text-primary", // Updated hover
                   pathname === mainNavLinks[1].href && "text-primary"
                 )}
               >
