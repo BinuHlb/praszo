@@ -2,22 +2,33 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu } from 'lucide-react';
+import { Menu, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
 import { useState, useEffect } from 'react';
 import AnimatedLogo from '@/components/icons/animated-logo';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
 import { cn } from '@/lib/utils';
 
-const navLinks = [
+const navItems: Array<{ href?: string; label: string; subItems?: Array<{ href: string; label: string }> }> = [
   { href: '/', label: 'Home' },
   { href: '/practice', label: 'Practice' },
+  {
+    label: 'Services',
+    subItems: [
+      { href: '/products/web-development', label: 'Web Solutions' },
+      { href: '/products/digital-marketing', label: 'Marketing' },
+    ],
+  },
   { href: '/products/verify', label: 'Verify' },
   { href: '/products/modify', label: 'Modify' },
   { href: '/products/docs', label: 'Docs' },
-  { href: '/products/web-development', label: 'Web Solutions' },
-  { href: '/products/digital-marketing', label: 'Marketing' },
   { href: '/contact', label: 'Contact Us' },
 ];
 
@@ -35,7 +46,7 @@ export default function Navbar() {
 
   return (
     <header className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300 h-16", // Reduced h-20 to h-16
+        "sticky top-0 z-50 w-full transition-all duration-300 h-16",
         isScrolled ? "bg-card shadow-lg" : "bg-transparent"
       )}>
       <div className="container mx-auto flex h-full items-center justify-between px-4 md:px-6">
@@ -45,14 +56,33 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-foreground hover:text-primary transition-colors px-2 py-1 rounded-md"
-            >
-              {link.label}
-            </Link>
+          {navItems.map((item) => (
+            item.subItems ? (
+              <DropdownMenu key={item.label}>
+                <DropdownMenuTrigger asChild>
+                  <Button variant="ghost" className="text-sm font-medium text-foreground hover:text-primary transition-colors px-2 py-1 rounded-md flex items-center">
+                    {item.label} <ChevronDown className="ml-1 h-4 w-4" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent>
+                  {item.subItems.map((subItem) => (
+                    <DropdownMenuItem key={subItem.href} asChild>
+                      <Link href={subItem.href} legacyBehavior passHref>
+                        <a>{subItem.label}</a>
+                      </Link>
+                    </DropdownMenuItem>
+                  ))}
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Link
+                key={item.href}
+                href={item.href!}
+                className="text-sm font-medium text-foreground hover:text-primary transition-colors px-2 py-1 rounded-md"
+              >
+                {item.label}
+              </Link>
+            )
           ))}
            <ThemeToggle />
            <Button asChild className="ml-2">
@@ -78,20 +108,41 @@ export default function Navbar() {
                   <span className="text-xl font-bold font-headline text-primary">Apex Digital</span>
                 </Link>
               </div>
-              <nav className="flex flex-col space-y-3">
-                {navLinks.map((link) => (
-                  <SheetClose asChild key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="text-lg font-medium text-foreground hover:text-primary transition-colors py-1.5"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  </SheetClose>
-                ))}
+              <nav className="flex flex-col space-y-1">
+                {navItems.flatMap((item) => {
+                  if (item.subItems) {
+                    const groupLabel = (
+                      <div key={`${item.label}-group-header`} className="px-0 pt-3 pb-1 text-sm font-semibold text-muted-foreground">
+                        {item.label}
+                      </div>
+                    );
+                    const subLinks = item.subItems.map(subItem => (
+                      <SheetClose asChild key={subItem.href}>
+                        <Link
+                          href={subItem.href}
+                          className="block text-lg font-medium text-foreground hover:text-primary transition-colors py-1.5 pl-4" // Indented
+                          onClick={() => setIsMobileMenuOpen(false)}
+                        >
+                          {subItem.label}
+                        </Link>
+                      </SheetClose>
+                    ));
+                    return [groupLabel, ...subLinks];
+                  }
+                  return (
+                    <SheetClose asChild key={item.href}>
+                      <Link
+                        href={item.href!}
+                        className="block text-lg font-medium text-foreground hover:text-primary transition-colors py-1.5"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    </SheetClose>
+                  );
+                })}
                 <SheetClose asChild>
-                  <Button asChild className="mt-4">
+                  <Button asChild className="mt-4 w-full">
                     <Link href="/contact" legacyBehavior passHref>
                       <a onClick={() => setIsMobileMenuOpen(false)}>Get a Quote</a>
                     </Link>
