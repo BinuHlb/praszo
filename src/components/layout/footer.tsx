@@ -13,7 +13,6 @@ export default function Footer() {
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2 mb-2">
               <AnimatedLogo className="h-10 w-10 text-primary" />
-              <span className="text-2xl font-bold font-headline text-primary">Praszo</span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
               Elevating businesses with innovative digital solutions and strategic insights to achieve market leadership.
