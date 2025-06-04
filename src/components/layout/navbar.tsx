@@ -60,28 +60,32 @@ export default function Navbar() {
             item.subItems ? (
               <DropdownMenu key={item.label}>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" className="text-sm font-medium text-foreground hover:text-primary transition-colors px-2 py-1 rounded-md flex items-center">
+                  <Button variant="ghost" className="text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background transition-colors px-3 py-2 rounded-md flex items-center">
                     {item.label} <ChevronDown className="ml-1 h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                  {item.subItems.map((subItem) => (
-                    <DropdownMenuItem key={subItem.href} asChild>
-                      <Link href={subItem.href} legacyBehavior passHref>
-                        <a>{subItem.label}</a>
-                      </Link>
-                    </DropdownMenuItem>
-                  ))}
+                <DropdownMenuContent className="w-56">
+                  <ul className="list-none p-0 m-0">
+                    {item.subItems.map((subItem) => (
+                      <li key={subItem.href} className="outline-none">
+                        <DropdownMenuItem asChild>
+                          <Link href={subItem.href} legacyBehavior passHref>
+                            <a className="w-full block px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground">
+                              {subItem.label}
+                            </a>
+                          </Link>
+                        </DropdownMenuItem>
+                      </li>
+                    ))}
+                  </ul>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <Link
-                key={item.href}
-                href={item.href!}
-                className="text-sm font-medium text-foreground hover:text-primary transition-colors px-2 py-1 rounded-md"
-              >
-                {item.label}
-              </Link>
+              <Button variant="ghost" asChild className="text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background transition-colors px-3 py-2 rounded-md">
+                <Link href={item.href!} legacyBehavior passHref>
+                  <a>{item.label}</a>
+                </Link>
+              </Button>
             )
           ))}
            <ThemeToggle />
@@ -120,7 +124,7 @@ export default function Navbar() {
                       <SheetClose asChild key={subItem.href}>
                         <Link
                           href={subItem.href}
-                          className="block text-lg font-medium text-foreground hover:text-primary transition-colors py-1.5 pl-4" // Indented
+                          className="block text-lg font-medium text-foreground hover:text-primary transition-colors py-1.5 pl-4"
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
                           {subItem.label}
