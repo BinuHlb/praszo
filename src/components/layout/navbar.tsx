@@ -92,7 +92,7 @@ const mobileDropdownNavLinks: Array<{ href?: string; label:string; subItems?: Ar
 
 // Combine all navigation elements for the mobile menu
 const allNavItemsForMobile = [
-  ...mainNavLinks.filter(link => link.href !== '/contact'), // Avoid duplicate "Contact Us" if CTA also goes to /contact
+  ...mainNavLinks.filter(link => link.href !== '/contact'), // Avoid duplicate "Contact Us" if CTA link is different
   ...mobileDropdownNavLinks.flatMap(item => {
     if (item.subItems) {
       // For items with subItems (like "Services"), create a group label then list subItems
@@ -155,21 +155,7 @@ export default function Navbar() {
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex flex-1 items-center justify-between mx-4 sm:mx-6 lg:mx-8">
-          {mainNavLinks.length > 0 && (
-            <Button
-              key={mainNavLinks[0].label}
-              variant="ghost"
-              asChild
-              className={cn(
-                "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2",
-                pathname === mainNavLinks[0].href && "text-primary"
-              )}
-            >
-              <Link href={mainNavLinks[0].href}>{mainNavLinks[0].label}</Link>
-            </Button>
-          )}
-
-          {/* Mega Menu Dropdown */}
+          {/* Mega Menu Dropdown - Aligned to the left within the nav space */}
           <DropdownMenu open={isMenuDropdownOpen} onOpenChange={setIsMenuDropdownOpen} modal={false}>
             <DropdownMenuTrigger asChild
               onMouseEnter={handleMenuMouseEnter}
@@ -227,19 +213,35 @@ export default function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {mainNavLinks.length > 1 && (
-            <Button
-              key={mainNavLinks[1].label}
-              variant="ghost"
-              asChild
-              className={cn(
-                "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2",
-                pathname === mainNavLinks[1].href && "text-primary"
-              )}
-            >
-              <Link href={mainNavLinks[1].href}>{mainNavLinks[1].label}</Link>
-            </Button>
-          )}
+          {/* Grouped Home and Contact Us links - Aligned to the right within the nav space */}
+          <div className="flex items-center space-x-1">
+            {mainNavLinks.length > 0 && (
+              <Button
+                key={mainNavLinks[0].label} // Home
+                variant="ghost"
+                asChild
+                className={cn(
+                  "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2",
+                  pathname === mainNavLinks[0].href && "text-primary"
+                )}
+              >
+                <Link href={mainNavLinks[0].href}>{mainNavLinks[0].label}</Link>
+              </Button>
+            )}
+            {mainNavLinks.length > 1 && (
+              <Button
+                key={mainNavLinks[1].label} // Contact Us
+                variant="ghost"
+                asChild
+                className={cn(
+                  "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2",
+                  pathname === mainNavLinks[1].href && "text-primary"
+                )}
+              >
+                <Link href={mainNavLinks[1].href}>{mainNavLinks[1].label}</Link>
+              </Button>
+            )}
+          </div>
         </nav>
         
         <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
