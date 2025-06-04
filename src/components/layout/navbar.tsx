@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, ChevronDown, ChevronRight } from 'lucide-react';
-import { Button, buttonVariants } from '@/components/ui/button'; // Import buttonVariants
+import { Button, buttonVariants } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import {
   DropdownMenu,
@@ -169,12 +169,14 @@ export default function Navbar() {
               onMouseEnter={handleMenuMouseEnter}
               onMouseLeave={handleMenuMouseLeave}
               className={cn(
-                buttonVariants({ variant: 'ghost' }), // Get base button styles
-                "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2", // Specific overrides and original classes
-                isMenuDropdownActive && "text-primary"
+                buttonVariants({ variant: 'ghost' }), 
+                "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2", 
+                mounted && isMenuDropdownActive && "text-primary"
               )}
             >
-              Menu <ChevronDown className="ml-1 h-4 w-4" />
+              <span className="flex items-center">
+                Menu <ChevronDown className="ml-1 h-4 w-4" />
+              </span>
             </DropdownMenuTrigger>
             <DropdownMenuContent
               className="w-screen left-0 bg-background shadow-xl border-t data-[side=bottom]:slide-in-from-top-4" 
