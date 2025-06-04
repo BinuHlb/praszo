@@ -93,7 +93,7 @@ export default function AboutPage() {
       <section className="py-16 md:py-24 bg-secondary overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
           <SectionHeader
-            title="Mission & Vision"
+            title="Mission &amp; Vision"
             subtitle="Guiding our strategies and inspiring our actions."
             titleClassName="text-primary"
           />
@@ -101,7 +101,7 @@ export default function AboutPage() {
             className="grid md:grid-cols-2 gap-8"
             variants={cardContainerVariants}
             initial="hidden"
-            whileInView="visible"
+            animate="visible" // Changed from whileInView
             viewport={{ once: true, amount: 0.1 }}
           >
             <motion.div variants={cardItemVariants}>
@@ -225,5 +225,3 @@ export default function AboutPage() {
     </>
   );
 }
-
-    
