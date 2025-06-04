@@ -19,6 +19,7 @@ import { useState, useEffect } from 'react';
 import AnimatedLogo from '@/components/icons/animated-logo';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
 import { cn } from '@/lib/utils';
+import { usePathname } from 'next/navigation';
 
 // Define navigation structures
 const mainNavLinks: Array<{ href: string; label: string }> = [
@@ -46,13 +47,14 @@ const ctaLink = { href: '/contact', label: 'Get a Quote' };
 // For mobile menu, combine all items.
 const allNavItemsForMobile = [
   ...mainNavLinks,
-  ...dropdownNavLinks.flatMap(item => item.subItems ? [{label: item.label, isGroupLabel: true}, ...item.subItems] : [item]), // Flatten services
+  ...dropdownNavLinks.flatMap(item => item.subItems ? [{label: item.label, isGroupLabel: true, href: undefined}, ...item.subItems] : [item]),
   ctaLink,
 ];
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -61,6 +63,12 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const isMenuDropdownActive = dropdownNavLinks.some(
+    (item) =>
+      (item.href && pathname === item.href) ||
+      (item.subItems && item.subItems.some((subItem) => pathname === subItem.href))
+  );
 
   return (
     <header className={cn(
@@ -76,14 +84,29 @@ export default function Navbar() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
           {mainNavLinks.map((link) => (
-            <Button key={link.label} variant="ghost" asChild className="text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2">
+            <Button
+              key={link.label}
+              variant="ghost"
+              asChild
+              className={cn(
+                "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2",
+                pathname === link.href && "text-primary"
+              )}
+            >
               <Link href={link.href}>{link.label}</Link>
             </Button>
           ))}
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" asChild className="text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2 flex items-center">
+              <Button
+                variant="ghost"
+                asChild
+                className={cn(
+                  "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2 flex items-center",
+                  isMenuDropdownActive && "text-primary"
+                )}
+              >
                 <a href="#" onClick={(e) => e.preventDefault()} aria-label="Open menu">
                   Menu <ChevronDown className="ml-1 h-4 w-4" />
                 </a>
@@ -105,7 +128,13 @@ export default function Navbar() {
                               {item.subItems.map((subItem) => (
                                 <li key={subItem.href} className="outline-none">
                                   <DropdownMenuItem asChild>
-                                    <Link href={subItem.href} className="w-full block px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground">
+                                    <Link 
+                                      href={subItem.href} 
+                                      className={cn(
+                                        "w-full block px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground",
+                                        pathname === subItem.href && "text-primary"
+                                      )}
+                                    >
                                       {subItem.label}
                                     </Link>
                                   </DropdownMenuItem>
@@ -119,7 +148,13 @@ export default function Navbar() {
                   ) : (
                     <li key={item.label} className="outline-none">
                       <DropdownMenuItem asChild>
-                         <Link href={item.href!} className="w-full block px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground">
+                         <Link 
+                           href={item.href!} 
+                           className={cn(
+                            "w-full block px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground",
+                            pathname === item.href && "text-primary"
+                           )}
+                         >
                            {item.label}
                         </Link>
                       </DropdownMenuItem>
@@ -170,7 +205,8 @@ export default function Navbar() {
                         href={item.href!}
                         className={cn(
                           "block text-lg font-medium text-foreground hover:text-primary transition-colors py-1.5",
-                          item.label === "Get a Quote" && "mt-3 pt-3 border-t border-border" // Style CTA differently
+                          item.label === "Get a Quote" && "mt-3 pt-3 border-t border-border",
+                          item.href && pathname === item.href && "text-primary"
                         )}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
@@ -187,3 +223,4 @@ export default function Navbar() {
     </header>
   );
 }
+
