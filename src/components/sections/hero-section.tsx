@@ -41,6 +41,8 @@ export default function HeroSection() {
   return (
     <section className="py-20 md:py-32 bg-gradient-to-br from-background to-secondary overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 grid md:grid-cols-2 gap-12 items-center">
+       
+        
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -55,7 +57,7 @@ export default function HeroSection() {
             We craft innovative digital experiences and powerful software to propel your brand forward. Discover the Apex advantage.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button size="lg" asChild>
+            <Button size="lg" variant="outline" asChild>
               <Link href="/contact">
                 <span className="flex items-center">
                   Start Your Project <ChevronRight className="ml-2 h-5 w-5" />
@@ -69,9 +71,11 @@ export default function HeroSection() {
             </Button>
           </div>
 
-          {/* Subscription Form */}
-          <motion.div 
-            className="mt-8 pt-6 border-t border-border/50"
+         
+        </motion.div>
+      {/* Subscription Form */}
+      <motion.div 
+            className="mt-5 p-8 border-t md:border-none border-border/50"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -110,24 +114,6 @@ export default function HeroSection() {
             </p>
           </motion.div>
 
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-          className="rounded-xl overflow-hidden"
-        >
-          <Image
-            src="/assets/images/hero-banner.png"
-            alt="Modern digital solutions and teamwork"
-            width={600}
-            height={450}
-            className="rounded-xl object-cover w-full h-auto"
-            data-ai-hint="business team collaboration"
-            priority
-          />
-        </motion.div>
       </div>
     </section>
   );

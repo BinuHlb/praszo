@@ -34,7 +34,7 @@ export const products: Product[] = [
   },
   {
     id: 'web-dev',
-    name: 'Bespoke Web Solutions',
+    name: ' Web Solutions',
     tagline: 'Crafting Digital Experiences That Convert.',
     description: 'Custom web design and development services tailored to your brand. We build fast, responsive, and scalable websites that drive growth.',
     longDescription: 'Our web development services focus on creating unique digital platforms that not only look stunning but also perform exceptionally. We work with the latest technologies to build secure, SEO-friendly, and user-centric websites. Whether you need an e-commerce platform, a corporate website, or a complex web application, our team has the expertise to deliver.',
