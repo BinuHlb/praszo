@@ -16,14 +16,18 @@ export default function HeroSection() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button size="lg" asChild>
-              <Link href="/contact">
-                <span className="flex items-center">
-                  Start Your Project <ChevronRight className="ml-2 h-5 w-5" />
-                </span>
+              <Link href="/contact" legacyBehavior passHref>
+                <a>
+                  <span className="flex items-center">
+                    Start Your Project <ChevronRight className="ml-2 h-5 w-5" />
+                  </span>
+                </a>
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
-              <Link href="/practice">Explore Practice</Link> {/* Updated from /project-management-app and NexusFlow PM */}
+              <Link href="/practice" legacyBehavior passHref>
+                <a>Explore Practice</a>
+              </Link>
             </Button>
           </div>
         </div>
