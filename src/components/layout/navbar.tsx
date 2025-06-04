@@ -2,7 +2,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, ChevronDown } from 'lucide-react';
+import { Menu, ChevronDown, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import {
@@ -10,7 +10,11 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+  DropdownMenuSub,
+  DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
+  DropdownMenuPortal,
+} from "@/components/ui/dropdown-menu";
 import { useState, useEffect } from 'react';
 import AnimatedLogo from '@/components/icons/animated-logo';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
@@ -30,6 +34,7 @@ const navItems: Array<{ href?: string; label: string; subItems?: Array<{ href: s
   { href: '/products/modify', label: 'Modify' },
   { href: '/products/docs', label: 'Docs' },
   { href: '/contact', label: 'Contact Us' },
+  { href: '/contact', label: 'Get a Quote' }, // "Get a Quote" is now a regular nav item
 ];
 
 export default function Navbar() {
@@ -56,51 +61,56 @@ export default function Navbar() {
         </Link>
 
         <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
-          {navItems.map((item) => (
-            item.subItems ? (
-              <DropdownMenu key={item.label}>
-                <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    asChild /* Ensure Button passes props to its child 'a' tag */
-                    className="text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background transition-colors px-3 py-2 rounded-md flex items-center"
-                  >
-                    {/* This 'a' tag will receive props from Button and DropdownMenuTrigger */}
-                    <a href="#" onClick={(e) => e.preventDefault()}>
-                      {item.label} <ChevronDown className="ml-1 h-4 w-4" />
-                    </a>
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56">
-                  <ul className="list-none p-0 m-0">
-                    {item.subItems.map((subItem) => (
-                      <li key={subItem.href} className="outline-none">
-                        <DropdownMenuItem asChild>
-                          <Link href={subItem.href} legacyBehavior passHref>
-                            <a className="w-full block px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground">
-                              {subItem.label}
-                            </a>
-                          </Link>
-                        </DropdownMenuItem>
-                      </li>
-                    ))}
-                  </ul>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <Button variant="ghost" asChild className="text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background transition-colors px-3 py-2 rounded-md">
-                <Link href={item.href!} legacyBehavior passHref>
-                  <a>{item.label}</a>
-                </Link>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button 
+                variant="ghost"
+                className="text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background transition-colors px-3 py-2 rounded-md flex items-center"
+              >
+                Menu <ChevronDown className="ml-1 h-4 w-4" />
               </Button>
-            )
-          ))}
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <ul className="list-none p-0 m-0">
+                {navItems.map((item) => (
+                  item.subItems ? (
+                    <li key={item.label} className="outline-none">
+                      <DropdownMenuSub>
+                        <DropdownMenuSubTrigger className="w-full justify-between px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground flex items-center">
+                          <span>{item.label}</span>
+                          <ChevronRight className="ml-auto h-4 w-4" />
+                        </DropdownMenuSubTrigger>
+                        <DropdownMenuPortal>
+                          <DropdownMenuSubContent>
+                            <ul className="list-none p-0 m-0">
+                              {item.subItems.map((subItem) => (
+                                <li key={subItem.href} className="outline-none">
+                                  <DropdownMenuItem asChild>
+                                    <Link href={subItem.href} className="w-full block px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground">
+                                      {subItem.label}
+                                    </Link>
+                                  </DropdownMenuItem>
+                                </li>
+                              ))}
+                            </ul>
+                          </DropdownMenuSubContent>
+                        </DropdownMenuPortal>
+                      </DropdownMenuSub>
+                    </li>
+                  ) : (
+                    <li key={item.href || item.label} className="outline-none">
+                      <DropdownMenuItem asChild>
+                         <Link href={item.href!} className="w-full block px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground">
+                           {item.label}
+                        </Link>
+                      </DropdownMenuItem>
+                    </li>
+                  )
+                ))}
+              </ul>
+            </DropdownMenuContent>
+          </DropdownMenu>
            <ThemeToggle />
-           <Button asChild className="ml-2">
-            <Link href="/contact" legacyBehavior passHref>
-              <a>Get a Quote</a>
-            </Link>
-          </Button>
         </nav>
 
         <div className="md:hidden flex items-center gap-2">
@@ -141,10 +151,13 @@ export default function Navbar() {
                     return [groupLabel, ...subLinks];
                   }
                   return (
-                    <SheetClose asChild key={item.href}>
+                    <SheetClose asChild key={item.href || item.label}>
                       <Link
                         href={item.href!}
-                        className="block text-lg font-medium text-foreground hover:text-primary transition-colors py-1.5"
+                        className={cn(
+                          "block text-lg font-medium text-foreground hover:text-primary transition-colors py-1.5",
+                          item.label === "Get a Quote" && "mt-3 pt-3 border-t border-border" // Add some styling for "Get a Quote"
+                        )}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {item.label}
@@ -152,13 +165,6 @@ export default function Navbar() {
                     </SheetClose>
                   );
                 })}
-                <SheetClose asChild>
-                  <Button asChild className="mt-4 w-full">
-                    <Link href="/contact" legacyBehavior passHref>
-                      <a onClick={() => setIsMobileMenuOpen(false)}>Get a Quote</a>
-                    </Link>
-                  </Button>
-                </SheetClose>
               </nav>
             </SheetContent>
           </Sheet>
