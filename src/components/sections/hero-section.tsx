@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
@@ -33,12 +34,12 @@ export default function HeroSection() {
         </div>
         <div className="animate-fade-in rounded-xl shadow-lg border overflow-hidden">
           <Image
-            src="https://placehold.co/600x450.png"
-            alt="Digital Agency Concept"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII="
+            alt="AI-generated concept for digital innovation"
             width={600}
             height={450}
             className="rounded-xl object-cover w-full h-auto"
-            data-ai-hint="team collaboration"
+            data-ai-hint="digital innovation abstract"
             priority
           />
         </div>
