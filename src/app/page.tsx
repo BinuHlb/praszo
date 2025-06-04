@@ -1,4 +1,6 @@
 
+'use client'; // Required for framer-motion
+
 import HeroSection from '@/components/sections/hero-section';
 import ProductList from '@/components/sections/product-list';
 import ServicesOverview from '@/components/sections/services-overview';
@@ -10,7 +12,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import SectionHeader from '@/components/layout/section-header';
 import { getProductBySlug } from '@/data/mock-data';
-import { motion } from 'framer-motion'; // Import motion
+import { motion } from 'framer-motion';
 
 export default function HomePage() {
   const practiceProduct = getProductBySlug('practice');
@@ -25,7 +27,7 @@ export default function HomePage() {
       <HeroSection />
       <ProductList />
       <ServicesOverview />
-      <motion.section // Wrap section with motion.section
+      <motion.section
         className="py-16 md:py-24 bg-background"
         variants={sectionVariants}
         initial="hidden"
@@ -37,7 +39,7 @@ export default function HomePage() {
             title="Experience Our Solutions"
             subtitle="Dive deeper into how our flagship project management tool, Practice, can revolutionize your workflow."
           />
-          <motion.div // Wrap the content div with motion.div
+          <motion.div
             className="max-w-3xl mx-auto"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -57,7 +59,7 @@ export default function HomePage() {
       </motion.section>
       <InteractiveQuestionnaire />
       <PartnerLogos />
-      <motion.section // Wrap section with motion.section
+      <motion.section
         className="py-16 md:py-24 bg-primary text-primary-foreground"
         variants={sectionVariants}
         initial="hidden"
