@@ -33,7 +33,7 @@ export default function ServicesOverview() {
           {services.map((service, index) => (
             <Card 
               key={service.title} 
-              className="text-center h-full shadow-lg hover:shadow-xl transition-shadow animate-fade-in rounded-lg"
+              className="text-center h-full  hover:shadow-lg transition-shadow animate-fade-in rounded-lg"
               style={{ animationDelay: `${index * 0.15}s`}}
             >
               <CardHeader>

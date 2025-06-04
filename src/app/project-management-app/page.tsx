@@ -80,7 +80,7 @@ export default function ProjectManagementAppPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <div key={feature.title} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>
-                <Card className="h-full shadow-lg rounded-lg">
+                <Card className="h-full hover:shadow-lg transition-shadow rounded-lg">
                   <CardHeader>
                     <div className="flex items-center gap-3">
                       {feature.icon && <feature.icon className="h-8 w-8 text-primary" />}

@@ -13,7 +13,7 @@ interface InteractiveDemoPlaceholderProps {
 
 export default function InteractiveDemoPlaceholder({ title, description, imageUrl, dataAiHint, link }: InteractiveDemoPlaceholderProps) {
   return (
-    <Card className="overflow-hidden shadow-xl rounded-lg"> {/* Ensured rounded-lg consistent with Card default */}
+    <Card className="overflow-hidden hover:shadow-lg transition-shadow rounded-lg"> {/* Ensured rounded-lg consistent with Card default */}
       {imageUrl && (
         <div className="relative aspect-video">
           <Image 

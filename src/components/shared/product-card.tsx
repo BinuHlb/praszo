@@ -12,7 +12,7 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <Card className="h-full flex flex-col overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl"> {/* Transferred h-full, set rounded-xl */}
+    <Card className="h-full flex flex-col overflow-hidden  hover:shadow-lg transition-shadow duration-300 rounded-xl"> {/* Transferred h-full, set rounded-xl */}
       <CardHeader className="p-0">
         <Image
           src={product.image}

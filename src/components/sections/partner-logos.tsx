@@ -50,7 +50,7 @@ export default function PartnerLogos() {
                   key={index} 
                   className="relative flex-[0_0_auto] min-w-0 pl-4 basis-1/4 sm:basis-1/8" /* Embla slide: pl-4 for gap, basis-1/4 for mobile (4 logos), sm:basis-1/8 for small screens and up (8 logos) */
                 >
-                  <div className="flex items-center justify-center h-[100px] p-3 bg-card rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out transform hover:scale-105">
+                  <div className="flex items-center justify-center h-[100px] p-3  rounded-lg  duration-300 ease-in-out transform hover:scale-105">
                     <Image
                       src={logo.src}
                       alt={logo.alt}

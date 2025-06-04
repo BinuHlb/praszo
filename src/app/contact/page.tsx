@@ -20,7 +20,7 @@ export default function ContactPage() {
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2 animate-fade-in">
               <h2 className="text-3xl font-bold font-headline mb-8 text-primary">Send Us a Message</h2>
-              <Card className="rounded-xl shadow-xl">
+              <Card className="rounded-xl">
                 <CardContent className="p-6 md:p-8">
                   <ContactForm />
                 </CardContent>
@@ -28,7 +28,7 @@ export default function ContactPage() {
             </div>
             <div className="space-y-8 animate-fade-in" style={{animationDelay: '0.2s'}}>
               <h2 className="text-3xl font-bold font-headline mb-8 text-primary">Contact Information</h2>
-              <Card className="rounded-xl shadow-xl">
+              <Card className="rounded-xl">
                 <CardContent className="p-6 md:p-8 space-y-6">
                   <div>
                     <h3 className="text-xl font-semibold font-headline flex items-center mb-2">

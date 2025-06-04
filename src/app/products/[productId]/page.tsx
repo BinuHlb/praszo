@@ -74,7 +74,7 @@ export default function ProductPage({ params }: ProductPageProps) {
               <div className="grid sm:grid-cols-2 gap-8">
                 {product.features.map((feature, index) => (
                   <div key={feature.title} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>
-                    <Card className="h-full shadow-lg hover:shadow-xl transition-shadow">
+                    <Card className="h-full hover:shadow-lg transition-shadow">
                       <CardHeader>
                         <div className="flex items-center gap-3">
                            {feature.icon ? <feature.icon className="h-7 w-7 text-accent" /> : <CheckCircle className="h-7 w-7 text-accent" /> }

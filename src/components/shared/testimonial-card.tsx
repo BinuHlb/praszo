@@ -9,7 +9,7 @@ interface TestimonialCardProps {
 
 export default function TestimonialCard({ testimonial }: TestimonialCardProps) {
   return (
-    <Card className="h-full flex flex-col justify-between p-6 shadow-lg hover:shadow-xl transition-shadow duration-300 rounded-xl"> {/* Transferred h-full, set rounded-xl */}
+    <Card className="h-full flex flex-col justify-between p-6 hover:shadow-lg transition-shadow duration-300 rounded-xl"> {/* Transferred h-full, set rounded-xl */}
       <div>
         <Quote className="h-8 w-8 text-accent mb-4" />
         <p className="text-lg italic text-muted-foreground mb-6">&quot;{testimonial.quote}&quot;</p>

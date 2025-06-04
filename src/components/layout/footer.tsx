@@ -76,7 +76,7 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-accent-foreground/20 pt-8 text-center text-sm text-accent-foreground/70">
-          <p>&copy; {currentYear} Praszo. All rights reserved. Designed with passion.</p>
+          <p>&copy; {currentYear} Praszo. All rights reserved. Designed By Difinity.</p>
         </div>
       </div>
     </footer>
