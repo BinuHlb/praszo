@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { Menu } from 'lucide-react'; // Removed X
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
 import { useState, useEffect } from 'react';
@@ -71,12 +71,7 @@ export default function Navbar() {
                   <AnimatedLogo className="h-8 w-8" />
                   <span className="text-xl font-bold font-headline text-primary">Apex Digital</span>
                 </Link>
-                <SheetClose asChild>
-                  <Button variant="ghost" size="icon">
-                    <X className="h-6 w-6" />
-                    <span className="sr-only">Close menu</span>
-                  </Button>
-                </SheetClose>
+                {/* Removed the explicit SheetClose button here, as SheetContent provides one */}
               </div>
               <nav className="flex flex-col space-y-4">
                 {navLinks.map((link) => (
