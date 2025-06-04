@@ -101,7 +101,7 @@ export default function AboutPage() {
             className="grid md:grid-cols-2 gap-8"
             variants={cardContainerVariants}
             initial="hidden"
-            animate="visible" // Changed from whileInView
+            animate="visible"
             viewport={{ once: true, amount: 0.1 }}
           >
             <motion.div variants={cardItemVariants}>
@@ -144,7 +144,7 @@ export default function AboutPage() {
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
             variants={cardContainerVariants}
             initial="hidden"
-            whileInView="visible"
+            animate="visible"
             viewport={{ once: true, amount: 0.1 }}
           >
             {coreValues.map((value) => (
