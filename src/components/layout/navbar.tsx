@@ -2,6 +2,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image'; // Added for mega menu
 import { Menu, ChevronDown, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from '@/components/ui/sheet';
@@ -10,16 +11,18 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuSub,
-  DropdownMenuSubTrigger,
-  DropdownMenuSubContent,
-  DropdownMenuPortal,
+  // DropdownMenuSub, // No longer needed for desktop mega menu
+  // DropdownMenuSubTrigger, // No longer needed for desktop mega menu
+  // DropdownMenuSubContent, // No longer needed for desktop mega menu
+  // DropdownMenuPortal, // No longer needed for desktop mega menu
 } from "@/components/ui/dropdown-menu";
 import { useState, useEffect, useRef } from 'react';
 import AnimatedLogo from '@/components/icons/animated-logo';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
+import { getProductBySlug } from '@/data/mock-data'; // Added
+import type { Product } from '@/lib/types'; // Added
 
 // Define navigation structures
 const mainNavLinks: Array<{ href: string; label: string }> = [
@@ -27,10 +30,11 @@ const mainNavLinks: Array<{ href: string; label: string }> = [
   { href: '/contact', label: 'Contact Us' },
 ];
 
-const dropdownNavLinks: Array<{ href?: string; label: string; subItems?: Array<{ href: string; label: string }> }> = [
+// For Mobile Menu - keeping the original dropdown structure for "Services"
+const mobileDropdownNavLinks: Array<{ href?: string; label: string; subItems?: Array<{ href: string; label: string }> }> = [
   { href: '/practice', label: 'Practice' },
   {
-    label: 'Services', 
+    label: 'Services',
     subItems: [
       { href: '/products/web-development', label: 'Web Solutions' },
       { href: '/products/digital-marketing', label: 'Marketing' },
@@ -46,9 +50,47 @@ const ctaLink = { href: '/contact', label: 'Get a Quote' };
 // For mobile menu, combine all items.
 const allNavItemsForMobile = [
   ...mainNavLinks,
-  ...dropdownNavLinks.flatMap(item => item.subItems ? [{label: item.label, isGroupLabel: true, href: undefined}, ...item.subItems] : [item]),
+  ...mobileDropdownNavLinks.flatMap(item => item.subItems ? [{label: item.label, isGroupLabel: true, href: undefined}, ...item.subItems] : [item]),
   ctaLink,
 ];
+
+interface MegaMenuItem {
+  href: string;
+  label: string;
+  image: string;
+  dataAiHint: string;
+  description: string;
+}
+
+const productSlugsForMegaMenu = [
+  'practice',
+  'web-development',
+  'digital-marketing',
+  'verify',
+  'modify',
+  'docs'
+];
+
+const megaMenuItems: MegaMenuItem[] = productSlugsForMegaMenu.map(slug => {
+  const product = getProductBySlug(slug);
+  if (!product) {
+    return { 
+      href: `/${slug}`, 
+      label: slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()), // Basic title case
+      image: 'https://placehold.co/150x100.png', 
+      dataAiHint: 'placeholder', 
+      description: 'Product information coming soon.' 
+    };
+  }
+  return {
+    href: product.type === 'app' ? `/${product.slug}` : `/products/${product.slug}`,
+    label: product.name,
+    image: product.image,
+    dataAiHint: product.dataAiHint,
+    description: product.tagline,
+  };
+}).filter(Boolean) as MegaMenuItem[];
+
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -68,7 +110,7 @@ export default function Navbar() {
   const handleMenuMouseLeave = () => {
     menuDropdownTimerRef.current = setTimeout(() => {
       setIsMenuDropdownOpen(false);
-    }, 300); // Increased delay
+    }, 300);
   };
 
   useEffect(() => {
@@ -84,11 +126,7 @@ export default function Navbar() {
     };
   }, []);
 
-  const isMenuDropdownActive = dropdownNavLinks.some(
-    (item) =>
-      (item.href && pathname === item.href) ||
-      (item.subItems && item.subItems.some((subItem) => pathname === subItem.href))
-  );
+  const isMenuDropdownActive = megaMenuItems.some(item => pathname === item.href);
 
   return (
     <header className={cn(
@@ -126,72 +164,45 @@ export default function Navbar() {
                 variant="ghost"
                 asChild
                 className={cn(
-                  "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2 flex items-center",
-                  (isMenuDropdownActive || isMenuDropdownOpen) && "text-primary" 
+                  "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2",
+                  (isMenuDropdownActive || isMenuDropdownOpen) && "text-primary"
                 )}
               >
-                <a href="#" onClick={(e) => e.preventDefault()} aria-label="Open menu">
+                <a> {/* Button asChild makes this 'a' take button's role */}
                   Menu <ChevronDown className="ml-1 h-4 w-4" />
                 </a>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent 
-              className="w-56"
+            <DropdownMenuContent
+              className="w-screen max-w-lg md:max-w-xl lg:max-w-2xl p-6 shadow-xl rounded-xl" // Adjusted for mega menu
               onMouseEnter={handleMenuMouseEnter}
               onMouseLeave={handleMenuMouseLeave}
+              align="start" // Align to the start of the trigger
+              sideOffset={10} // Give some space from the trigger
             >
-              <ul className="list-none p-0 m-0">
-                {dropdownNavLinks.map((item) =>
-                  item.subItems ? (
-                    <li key={item.label} className="outline-none">
-                      <DropdownMenuSub>
-                        <DropdownMenuSubTrigger className={cn(
-                          "w-full justify-between px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground flex items-center",
-                           item.subItems.some(sub => pathname === sub.href) && "bg-accent text-accent-foreground" // Highlight sub-trigger if a sub-item is active
-                        )}>
-                          <span>{item.label}</span>
-                          {/* ChevronRight is automatically added by DropdownMenuSubTrigger */}
-                        </DropdownMenuSubTrigger>
-                        <DropdownMenuPortal>
-                          <DropdownMenuSubContent>
-                            <ul className="list-none p-0 m-0">
-                              {item.subItems.map((subItem) => (
-                                <li key={subItem.label} className="outline-none">
-                                  <DropdownMenuItem asChild>
-                                    <Link 
-                                      href={subItem.href} 
-                                      className={cn(
-                                        "w-full block px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground",
-                                        pathname === subItem.href && "text-primary bg-accent"
-                                      )}
-                                    >
-                                      {subItem.label}
-                                    </Link>
-                                  </DropdownMenuItem>
-                                </li>
-                              ))}
-                            </ul>
-                          </DropdownMenuSubContent>
-                        </DropdownMenuPortal>
-                      </DropdownMenuSub>
-                    </li>
-                  ) : (
-                    <li key={item.label} className="outline-none">
-                      <DropdownMenuItem asChild>
-                         <Link 
-                           href={item.href!} 
-                           className={cn(
-                            "w-full block px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground",
-                            pathname === item.href && "text-primary bg-accent"
-                           )}
-                         >
-                           {item.label}
-                        </Link>
-                      </DropdownMenuItem>
-                    </li>
-                  )
-                )}
-              </ul>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-8">
+                {megaMenuItems.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className="group flex flex-col items-start p-3 rounded-lg hover:bg-accent transition-colors"
+                    onClick={() => setIsMenuDropdownOpen(false)} // Close menu on click
+                  >
+                    <div className="relative w-full aspect-[4/3] rounded-md overflow-hidden mb-3 shadow-md">
+                      <Image
+                        src={item.image}
+                        alt={item.label}
+                        layout="fill"
+                        objectFit="cover"
+                        data-ai-hint={item.dataAiHint}
+                        className="group-hover:scale-105 transition-transform duration-300"
+                      />
+                    </div>
+                    <h3 className="text-md font-semibold font-headline text-popover-foreground group-hover:text-primary mb-1">{item.label}</h3>
+                    <p className="text-xs text-muted-foreground line-clamp-2">{item.description}</p>
+                  </Link>
+                ))}
+              </div>
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -222,7 +233,7 @@ export default function Navbar() {
               </div>
               <nav className="flex flex-col space-y-1">
                 {allNavItemsForMobile.map((item) => {
-                  if ((item as any).isGroupLabel) { // Type assertion for isGroupLabel
+                  if ((item as any).isGroupLabel) {
                     return (
                       <div key={`${item.label}-group-header`} className="px-0 pt-3 pb-1 text-sm font-semibold text-muted-foreground">
                         {item.label}
@@ -253,4 +264,3 @@ export default function Navbar() {
     </header>
   );
 }
-
