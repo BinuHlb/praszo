@@ -15,7 +15,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuPortal,
 } from "@/components/ui/dropdown-menu";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import AnimatedLogo from '@/components/icons/animated-logo';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
 import { cn } from '@/lib/utils';
@@ -27,7 +27,6 @@ const mainNavLinks: Array<{ href: string; label: string }> = [
   { href: '/contact', label: 'Contact Us' },
 ];
 
-// This array is specifically for the "Menu" dropdown on desktop.
 const dropdownNavLinks: Array<{ href?: string; label: string; subItems?: Array<{ href: string; label: string }> }> = [
   { href: '/practice', label: 'Practice' },
   {
@@ -56,12 +55,33 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
 
+  const [isMenuDropdownOpen, setIsMenuDropdownOpen] = useState(false);
+  const menuDropdownTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  const handleMenuMouseEnter = () => {
+    if (menuDropdownTimerRef.current) {
+      clearTimeout(menuDropdownTimerRef.current);
+    }
+    setIsMenuDropdownOpen(true);
+  };
+
+  const handleMenuMouseLeave = () => {
+    menuDropdownTimerRef.current = setTimeout(() => {
+      setIsMenuDropdownOpen(false);
+    }, 200); // Adjust delay as needed (e.g., 200ms)
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (menuDropdownTimerRef.current) {
+        clearTimeout(menuDropdownTimerRef.current);
+      }
+    };
   }, []);
 
   const isMenuDropdownActive = dropdownNavLinks.some(
@@ -97,14 +117,17 @@ export default function Navbar() {
             </Button>
           ))}
 
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+          <DropdownMenu open={isMenuDropdownOpen} onOpenChange={setIsMenuDropdownOpen}>
+            <DropdownMenuTrigger asChild
+              onMouseEnter={handleMenuMouseEnter}
+              onMouseLeave={handleMenuMouseLeave}
+            >
               <Button
                 variant="ghost"
                 asChild
                 className={cn(
                   "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2 flex items-center",
-                  isMenuDropdownActive && "text-primary"
+                  (isMenuDropdownActive || isMenuDropdownOpen) && "text-primary" 
                 )}
               >
                 <a href="#" onClick={(e) => e.preventDefault()} aria-label="Open menu">
@@ -112,13 +135,20 @@ export default function Navbar() {
                 </a>
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56">
+            <DropdownMenuContent 
+              className="w-56"
+              onMouseEnter={handleMenuMouseEnter}
+              onMouseLeave={handleMenuMouseLeave}
+            >
               <ul className="list-none p-0 m-0">
                 {dropdownNavLinks.map((item) =>
                   item.subItems ? (
                     <li key={item.label} className="outline-none">
                       <DropdownMenuSub>
-                        <DropdownMenuSubTrigger className="w-full justify-between px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground flex items-center">
+                        <DropdownMenuSubTrigger className={cn(
+                          "w-full justify-between px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground flex items-center",
+                           item.subItems.some(sub => pathname === sub.href) && "bg-accent text-accent-foreground" // Highlight sub-trigger if a sub-item is active
+                        )}>
                           <span>{item.label}</span>
                           <ChevronRight className="ml-auto h-4 w-4" />
                         </DropdownMenuSubTrigger>
@@ -126,13 +156,13 @@ export default function Navbar() {
                           <DropdownMenuSubContent>
                             <ul className="list-none p-0 m-0">
                               {item.subItems.map((subItem) => (
-                                <li key={subItem.href} className="outline-none">
+                                <li key={subItem.label} className="outline-none">
                                   <DropdownMenuItem asChild>
                                     <Link 
                                       href={subItem.href} 
                                       className={cn(
                                         "w-full block px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground",
-                                        pathname === subItem.href && "text-primary"
+                                        pathname === subItem.href && "text-primary bg-accent"
                                       )}
                                     >
                                       {subItem.label}
@@ -152,7 +182,7 @@ export default function Navbar() {
                            href={item.href!} 
                            className={cn(
                             "w-full block px-2 py-1.5 text-sm rounded-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent hover:text-accent-foreground",
-                            pathname === item.href && "text-primary"
+                            pathname === item.href && "text-primary bg-accent"
                            )}
                          >
                            {item.label}
@@ -205,8 +235,8 @@ export default function Navbar() {
                         href={item.href!}
                         className={cn(
                           "block text-lg font-medium text-foreground hover:text-primary transition-colors py-1.5",
-                          item.label === "Get a Quote" && "mt-3 pt-3 border-t border-border",
-                          item.href && pathname === item.href && "text-primary"
+                           item.href && pathname === item.href && "text-primary",
+                           item.label === ctaLink.label && "mt-3 pt-3 border-t border-border"
                         )}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
