@@ -60,14 +60,13 @@ export default function Navbar() {
             item.subItems ? (
               <DropdownMenu key={item.label}>
                 <DropdownMenuTrigger asChild>
-                  <Button 
-                    variant="ghost" 
+                  <Button
+                    variant="ghost"
                     asChild /* Ensure Button passes props to its child 'a' tag */
                     className="text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-background transition-colors px-3 py-2 rounded-md flex items-center"
                   >
                     {/* This 'a' tag will receive props from Button and DropdownMenuTrigger */}
-                    <a href="#" onClick={(e) => e.preventDefault()} 
-                       className="flex items-center"> {/* Added flex items-center here too */}
+                    <a href="#" onClick={(e) => e.preventDefault()}>
                       {item.label} <ChevronDown className="ml-1 h-4 w-4" />
                     </a>
                   </Button>
