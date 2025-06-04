@@ -30,20 +30,20 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   return (
     <>
-      <section className="py-20 md:py-28 bg-gradient-to-br from-secondary to-background">
+      <section className="py-20 md:py-28 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-slide-up">
-              <span className="text-sm font-semibold text-primary uppercase tracking-wider">{product.type === 'app' ? 'Application' : 'Service'}</span>
+              <span className="text-sm font-semibold uppercase tracking-wider">{product.type === 'app' ? 'Application' : 'Service'}</span>
               <h1 className="text-4xl md:text-5xl font-bold font-headline">{product.name}</h1>
-              <p className="text-lg md:text-xl text-muted-foreground text-balance">{product.tagline}</p>
-              <Button size="lg" asChild>
-                <Link href={`/contact?product=${encodeURIComponent(product.name)}`} legacyBehavior passHref>
-                  <a>Inquire About {product.name}</a>
+              <p className="text-lg md:text-xl text-primary-foreground/90 text-balance">{product.tagline}</p>
+              <Button size="lg" variant="secondary" asChild className="text-primary hover:bg-accent hover:text-accent-foreground">
+                <Link href={`/contact?product=${encodeURIComponent(product.name)}`}>
+                  Inquire About {product.name}
                 </Link>
               </Button>
             </div>
-            <div className="animate-fade-in rounded-xl shadow-xl border overflow-hidden">
+            <div className="animate-fade-in rounded-xl shadow-xl border border-primary-foreground/20 overflow-hidden">
                 <Image
                   src={product.image}
                   alt={product.name}
