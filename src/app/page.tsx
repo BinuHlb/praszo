@@ -2,6 +2,7 @@ import HeroSection from '@/components/sections/hero-section';
 import ProductList from '@/components/sections/product-list';
 import ServicesOverview from '@/components/sections/services-overview';
 import InteractiveDemoPlaceholder from '@/components/sections/interactive-demo-placeholder';
+import InteractiveQuestionnaire from '@/components/sections/interactive-questionnaire';
 import PartnerLogos from '@/components/sections/partner-logos';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
@@ -31,6 +32,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      <InteractiveQuestionnaire />
       <PartnerLogos />
       <section className="py-16 md:py-24 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 md:px-6 text-center animate-fade-in">
