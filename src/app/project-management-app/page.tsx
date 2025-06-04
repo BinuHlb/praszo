@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle, BarChart3, Users, Settings, Zap, ShieldCheck, MessageSquare } from 'lucide-react';
 import { products, getProductBySlug } from '@/data/mock-data';
 import Link from 'next/link';
-import AnimatedBorderBox from '@/components/ui/animated-border-box';
 import TestimonialCard from '@/components/shared/testimonial-card';
 import InteractiveDemoPlaceholder from '@/components/sections/interactive-demo-placeholder';
 
@@ -81,19 +80,17 @@ export default function ProjectManagementAppPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <div key={feature.title} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>
-                <AnimatedBorderBox>
-                  <Card className="h-full shadow-lg">
-                    <CardHeader>
-                      <div className="flex items-center gap-3">
-                        {feature.icon && <feature.icon className="h-8 w-8 text-primary" />}
-                        <CardTitle className="text-xl font-headline">{feature.title}</CardTitle>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground">{feature.description}</p>
-                    </CardContent>
-                  </Card>
-                </AnimatedBorderBox>
+                <Card className="h-full shadow-lg rounded-lg"> {/* Ensuring Card has rounded-lg if ABB default was used */}
+                  <CardHeader>
+                    <div className="flex items-center gap-3">
+                      {feature.icon && <feature.icon className="h-8 w-8 text-primary" />}
+                      <CardTitle className="text-xl font-headline">{feature.title}</CardTitle>
+                    </div>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground">{feature.description}</p>
+                  </CardContent>
+                </Card>
               </div>
             ))}
           </div>

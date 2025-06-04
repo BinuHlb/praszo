@@ -1,6 +1,5 @@
 import { Zap, BarChart3, Users } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import AnimatedBorderBox from '@/components/ui/animated-border-box';
 
 const services = [
   {
@@ -32,19 +31,21 @@ export default function ServicesOverview() {
         </div>
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <AnimatedBorderBox key={service.title} className="animate-fade-in" style={{ animationDelay: `${index * 0.15}s`}}>
-              <Card className="text-center h-full shadow-lg hover:shadow-xl transition-shadow">
-                <CardHeader>
-                  <div className="mx-auto flex items-center justify-center w-16 h-16 rounded-full bg-primary text-primary-foreground mb-4">
-                    <service.icon size={32} />
-                  </div>
-                  <CardTitle className="text-xl font-headline">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{service.description}</p>
-                </CardContent>
-              </Card>
-            </AnimatedBorderBox>
+            <Card 
+              key={service.title} 
+              className="text-center h-full shadow-lg hover:shadow-xl transition-shadow animate-fade-in rounded-lg" // Transferred classes, ensured rounded-lg
+              style={{ animationDelay: `${index * 0.15}s`}}
+            >
+              <CardHeader>
+                <div className="mx-auto flex items-center justify-center w-16 h-16 rounded-full bg-primary text-primary-foreground mb-4">
+                  <service.icon size={32} />
+                </div>
+                <CardTitle className="text-xl font-headline">{service.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground">{service.description}</p>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
