@@ -10,10 +10,10 @@
     --card-foreground: 275 10% 20%;
     --popover: 0 0% 100%;
     --popover-foreground: 275 10% 20%;
-    --primary: 275 100% 25%; /* Deep Indigo #4B0082 */
+    --primary: 246 93% 63%; /* New Primary Color: #5c49f7 */
     --primary-foreground: 0 0% 98%; /* Light color for text on primary */
     --secondary: 275 20% 88%; /* Lighter shade of indigo/purple */
-    --secondary-foreground: 275 100% 25%;
+    --secondary-foreground: 246 93% 63%; /* Adjusted to new primary */
     --muted: 275 10% 75%;
     --muted-foreground: 275 10% 45%;
     --accent: 285 100% 50%; /* Electric Purple #BF00FF */
@@ -22,10 +22,10 @@
     --destructive-foreground: 0 0% 98%;
     --border: 275 10% 85%;
     --input: 275 10% 90%;
-    --ring: 285 100% 50%; /* Accent for focus rings */
+    --ring: 246 93% 63%; /* Adjusted to new primary */
     --radius: 0.5rem;
 
-    --chart-1: 275 100% 25%;
+    --chart-1: 246 93% 63%; /* Adjusted to new primary */
     --chart-2: 285 100% 50%;
     --chart-3: 275 60% 50%;
     --chart-4: 285 60% 70%;
@@ -48,10 +48,10 @@
     --card-foreground: 275 15% 90%;
     --popover: 275 15% 15%;
     --popover-foreground: 275 15% 90%;
-    --primary: 275 100% 65%; /* Lighter Deep Indigo */
-    --primary-foreground: 275 100% 15%;
+    --primary: 246 93% 75%; /* New Dark Primary Color (lighter shade of #5c49f7) */
+    --primary-foreground: 246 93% 20%; /* Darker color for text on dark primary */
     --secondary: 275 20% 25%;
-    --secondary-foreground: 275 15% 90%;
+    --secondary-foreground: 246 93% 75%; /* Adjusted to new dark primary */
     --muted: 275 10% 30%;
     --muted-foreground: 275 10% 65%;
     --accent: 285 100% 60%; /* Lighter Electric Purple */
@@ -60,9 +60,9 @@
     --destructive-foreground: 0 0% 98%;
     --border: 275 10% 25%;
     --input: 275 10% 20%;
-    --ring: 285 100% 60%;
+    --ring: 246 93% 75%; /* Adjusted to new dark primary */
 
-    --chart-1: 275 100% 65%;
+    --chart-1: 246 93% 75%; /* Adjusted to new dark primary */
     --chart-2: 285 100% 60%;
     --chart-3: 275 60% 70%;
     --chart-4: 285 60% 80%;
