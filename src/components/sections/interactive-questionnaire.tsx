@@ -80,19 +80,19 @@ export default function InteractiveQuestionnaire() {
         <div className="container mx-auto px-4 md:px-6 text-center">
           <SectionHeader
             title="Thanks for Your Insights!"
-            subtitle="Based on your answers, a comprehensive project management tool like Practice could be a great fit to streamline your workflows, enhance collaboration, and boost team productivity." // Updated
+            subtitle="Based on your answers, a comprehensive project management tool like Practice could be a great fit to streamline your workflows, enhance collaboration, and boost team productivity."
             titleClassName="text-primary"
           />
           <div className="animate-fade-in mt-8">
             <CheckCircle className="h-20 w-20 md:h-24 md:w-24 text-primary mx-auto mb-6" />
             <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-balance">
-              Ready to see how Practice can transform your project management and help you achieve your goals? {/* Updated */}
+              Ready to see how Practice can transform your project management and help you achieve your goals?
             </p>
             <Button size="lg" asChild className="text-lg py-6 px-8">
-              <Link href="/practice" legacyBehavior passHref> {/* Updated */}
+              <Link href="/practice" legacyBehavior passHref>
                 <a>
                   <span className="flex items-center">
-                    Discover Practice <ArrowRight className="ml-2 h-5 w-5" /> {/* Updated */}
+                    Discover Practice <ArrowRight className="ml-2 h-5 w-5" />
                   </span>
                 </a>
               </Link>
@@ -107,8 +107,8 @@ export default function InteractiveQuestionnaire() {
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeader
-          title="Is Practice Right For You?" // Updated
-          subtitle="Answer a few quick questions to see how our project management solution, Practice, can address your team's specific challenges and goals." // Updated
+          title="Is Practice Right For You?"
+          subtitle="Answer a few quick questions to see how our project management solution, Practice, can address your team's specific challenges and goals."
         />
         <div className="max-w-2xl mx-auto animate-fade-in">
           <Card className="shadow-xl rounded-xl overflow-hidden">
