@@ -16,8 +16,8 @@
     --secondary-foreground: 246 93% 63%; /* Adjusted to new primary */
     --muted: 275 10% 75%;
     --muted-foreground: 275 10% 45%;
-    --accent: 285 100% 50%; /* Electric Purple #BF00FF */
-    --accent-foreground: 0 0% 98%;
+    --accent: 285 100% 63%; /* Adjusted lightness to match primary */
+    --accent-foreground: 275 10% 20%; /* Adjusted for readability on new accent */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 275 10% 85%;
@@ -26,7 +26,7 @@
     --radius: 0.5rem;
 
     --chart-1: 246 93% 63%; /* Adjusted to new primary */
-    --chart-2: 285 100% 50%;
+    --chart-2: 285 100% 63%; /* Adjusted to new accent */
     --chart-3: 275 60% 50%;
     --chart-4: 285 60% 70%;
     --chart-5: 275 30% 60%;
@@ -54,8 +54,8 @@
     --secondary-foreground: 246 93% 75%; /* Adjusted to new dark primary */
     --muted: 275 10% 30%;
     --muted-foreground: 275 10% 65%;
-    --accent: 285 100% 60%; /* Lighter Electric Purple */
-    --accent-foreground: 275 100% 15%;
+    --accent: 285 100% 75%; /* Adjusted lightness to match dark primary */
+    --accent-foreground: 275 100% 15%; /* Existing, suitable for lighter accent */
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 275 10% 25%;
@@ -63,7 +63,7 @@
     --ring: 246 93% 75%; /* Adjusted to new dark primary */
 
     --chart-1: 246 93% 75%; /* Adjusted to new dark primary */
-    --chart-2: 285 100% 60%;
+    --chart-2: 285 100% 75%; /* Adjusted to new dark accent */
     --chart-3: 275 60% 70%;
     --chart-4: 285 60% 80%;
     --chart-5: 275 30% 70%;
