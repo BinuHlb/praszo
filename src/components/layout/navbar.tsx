@@ -132,6 +132,7 @@ export default function Navbar() {
       setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Set initial state
     return () => {
       window.removeEventListener('scroll', handleScroll);
       if (menuDropdownTimerRef.current) {
@@ -242,8 +243,8 @@ export default function Navbar() {
         
         <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
           <Button asChild className="text-sm font-medium">
-            <Link href={ctaLink.href} legacyBehavior passHref>
-              <a>{ctaLink.label}</a>
+            <Link href={ctaLink.href}>
+              {ctaLink.label}
             </Link>
           </Button>
           <ThemeToggle />
