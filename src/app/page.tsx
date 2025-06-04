@@ -9,8 +9,11 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react'; 
 import SectionHeader from '@/components/layout/section-header';
+import { getProductBySlug } from '@/data/mock-data';
 
 export default function HomePage() {
+  const practiceProduct = getProductBySlug('practice');
+
   return (
     <>
       <HeroSection />
@@ -28,7 +31,8 @@ export default function HomePage() {
               description="Get a hands-on feel for Practice's intuitive interface and powerful features. See how it simplifies complex project management tasks and boosts team productivity."
               imageUrl="https://placehold.co/800x450.png"
               dataAiHint="project dashboard"
-              link="/products/practice#demo" // Updated link
+              link={practiceProduct?.interactiveDemo?.link} // Keep link as fallback or for other purposes
+              videoUrl={practiceProduct?.interactiveDemo?.videoUrl} // Pass the videoUrl
             />
           </div>
         </div>
@@ -42,12 +46,10 @@ export default function HomePage() {
             Let's discuss how Praszo can help you achieve your goals.
           </p>
           <Button size="lg" variant="secondary" asChild className="text-primary hover:bg-background/90">
-            <Link href="/contact" legacyBehavior passHref>
-              <a>
+            <Link href="/contact">
                 <span className="flex items-center">
                   Get in Touch <ArrowRight className="ml-2 h-5 w-5" />
                 </span>
-              </a>
             </Link>
           </Button>
         </div>
