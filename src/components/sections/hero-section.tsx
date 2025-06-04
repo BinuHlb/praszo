@@ -33,7 +33,7 @@ export default function HeroSection() {
               alt="Digital Agency Concept"
               width={600}
               height={450}
-              className="rounded-lg object-cover"
+              className="rounded-xl object-cover" /* Matched border radius */
               data-ai-hint="team collaboration"
               priority
             />

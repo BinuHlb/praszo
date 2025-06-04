@@ -20,7 +20,7 @@ export default function ContactPage() {
             <div className="lg:col-span-2 animate-fade-in">
               <h2 className="text-3xl font-bold font-headline mb-8 text-primary">Send Us a Message</h2>
               <AnimatedBorderBox borderRadius="rounded-xl">
-                <div className="p-8 bg-card rounded-xl shadow-xl">
+                <div className="p-6 md:p-8 bg-card rounded-xl shadow-xl"> {/* Adjusted padding */}
                   <ContactForm />
                 </div>
               </AnimatedBorderBox>
@@ -28,7 +28,7 @@ export default function ContactPage() {
             <div className="space-y-8 animate-fade-in" style={{animationDelay: '0.2s'}}>
               <h2 className="text-3xl font-bold font-headline mb-8 text-primary">Contact Information</h2>
               <AnimatedBorderBox borderRadius="rounded-xl">
-                <div className="p-8 bg-card rounded-xl shadow-xl space-y-6">
+                <div className="p-6 md:p-8 bg-card rounded-xl shadow-xl space-y-6"> {/* Adjusted padding */}
                   <div>
                     <h3 className="text-xl font-semibold font-headline flex items-center mb-2">
                       <MapPin className="h-6 w-6 mr-3 text-accent" /> Address

@@ -44,13 +44,13 @@ export default function ProductPage({ params }: ProductPageProps) {
               </Button>
             </div>
             <div className="animate-fade-in">
-               <AnimatedBorderBox borderRadius="rounded-xl">
+               <AnimatedBorderBox borderRadius="rounded-xl" className="shadow-xl"> {/* Moved shadow here */}
                 <Image
                   src={product.image}
                   alt={product.name}
                   width={600}
                   height={400}
-                  className="rounded-lg object-cover shadow-xl"
+                  className="rounded-xl object-cover" // Matched border radius, removed shadow
                   data-ai-hint={product.dataAiHint}
                 />
               </AnimatedBorderBox>

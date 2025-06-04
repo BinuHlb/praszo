@@ -34,7 +34,7 @@ export default function Navbar() {
         "sticky top-0 z-50 w-full transition-all duration-300",
         isScrolled ? "bg-card shadow-lg" : "bg-transparent"
       )}>
-      <div className="container mx-auto flex h-20 items-center justify-between px-4 md:px-6">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6"> {/* Reduced height from h-20 to h-16 */}
         <Link href="/" className="flex items-center gap-2">
           <AnimatedLogo className="h-10 w-10" />
           <span className="text-2xl font-bold font-headline text-primary">Apex Digital</span>
