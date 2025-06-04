@@ -151,24 +151,23 @@ export default function Navbar() {
       <div className="container mx-auto flex h-full items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
           <AnimatedLogo  />
-          
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-1 lg:space-x-2">
-          {mainNavLinks.map((link) => (
+        <nav className="hidden md:flex flex-1 items-center justify-between mx-4 sm:mx-6 lg:mx-8">
+          {mainNavLinks.length > 0 && (
             <Button
-              key={link.label}
+              key={mainNavLinks[0].label}
               variant="ghost"
               asChild
               className={cn(
                 "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2",
-                pathname === link.href && "text-primary"
+                pathname === mainNavLinks[0].href && "text-primary"
               )}
             >
-              <Link href={link.href}>{link.label}</Link>
+              <Link href={mainNavLinks[0].href}>{mainNavLinks[0].label}</Link>
             </Button>
-          ))}
+          )}
 
           {/* Mega Menu Dropdown */}
           <DropdownMenu open={isMenuDropdownOpen} onOpenChange={setIsMenuDropdownOpen} modal={false}>
@@ -178,7 +177,6 @@ export default function Navbar() {
             >
               <Button
                 variant="ghost"
-                asChild 
                 className={cn(
                   "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2",
                   isMenuDropdownActive && "text-primary"
@@ -190,8 +188,8 @@ export default function Navbar() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
-              className="w-screen left-0 bg-background shadow-xl border-t data-[side=bottom]:slide-in-from-top-4" // Full width, positioned from left
-              sideOffset={4} // Position below the trigger
+              className="w-screen left-0 bg-background shadow-xl border-t data-[side=bottom]:slide-in-from-top-4" 
+              sideOffset={4} 
               onMouseEnter={handleMenuMouseEnter}
               onMouseLeave={handleMenuMouseLeave}
             >
@@ -199,13 +197,13 @@ export default function Navbar() {
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-8">
                   {megaMenuItems.map((item) => (
                     <Link
-                      key={item.label} // Use label as key assuming labels are unique in this context
+                      key={item.label} 
                       href={item.href}
                       className={cn(
                         "group flex flex-col items-start p-3 rounded-lg hover:bg-accent/50 transition-colors",
-                        pathname === item.href && "bg-accent/50" // Example active state for mega menu item
+                        pathname === item.href && "bg-accent/50" 
                       )}
-                      onClick={() => setIsMenuDropdownOpen(false)} // Close menu on click
+                      onClick={() => setIsMenuDropdownOpen(false)} 
                     >
                       <div className="relative w-full aspect-[4/3] rounded-md overflow-hidden mb-3 shadow-md">
                         <Image
@@ -229,13 +227,30 @@ export default function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
+          {mainNavLinks.length > 1 && (
+            <Button
+              key={mainNavLinks[1].label}
+              variant="ghost"
+              asChild
+              className={cn(
+                "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2",
+                pathname === mainNavLinks[1].href && "text-primary"
+              )}
+            >
+              <Link href={mainNavLinks[1].href}>{mainNavLinks[1].label}</Link>
+            </Button>
+          )}
+        </nav>
+        
+        <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
           <Button asChild className="text-sm font-medium">
             <Link href={ctaLink.href} legacyBehavior passHref>
               <a>{ctaLink.label}</a>
             </Link>
           </Button>
           <ThemeToggle />
-        </nav>
+        </div>
+
 
         {/* Mobile Menu Trigger and Content */}
         <div className="md:hidden flex items-center gap-2">
@@ -289,3 +304,4 @@ export default function Navbar() {
     </header>
   );
 }
+
