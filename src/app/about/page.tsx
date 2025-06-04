@@ -50,8 +50,8 @@ export default function AboutPage() {
         <motion.div
           className="container mx-auto px-4 md:px-6 text-center"
           initial="hidden"
-          animate="visible" // Changed from whileInView
-          viewport={{ once: true }} // Still useful for performance if animate is conditional
+          animate="visible"
+          viewport={{ once: true }}
           variants={heroTextVariants}
         >
           <h1 className="text-4xl md:text-5xl font-bold font-headline mb-4">About Praszo</h1>
@@ -64,7 +64,7 @@ export default function AboutPage() {
       <section className="py-16 md:py-24 overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div variants={imageVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <motion.div variants={imageVariants} initial="hidden" animate="visible" viewport={{ once: true }}>
               <Image
                 src="https://placehold.co/600x450.png"
                 alt="Praszo team collaborating"
@@ -74,7 +74,7 @@ export default function AboutPage() {
                 data-ai-hint="office team discussion"
               />
             </motion.div>
-            <motion.div className="space-y-6" variants={contentBlockVariants} initial="hidden" whileInView="visible" viewport={{ once: true }}>
+            <motion.div className="space-y-6" variants={contentBlockVariants} initial="hidden" animate="visible" viewport={{ once: true }}>
               <SectionHeader
                 title="Our Journey"
                 subtitle="Founded on the principles of innovation and client success, Praszo began with a vision to simplify complex digital challenges. Over the years, we've grown into a dynamic agency, helping businesses of all sizes navigate the digital landscape and achieve their strategic objectives. Our commitment to excellence and forward-thinking has been the cornerstone of our evolution."
