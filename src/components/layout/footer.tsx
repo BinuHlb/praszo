@@ -1,6 +1,7 @@
+
 import Link from 'next/link';
 import { Github, Linkedin, Twitter, Phone, Mail, MapPin } from 'lucide-react';
-import AnimatedLogo from '@/components/icons/animated-logo';
+import AnimatedLogoDark from '@/components/icons/animated-logo-dark'; // Changed import
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -12,7 +13,7 @@ export default function Footer() {
           {/* Column 1: Praszo & Socials */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2 mb-2">
-              <AnimatedLogo />
+              <AnimatedLogoDark /> {/* Changed to AnimatedLogoDark */}
             </Link>
             <p className="text-sm text-accent-foreground/80 max-w-xs">
               Elevating businesses with innovative digital solutions and strategic insights to achieve market leadership.
