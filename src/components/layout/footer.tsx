@@ -50,20 +50,17 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold font-headline mb-4">Get In Touch</h3>
             <ul className="space-y-3 text-sm mb-6">
-              <li className="flex items-start">
-                <MapPin size={18} className="mr-2.5 mt-0.5 text-accent-foreground/70 flex-shrink-0" />
-                <span className="text-accent-foreground/90">123 Innovation Drive, <br />Tech City, TX 75001, USA</span>
-              </li>
+             
               <li className="flex items-center">
                 <Mail size={18} className="mr-2.5 text-accent-foreground/70 flex-shrink-0" />
-                <a href="mailto:contact@apexdigital.agency" className="text-accent-foreground/90 hover:text-accent-foreground/70 transition-colors">
-                  contact@apexdigital.agency
+                <a href="mailto:info@difinitydigital.com" className="text-accent-foreground/90 hover:text-accent-foreground/70 transition-colors">
+                info@difinitydigital.com
                 </a>
               </li>
               <li className="flex items-center">
                 <Phone size={18} className="mr-2.5 text-accent-foreground/70 flex-shrink-0" />
-                <a href="tel:+1234567890" className="text-accent-foreground/90 hover:text-accent-foreground/70 transition-colors">
-                  +1 (234) 567-890
+                <a href="tel:+919995099789" className="text-accent-foreground/90 hover:text-accent-foreground/70 transition-colors">
+                9995099789
                 </a>
               </li>
             </ul>

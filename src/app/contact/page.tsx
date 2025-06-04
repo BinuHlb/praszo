@@ -30,26 +30,21 @@ export default function ContactPage() {
               <h2 className="text-3xl font-bold font-headline mb-8 text-primary">Contact Information</h2>
               <Card className="rounded-xl">
                 <CardContent className="p-6 md:p-8 space-y-6">
-                  <div>
-                    <h3 className="text-xl font-semibold font-headline flex items-center mb-2">
-                      <MapPin className="h-6 w-6 mr-3 text-accent" /> Address
-                    </h3>
-                    <p className="text-muted-foreground">123 Innovation Drive<br />Tech City, TX 75001, USA</p>
-                  </div>
+               
                   <div>
                     <h3 className="text-xl font-semibold font-headline flex items-center mb-2">
                       <Mail className="h-6 w-6 mr-3 text-accent" /> Email
                     </h3>
-                    <a href="mailto:contact@apexdigital.agency" className="text-muted-foreground hover:text-primary transition-colors">
-                      contact@apexdigital.agency
+                    <a href="mailto:info@difinitydigital.com" className="text-muted-foreground hover:text-primary transition-colors">
+                    info@difinitydigital.com
                     </a>
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold font-headline flex items-center mb-2">
                       <Phone className="h-6 w-6 mr-3 text-accent" /> Phone
                     </h3>
-                    <a href="tel:+1234567890" className="text-muted-foreground hover:text-primary transition-colors">
-                      +1 (234) 567-890
+                    <a href="tel:+919995099789" className="text-muted-foreground hover:text-primary transition-colors">
+                    9995099789
                     </a>
                   </div>
                 </CardContent>
