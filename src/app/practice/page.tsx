@@ -34,7 +34,7 @@ export default function PracticePage() { // Renamed from ProjectManagementAppPag
           <div className="flex justify-center gap-4">
             <Button size="lg" variant="secondary" asChild className="text-primary hover:bg-accent hover:text-accent-foreground">
               <Link href={`/contact?product=${encodeURIComponent(app.name)}`} legacyBehavior passHref>
-                <a>Request a Demo</a>
+                <a>Request a Demoooo</a>
               </Link>
             </Button>
             <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white hover:text-[hsl(246,93%,63%)]">
