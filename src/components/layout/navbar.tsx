@@ -53,7 +53,7 @@ const productSlugsForMegaMenu = [
 const megaMenuItems: MegaMenuItem[] = productSlugsForMegaMenu.map(slug => {
   const product = getProductBySlug(slug);
   if (!product) {
-    return { 
+    return {
       href: slug.startsWith('http') ? slug : `/products/${slug}`, // Basic href generation
       label: slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()), // Generate a label from slug
       image: 'https://placehold.co/150x100.png', // Placeholder image
@@ -62,47 +62,32 @@ const megaMenuItems: MegaMenuItem[] = productSlugsForMegaMenu.map(slug => {
     };
   }
   return {
-    href: `/products/${product.slug}`, // Ensure all mega menu items use /products/slug
+    href: `/products/${product.slug}`,
     label: product.name,
     image: product.image,
     dataAiHint: product.dataAiHint,
     description: product.tagline,
   };
-}).filter(Boolean) as MegaMenuItem[]; // Ensure no undefined items if any slug fails
+}).filter(Boolean) as MegaMenuItem[];
 
 
 const ctaLink = { href: '/contact', label: 'Get a Quote' };
 
 
-// For mobile menu - combine all items.
-const mobileDropdownNavLinks: Array<{ href?: string; label:string; subItems?: Array<{ href: string; label: string }> }> = [
-  { href: '/products/practice', label: 'Practice' }, 
-  {
-    label: 'Services', // Group label for mobile
-    subItems: [ // These match some of the mega menu items but are structured for mobile
-      { href: '/products/web-development', label: 'Web Solutions' },
-      { href: '/products/digital-marketing', label: 'Marketing' },
-    ],
-  },
-  { href: '/products/verify', label: 'Verify' },
-  { href: '/products/modify', label: 'Modify' },
-  { href: '/products/docs', label: 'Docs' },
-];
-
-
 // Combine all navigation elements for the mobile menu
+const navItemsForMobileBase = mainNavLinks.filter(link => {
+  // If ctaLink also points to /contact, don't include mainNavLinks's /contact to avoid duplicate labels
+  if (link.href === '/contact' && ctaLink.href === '/contact') {
+    return false;
+  }
+  return true;
+});
+
 const allNavItemsForMobile = [
-  ...mainNavLinks.filter(link => link.href !== '/contact'), // Avoid duplicate "Contact Us" if CTA link is different
-  ...mobileDropdownNavLinks.flatMap(item => {
-    if ((item as any).subItems) { // Type guard for subItems
-      // For items with subItems (like "Services"), create a group label then list subItems
-      return [{ label: item.label, isGroupLabel: true, href: undefined }, ...(item as any).subItems];
-    }
-    return [item]; // For direct links
-  }),
-  // Add "Contact Us" if it wasn't already added (e.g., if CTA link is different)
-  ...(mainNavLinks.some(link => link.href === '/contact' && ctaLink.href !== '/contact') ? [{href: '/contact', label: 'Contact Us'}] : []),
-  ctaLink, // Add the CTA link at the end
+  ...navItemsForMobileBase, // Includes Home, About Us. May include Contact Us if ctaLink target is different.
+  { label: 'Our Offerings', isGroupLabel: true, href: undefined }, // Group label for products/services
+  ...megaMenuItems.map(item => ({ href: item.href, label: item.label })), // All products/services
+  ctaLink, // The primary CTA / Contact link for mobile
 ];
 
 
@@ -145,10 +130,10 @@ export default function Navbar() {
   useEffect(() => {
     setMounted(true);
   }, []);
-  
+
   const pathMatchesMegaMenu = mounted ? megaMenuItems.some(item => pathname === item.href) : false;
   const isMenuDropdownActive = pathMatchesMegaMenu || (mounted && isMenuDropdownOpen);
-  
+
 
   return (
     <header className={cn(
@@ -167,8 +152,9 @@ export default function Navbar() {
               onMouseEnter={handleMenuMouseEnter}
               onMouseLeave={handleMenuMouseLeave}
               className={cn(
-                buttonVariants({ variant: 'ghost' }), 
-                "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2", 
+                buttonVariants({ variant: 'ghost' }),
+                "text-sm font-medium text-foreground px-3 py-2",
+                "hover:text-primary hover:bg-transparent", // Only change text color on hover
                 mounted && isMenuDropdownActive && "text-primary"
               )}
             >
@@ -177,8 +163,8 @@ export default function Navbar() {
               </span>
             </DropdownMenuTrigger>
             <DropdownMenuContent
-              className="w-screen left-0 bg-background shadow-xl border-t data-[side=bottom]:slide-in-from-top-4" 
-              sideOffset={4} 
+              className="w-screen left-0 bg-background shadow-xl border-t data-[side=bottom]:slide-in-from-top-4"
+              sideOffset={4}
               onMouseEnter={handleMenuMouseEnter}
               onMouseLeave={handleMenuMouseLeave}
             >
@@ -186,13 +172,13 @@ export default function Navbar() {
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-8">
                   {megaMenuItems.map((item) => (
                     <Link
-                      key={item.label} 
+                      key={item.label}
                       href={item.href}
                       className={cn(
                         "group flex flex-col items-start p-3 rounded-lg hover:bg-accent/50 transition-colors",
-                        pathname === item.href && "bg-accent/50" 
+                        pathname === item.href && "bg-accent/50"
                       )}
-                      onClick={() => setIsMenuDropdownOpen(false)} 
+                      onClick={() => setIsMenuDropdownOpen(false)}
                     >
                       <div className="relative w-full aspect-[4/3] rounded-md overflow-hidden mb-3 shadow-md">
                         <Image
@@ -224,7 +210,7 @@ export default function Navbar() {
                 href={link.href}
                 className={cn(
                   buttonVariants({ variant: 'ghost', size: 'default' }),
-                  "text-sm font-medium hover:text-primary hover:bg-transparent",
+                  "text-sm font-medium hover:bg-transparent hover:text-primary", // only text color change on hover
                   pathname === link.href && "text-primary"
                 )}
               >
@@ -233,7 +219,7 @@ export default function Navbar() {
             ))}
           </div>
         </nav>
-        
+
         <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
           <Button asChild className="text-sm font-medium">
             <Link href={ctaLink.href}>
@@ -262,7 +248,7 @@ export default function Navbar() {
               </div>
               <nav className="flex flex-col space-y-1">
                  {allNavItemsForMobile.map((item) => {
-                  if ((item as any).isGroupLabel) { 
+                  if ((item as any).isGroupLabel) {
                     return (
                       <div key={`${item.label}-group-header`} className="px-0 pt-3 pb-1 text-sm font-semibold text-muted-foreground">
                         {item.label}
@@ -272,10 +258,10 @@ export default function Navbar() {
                   return (
                     <SheetClose asChild key={item.label}>
                       <Link
-                        href={item.href!} 
+                        href={item.href!}
                         className={cn(
                           "block text-lg font-medium text-foreground hover:text-primary transition-colors py-1.5",
-                           item.href && pathname === item.href && "text-primary", 
+                           item.href && pathname === item.href && "text-primary",
                            item.label === ctaLink.label && "mt-3 pt-3 border-t border-border"
                         )}
                         onClick={() => setIsMobileMenuOpen(false)}
