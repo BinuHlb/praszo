@@ -45,8 +45,7 @@ export default function PartnerLogos() {
               {partnerLogosList.map((logo, index) => (
                 <div 
                   key={index} 
-                  className="relative flex-[0_0_auto] min-w-0 pl-4 md:pl-6" /* Embla slide: pl for gap */
-                  style={{ flexBasis: 'calc(50% - 1rem)', md: {flexBasis: 'calc(25% - 1.5rem)'} }} /* Responsive number of items */
+                  className="relative flex-[0_0_auto] min-w-0 pl-4 basis-1/4 md:basis-1/8" /* Embla slide: pl-4 for gap, basis-1/4 for mobile (4 logos), md:basis-1/8 for desktop (8 logos) */
                 >
                   <div className="flex items-center justify-center h-[100px] p-3 bg-card rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out transform hover:scale-105">
                     <Image
@@ -85,3 +84,4 @@ export default function PartnerLogos() {
     </section>
   );
 }
+
