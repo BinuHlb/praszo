@@ -214,30 +214,28 @@ export default function Navbar() {
           {/* Grouped Home and Contact Us links - Aligned to the right within the nav space */}
           <div className="flex items-center space-x-1">
             {mainNavLinks.length > 0 && (
-              <Button
+              <Link
                 key={mainNavLinks[0].label} // Home
-                variant="ghost"
-                asChild
+                href={mainNavLinks[0].href}
                 className={cn(
-                  "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2",
+                  "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2 rounded-md transition-colors",
                   pathname === mainNavLinks[0].href && "text-primary"
                 )}
               >
-                <Link href={mainNavLinks[0].href}>{mainNavLinks[0].label}</Link>
-              </Button>
+                {mainNavLinks[0].label}
+              </Link>
             )}
             {mainNavLinks.length > 1 && (
-              <Button
+              <Link
                 key={mainNavLinks[1].label} // Contact Us
-                variant="ghost"
-                asChild
+                href={mainNavLinks[1].href}
                 className={cn(
-                  "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2",
+                  "text-sm font-medium text-foreground hover:text-primary hover:bg-transparent px-3 py-2 rounded-md transition-colors",
                   pathname === mainNavLinks[1].href && "text-primary"
                 )}
               >
-                <Link href={mainNavLinks[1].href}>{mainNavLinks[1].label}</Link>
-              </Button>
+                {mainNavLinks[1].label}
+              </Link>
             )}
           </div>
         </nav>
@@ -304,4 +302,3 @@ export default function Navbar() {
     </header>
   );
 }
-
