@@ -20,8 +20,9 @@ import AnimatedLogo from '@/components/icons/animated-logo';
 import { ThemeToggle } from '@/components/layout/theme-toggle';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
-import { getProductBySlug } from '@/data/mock-data';
+import { getProductBySlug } from '@/data/mock-data'; // Assuming products data is fetched/available
 import type { Product } from '@/lib/types';
+
 
 // Define navigation structures
 const mainNavLinks: Array<{ href: string; label: string }> = [
@@ -37,6 +38,7 @@ interface MegaMenuItem {
   description: string; // Tagline
 }
 
+// Slugs for products/services to be included in the mega menu
 const productSlugsForMegaMenu = [
   'practice',
   'web-development',
@@ -46,15 +48,17 @@ const productSlugsForMegaMenu = [
   'docs'
 ];
 
+// Dynamically create mega menu items from product data
 const megaMenuItems: MegaMenuItem[] = productSlugsForMegaMenu.map(slug => {
   const product = getProductBySlug(slug);
+  // Fallback for cases where product might not be found, though ideally all slugs are valid
   if (!product) {
     return { 
-      href: slug.startsWith('http') ? slug : (product?.type === 'app' ? `/${slug}` : `/products/${slug}`),
-      label: slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
-      image: 'https://placehold.co/150x100.png', 
-      dataAiHint: 'placeholder', 
-      description: 'Product information coming soon.' 
+      href: slug.startsWith('http') ? slug : (product?.type === 'app' ? `/${slug}` : `/products/${slug}`), // Basic href generation
+      label: slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()), // Generate a label from slug
+      image: 'https://placehold.co/150x100.png', // Placeholder image
+      dataAiHint: 'placeholder', // Placeholder AI hint
+      description: 'Product information coming soon.' // Placeholder description
     };
   }
   return {
@@ -64,17 +68,18 @@ const megaMenuItems: MegaMenuItem[] = productSlugsForMegaMenu.map(slug => {
     dataAiHint: product.dataAiHint,
     description: product.tagline,
   };
-}).filter(Boolean) as MegaMenuItem[];
+}).filter(Boolean) as MegaMenuItem[]; // Ensure no undefined items if any slug fails
 
 
 const ctaLink = { href: '/contact', label: 'Get a Quote' };
 
+
 // For mobile menu - combine all items.
-const mobileDropdownNavLinks: Array<{ href?: string; label: string; subItems?: Array<{ href: string; label: string }> }> = [
+const mobileDropdownNavLinks: Array<{ href?: string; label:string; subItems?: Array<{ href: string; label: string }> }> = [
   { href: '/practice', label: 'Practice' },
   {
-    label: 'Services',
-    subItems: [
+    label: 'Services', // Group label for mobile
+    subItems: [ // These match some of the mega menu items but are structured for mobile
       { href: '/products/web-development', label: 'Web Solutions' },
       { href: '/products/digital-marketing', label: 'Marketing' },
     ],
@@ -84,17 +89,20 @@ const mobileDropdownNavLinks: Array<{ href?: string; label: string; subItems?: A
   { href: '/products/docs', label: 'Docs' },
 ];
 
+
+// Combine all navigation elements for the mobile menu
 const allNavItemsForMobile = [
-  ...mainNavLinks.filter(link => link.href !== '/contact'), // Remove duplicate "Contact Us" if Get a Quote also goes to /contact
+  ...mainNavLinks.filter(link => link.href !== '/contact'), // Avoid duplicate "Contact Us" if CTA also goes to /contact
   ...mobileDropdownNavLinks.flatMap(item => {
     if (item.subItems) {
+      // For items with subItems (like "Services"), create a group label then list subItems
       return [{ label: item.label, isGroupLabel: true, href: undefined }, ...item.subItems];
     }
-    return [item];
+    return [item]; // For direct links
   }),
-  // Ensure "Contact Us" is present from mainNavLinks if not duplicating from ctaLink
+  // Add "Contact Us" if it wasn't already added (e.g., if CTA link is different)
   ...(mainNavLinks.some(link => link.href === '/contact' && ctaLink.href !== '/contact') ? [{href: '/contact', label: 'Contact Us'}] : []),
-  ctaLink, 
+  ctaLink, // Add the CTA link at the end
 ];
 
 
@@ -116,7 +124,7 @@ export default function Navbar() {
   const handleMenuMouseLeave = () => {
     menuDropdownTimerRef.current = setTimeout(() => {
       setIsMenuDropdownOpen(false);
-    }, 300); 
+    }, 300); // 300ms delay
   };
 
   useEffect(() => {
@@ -163,7 +171,7 @@ export default function Navbar() {
           ))}
 
           {/* Mega Menu Dropdown */}
-          <DropdownMenu open={isMenuDropdownOpen} onOpenChange={setIsMenuDropdownOpen}>
+          <DropdownMenu open={isMenuDropdownOpen} onOpenChange={setIsMenuDropdownOpen} modal={false}>
             <DropdownMenuTrigger asChild
               onMouseEnter={handleMenuMouseEnter}
               onMouseLeave={handleMenuMouseLeave}
@@ -182,19 +190,22 @@ export default function Navbar() {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
-              className="w-screen left-0 bg-background shadow-xl border-t data-[side=bottom]:slide-in-from-top-4"
-              sideOffset={4} 
+              className="w-screen left-0 bg-background shadow-xl border-t data-[side=bottom]:slide-in-from-top-4" // Full width, positioned from left
+              sideOffset={4} // Position below the trigger
               onMouseEnter={handleMenuMouseEnter}
               onMouseLeave={handleMenuMouseLeave}
             >
-              <div className="container mx-auto px-4 md:px-6 py-6">
+              <div className="container mx-auto px-4 md:px-6 py-6"> {/* Container for content alignment */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-x-6 gap-y-8">
                   {megaMenuItems.map((item) => (
                     <Link
                       key={item.label} // Use label as key assuming labels are unique in this context
                       href={item.href}
-                      className="group flex flex-col items-start p-3 rounded-lg hover:bg-accent/50 transition-colors"
-                      onClick={() => setIsMenuDropdownOpen(false)} 
+                      className={cn(
+                        "group flex flex-col items-start p-3 rounded-lg hover:bg-accent/50 transition-colors",
+                        pathname === item.href && "bg-accent/50" // Example active state for mega menu item
+                      )}
+                      onClick={() => setIsMenuDropdownOpen(false)} // Close menu on click
                     >
                       <div className="relative w-full aspect-[4/3] rounded-md overflow-hidden mb-3 shadow-md">
                         <Image
@@ -245,6 +256,7 @@ export default function Navbar() {
               </div>
               <nav className="flex flex-col space-y-1">
                  {allNavItemsForMobile.map((item) => {
+                  // Check if item is a group label (for 'Services' in mobile)
                   if ((item as any).isGroupLabel) { 
                     return (
                       <div key={`${item.label}-group-header`} className="px-0 pt-3 pb-1 text-sm font-semibold text-muted-foreground">
@@ -252,14 +264,15 @@ export default function Navbar() {
                       </div>
                     );
                   }
+                  // Regular link item
                   return (
                     <SheetClose asChild key={item.label}>
                       <Link
-                        href={item.href!} 
+                        href={item.href!} // Assert href is present for link items
                         className={cn(
                           "block text-lg font-medium text-foreground hover:text-primary transition-colors py-1.5",
-                           item.href && pathname === item.href && "text-primary",
-                           item.label === ctaLink.label && "mt-3 pt-3 border-t border-border"
+                           item.href && pathname === item.href && "text-primary", // Active link styling
+                           item.label === ctaLink.label && "mt-3 pt-3 border-t border-border" // Special styling for CTA
                         )}
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
