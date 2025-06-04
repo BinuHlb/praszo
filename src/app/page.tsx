@@ -42,10 +42,12 @@ export default function HomePage() {
             Let's discuss how Apex Digital can help you achieve your goals.
           </p>
           <Button size="lg" variant="secondary" asChild className="text-primary hover:bg-background/90">
-            <Link href="/contact">
-              <span className="flex items-center">
-                Get in Touch <ArrowRight className="ml-2 h-5 w-5" />
-              </span>
+            <Link href="/contact" legacyBehavior passHref>
+              <a>
+                <span className="flex items-center">
+                  Get in Touch <ArrowRight className="ml-2 h-5 w-5" />
+                </span>
+              </a>
             </Link>
           </Button>
         </div>

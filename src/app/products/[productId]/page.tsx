@@ -1,3 +1,4 @@
+
 import { getProductBySlug, products as allProductsData } from '@/data/mock-data'; // Import allProductsData
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
@@ -39,8 +40,8 @@ export default function ProductPage({ params }: ProductPageProps) {
               <h1 className="text-4xl md:text-5xl font-bold font-headline">{product.name}</h1>
               <p className="text-lg md:text-xl text-muted-foreground text-balance">{product.tagline}</p>
               <Button size="lg" asChild>
-                <Link href={`/contact?product=${encodeURIComponent(product.name)}`}>
-                  Inquire About {product.name}
+                <Link href={`/contact?product=${encodeURIComponent(product.name)}`} legacyBehavior passHref>
+                  <a>Inquire About {product.name}</a>
                 </Link>
               </Button>
             </div>

@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -27,10 +28,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         <CardDescription className="text-muted-foreground mb-4 flex-grow">{product.tagline}</CardDescription>
         <p className="text-sm mb-6 flex-grow">{product.description}</p>
         <Button asChild className="mt-auto w-full group">
-          <Link href={product.type === 'app' ? `/${product.slug}` : `/products/${product.slug}`}>
-            <span className="flex items-center justify-center w-full">
-              Learn More <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </span>
+          <Link href={product.type === 'app' ? `/${product.slug}` : `/products/${product.slug}`} legacyBehavior passHref>
+            <a>
+              <span className="flex items-center justify-center w-full">
+                Learn More <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+            </a>
           </Link>
         </Button>
       </CardContent>

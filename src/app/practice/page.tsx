@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -32,7 +33,9 @@ export default function PracticePage() { // Renamed from ProjectManagementAppPag
           <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto text-balance">{app.tagline}</p>
           <div className="flex justify-center gap-4">
             <Button size="lg" variant="secondary" asChild className="text-primary hover:bg-accent hover:text-accent-foreground">
-              <Link href={`/contact?product=${encodeURIComponent(app.name)}`}>Request a Demo</Link> {/* Updated product name */}
+              <Link href={`/contact?product=${encodeURIComponent(app.name)}`} legacyBehavior passHref>
+                <a>Request a Demo</a>
+              </Link>
             </Button>
             <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
               View Pricing
