@@ -9,6 +9,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import SectionHeader from '@/components/layout/section-header';
 import { ArrowRight, CheckCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const questions = [
   {
@@ -47,6 +48,11 @@ type Answers = {
   [key: string]: string;
 };
 
+const cardVariants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+};
+
 export default function InteractiveQuestionnaire() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<Answers>({});
@@ -68,7 +74,7 @@ export default function InteractiveQuestionnaire() {
 
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setSelectedOption(undefined); 
+      setSelectedOption(undefined);
     } else {
       setQuizCompleted(true);
     }
@@ -83,21 +89,24 @@ export default function InteractiveQuestionnaire() {
             subtitle="Based on your answers, a comprehensive project management tool like Practice could be a great fit to streamline your workflows, enhance collaboration, and boost team productivity."
             titleClassName="text-primary"
           />
-          <div className="animate-fade-in mt-8">
+          <motion.div
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible" // Animate in when it appears
+            className="mt-8"
+          >
             <CheckCircle className="h-20 w-20 md:h-24 md:w-24 text-primary mx-auto mb-6" />
             <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-balance">
               Ready to see how Practice can transform your project management and help you achieve your goals?
             </p>
             <Button size="lg" asChild className="text-lg py-6 px-8">
-              <Link href="/products/practice" legacyBehavior passHref> 
-                <a>
-                  <span className="flex items-center">
-                    Discover Practice <ArrowRight className="ml-2 h-5 w-5" />
-                  </span>
-                </a>
+              <Link href="/products/practice">
+                <span className="flex items-center">
+                  Discover Practice <ArrowRight className="ml-2 h-5 w-5" />
+                </span>
               </Link>
             </Button>
-          </div>
+          </motion.div>
         </div>
       </section>
     );
@@ -110,7 +119,14 @@ export default function InteractiveQuestionnaire() {
           title="Is Practice Right For You?"
           subtitle="Answer a few quick questions to see how our project management solution, Practice, can address your team's specific challenges and goals."
         />
-        <div className="max-w-2xl mx-auto animate-fade-in">
+        <motion.div
+          className="max-w-2xl mx-auto"
+          key={currentQuestionIndex} // Add key to re-trigger animation on question change
+          variants={cardVariants}
+          initial="hidden"
+          animate="visible" // Use animate instead of whileInView for initial appearance & question changes
+          viewport={{ once: true }} // Only for initial load of the questionnaire section
+        >
           <Card className="shadow-xl rounded-xl overflow-hidden">
             <CardHeader className="bg-muted/50">
               <CardTitle className="text-xl md:text-2xl font-headline text-primary">
@@ -121,8 +137,8 @@ export default function InteractiveQuestionnaire() {
             <CardContent className="p-6 md:p-8">
               <RadioGroup value={selectedOption} onValueChange={handleAnswerSelect} className="space-y-4">
                 {currentQuestion.options.map((option) => (
-                  <Label 
-                    key={option.value} 
+                  <Label
+                    key={option.value}
                     htmlFor={`${currentQuestion.id}-${option.value}`}
                     className={`flex items-center space-x-3 p-4 border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer
                                 ${selectedOption === option.value ? 'bg-primary/10 border-primary ring-2 ring-primary' : 'border-border'}`}
@@ -145,12 +161,12 @@ export default function InteractiveQuestionnaire() {
               <div className="mt-6 h-2.5 bg-muted rounded-full overflow-hidden">
                 <div
                   className="h-full bg-primary transition-all duration-500 ease-out"
-                  style={{ width: `${((currentQuestionIndex + (selectedOption ? 1: 0.5) ) / questions.length) * 100}%` }}
+                  style={{ width: `${((currentQuestionIndex + (selectedOption ? 1 : 0.5)) / questions.length) * 100}%` }}
                 />
               </div>
             </CardContent>
           </Card>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

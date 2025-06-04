@@ -7,6 +7,7 @@ import useEmblaCarousel from 'embla-carousel-react';
 import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import SectionHeader from '@/components/layout/section-header';
+import { motion } from 'framer-motion';
 
 const partnerLogosList = [
   { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 1', dataAiHint: 'company logo' },
@@ -19,9 +20,14 @@ const partnerLogosList = [
   { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 8', dataAiHint: 'company logo' },
 ];
 
+const sectionVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" } },
+};
+
 export default function PartnerLogos() {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ 
-    loop: true, 
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
     align: 'start',
     slidesToScroll: 'auto',
   });
@@ -35,22 +41,28 @@ export default function PartnerLogos() {
   }, [emblaApi]);
 
   return (
-    <section className="py-12 md:py-20 bg-secondary">
+    <motion.section
+      className="py-12 md:py-20 bg-secondary"
+      variants={sectionVariants}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+    >
       <div className="container mx-auto px-4 md:px-6">
-        <SectionHeader 
+        <SectionHeader
           title="Trusted By Leading Companies"
           titleClassName="text-primary"
           className="mb-10"
         />
         <div className="relative">
           <div className="overflow-hidden py-4" ref={emblaRef}>
-            <div className="flex -ml-4"> {/* Embla container: negative margin for gap simulation */}
+            <div className="flex -ml-4">
               {partnerLogosList.map((logo, index) => (
-                <div 
-                  key={index} 
-                  className="relative flex-[0_0_auto] min-w-0 pl-4 basis-1/4 sm:basis-1/8" /* Embla slide: pl-4 for gap, basis-1/4 for mobile (4 logos), sm:basis-1/8 for small screens and up (8 logos) */
+                <div
+                  key={index}
+                  className="relative flex-[0_0_auto] min-w-0 pl-4 basis-1/4 sm:basis-1/8"
                 >
-                  <div className="flex items-center justify-center h-[100px] p-3  rounded-lg  duration-300 ease-in-out transform hover:scale-105">
+                  <div className="flex items-center justify-center h-[100px] p-3 rounded-lg duration-300 ease-in-out transform hover:scale-105">
                     <Image
                       src={logo.src}
                       alt={logo.alt}
@@ -84,6 +96,6 @@ export default function PartnerLogos() {
           </Button>
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 }

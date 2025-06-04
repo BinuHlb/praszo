@@ -7,40 +7,64 @@ import InteractiveQuestionnaire from '@/components/sections/interactive-question
 import PartnerLogos from '@/components/sections/partner-logos';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react'; 
+import { ArrowRight } from 'lucide-react';
 import SectionHeader from '@/components/layout/section-header';
 import { getProductBySlug } from '@/data/mock-data';
+import { motion } from 'framer-motion'; // Import motion
 
 export default function HomePage() {
   const practiceProduct = getProductBySlug('practice');
+
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeInOut" } },
+  };
 
   return (
     <>
       <HeroSection />
       <ProductList />
       <ServicesOverview />
-      <section className="py-16 md:py-24 bg-background">
+      <motion.section // Wrap section with motion.section
+        className="py-16 md:py-24 bg-background"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+      >
         <div className="container mx-auto px-4 md:px-6">
           <SectionHeader
             title="Experience Our Solutions"
             subtitle="Dive deeper into how our flagship project management tool, Practice, can revolutionize your workflow."
           />
-          <div className="max-w-3xl mx-auto animate-fade-in">
+          <motion.div // Wrap the content div with motion.div
+            className="max-w-3xl mx-auto"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             <InteractiveDemoPlaceholder
               title="Practice: Visualize Your Success"
               description="Get a hands-on feel for Practice's intuitive interface and powerful features. See how it simplifies complex project management tasks and boosts team productivity."
               imageUrl="https://placehold.co/800x450.png"
               dataAiHint="project dashboard"
-              link={practiceProduct?.interactiveDemo?.link} // Keep link as fallback or for other purposes
-              videoUrl={practiceProduct?.interactiveDemo?.videoUrl} // Pass the videoUrl
+              link={practiceProduct?.interactiveDemo?.link}
+              videoUrl={practiceProduct?.interactiveDemo?.videoUrl}
             />
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
       <InteractiveQuestionnaire />
       <PartnerLogos />
-      <section className="py-16 md:py-24 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 md:px-6 text-center animate-fade-in">
+      <motion.section // Wrap section with motion.section
+        className="py-16 md:py-24 bg-primary text-primary-foreground"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+      >
+        <div className="container mx-auto px-4 md:px-6 text-center">
           <h2 className="text-3xl md:text-4xl font-bold font-headline mb-6">Ready to Transform Your Business?</h2>
           <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-balance">
             Let's discuss how Praszo can help you achieve your goals.
@@ -53,7 +77,7 @@ export default function HomePage() {
             </Link>
           </Button>
         </div>
-      </section>
+      </motion.section>
     </>
   );
 }
