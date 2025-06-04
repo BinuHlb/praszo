@@ -27,6 +27,7 @@ import type { Product } from '@/lib/types';
 // Define navigation structures
 const mainNavLinks: Array<{ href: string; label: string }> = [
   { href: '/', label: 'Home' },
+  { href: '/about', label: 'About Us' },
   { href: '/contact', label: 'Contact Us' },
 ];
 
@@ -171,7 +172,7 @@ export default function Navbar() {
                 mounted && isMenuDropdownActive && "text-primary"
               )}
             >
-              <span className="flex items-center"> {/* Added span wrapper */}
+              <span className="flex items-center">
                  Menu <ChevronDown className="ml-1 h-4 w-4" />
               </span>
             </DropdownMenuTrigger>
@@ -215,34 +216,21 @@ export default function Navbar() {
             </DropdownMenuContent>
           </DropdownMenu>
 
-          {/* Grouped "Home" and "Contact Us" links, aligned to the right */}
+          {/* Grouped "Home", "About Us", "Contact Us" links, aligned to the right */}
           <div className="flex items-center space-x-1">
-            {mainNavLinks.length > 0 && (
+            {mainNavLinks.map((link) => (
               <Link
-                key={mainNavLinks[0].label} // Home
-                href={mainNavLinks[0].href}
+                key={link.label}
+                href={link.href}
                 className={cn(
                   buttonVariants({ variant: 'ghost', size: 'default' }),
-                  "text-sm font-medium hover:bg-transparent hover:text-primary", // Updated hover
-                  pathname === mainNavLinks[0].href && "text-primary"
+                  "text-sm font-medium hover:text-primary hover:bg-transparent",
+                  pathname === link.href && "text-primary"
                 )}
               >
-                {mainNavLinks[0].label}
+                {link.label}
               </Link>
-            )}
-            {mainNavLinks.length > 1 && (
-              <Link
-                key={mainNavLinks[1].label} // Contact Us
-                href={mainNavLinks[1].href}
-                className={cn(
-                  buttonVariants({ variant: 'ghost', size: 'default' }),
-                  "text-sm font-medium hover:bg-transparent hover:text-primary", // Updated hover
-                  pathname === mainNavLinks[1].href && "text-primary"
-                )}
-              >
-                {mainNavLinks[1].label}
-              </Link>
-            )}
+            ))}
           </div>
         </nav>
         
