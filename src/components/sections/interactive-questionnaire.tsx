@@ -56,8 +56,6 @@ export default function InteractiveQuestionnaire() {
 
   const handleAnswerSelect = (value: string) => {
     setSelectedOption(value);
-    // We can store answers if needed for more complex logic later,
-    // but for now, just selecting is enough to proceed.
     setAnswers((prev) => ({
       ...prev,
       [currentQuestion.id]: value,
@@ -65,11 +63,11 @@ export default function InteractiveQuestionnaire() {
   };
 
   const handleNext = () => {
-    if (!selectedOption) return; // Require an answer
+    if (!selectedOption) return;
 
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
-      setSelectedOption(undefined); // Reset for next question
+      setSelectedOption(undefined); 
     } else {
       setQuizCompleted(true);
     }
@@ -81,17 +79,19 @@ export default function InteractiveQuestionnaire() {
         <div className="container mx-auto px-4 md:px-6 text-center">
           <SectionHeader
             title="Thanks for Your Insights!"
-            subtitle="Based on your answers, a comprehensive project management tool like NexusFlow PM could be a great fit to streamline your workflows, enhance collaboration, and boost team productivity."
+            subtitle="Based on your answers, a comprehensive project management tool like Practice could be a great fit to streamline your workflows, enhance collaboration, and boost team productivity." // Updated
             titleClassName="text-primary"
           />
           <div className="animate-fade-in mt-8">
             <CheckCircle className="h-20 w-20 md:h-24 md:w-24 text-primary mx-auto mb-6" />
             <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-balance">
-              Ready to see how NexusFlow PM can transform your project management and help you achieve your goals?
+              Ready to see how Practice can transform your project management and help you achieve your goals? {/* Updated */}
             </p>
             <Button size="lg" asChild className="text-lg py-6 px-8">
-              <Link href="/project-management-app">
-                Discover NexusFlow PM <ArrowRight className="ml-2 h-5 w-5" />
+              <Link href="/practice"> {/* Updated */}
+                <span className="flex items-center">
+                  Discover Practice <ArrowRight className="ml-2 h-5 w-5" /> {/* Updated */}
+                </span>
               </Link>
             </Button>
           </div>
@@ -104,8 +104,8 @@ export default function InteractiveQuestionnaire() {
     <section className="py-16 md:py-24 bg-background">
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeader
-          title="Is NexusFlow PM Right For You?"
-          subtitle="Answer a few quick questions to see how our project management solution can address your team's specific challenges and goals."
+          title="Is Practice Right For You?" // Updated
+          subtitle="Answer a few quick questions to see how our project management solution, Practice, can address your team's specific challenges and goals." // Updated
         />
         <div className="max-w-2xl mx-auto animate-fade-in">
           <Card className="shadow-xl rounded-xl overflow-hidden">
@@ -133,8 +133,10 @@ export default function InteractiveQuestionnaire() {
               </RadioGroup>
               <div className="mt-8 flex justify-end">
                 <Button onClick={handleNext} disabled={!selectedOption} size="lg" className="text-base py-5 px-7">
-                  {currentQuestionIndex < questions.length - 1 ? 'Next Question' : 'See Your Solution'}
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <span className="flex items-center">
+                    {currentQuestionIndex < questions.length - 1 ? 'Next Question' : 'See Your Solution'}
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </span>
                 </Button>
               </div>
               <div className="mt-6 h-2.5 bg-muted rounded-full overflow-hidden">

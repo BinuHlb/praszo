@@ -28,7 +28,9 @@ export default function ProductCard({ product }: ProductCardProps) {
         <p className="text-sm mb-6 flex-grow">{product.description}</p>
         <Button asChild className="mt-auto w-full group">
           <Link href={product.type === 'app' ? `/${product.slug}` : `/products/${product.slug}`}>
-            Learn More <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            <span className="flex items-center justify-center w-full">
+              Learn More <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </span>
           </Link>
         </Button>
       </CardContent>

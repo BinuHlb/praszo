@@ -27,7 +27,9 @@ export default function InteractiveDemoPlaceholder({ title, description, imageUr
              <div className="absolute inset-0 flex items-center justify-center bg-black/30">
               <Button variant="secondary" size="lg" asChild>
                 <a href={link} target="_blank" rel="noopener noreferrer">
-                  <PlayCircle className="mr-2 h-6 w-6" /> Launch Demo
+                  <span className="flex items-center">
+                    <PlayCircle className="mr-2 h-6 w-6" /> Launch Demo
+                  </span>
                 </a>
               </Button>
             </div>
@@ -48,7 +50,9 @@ export default function InteractiveDemoPlaceholder({ title, description, imageUr
         {link && !imageUrl && (
            <Button variant="default" asChild>
               <a href={link} target="_blank" rel="noopener noreferrer">
-                <PlayCircle className="mr-2 h-5 w-5" /> Try Interactive Demo
+                <span className="flex items-center">
+                  <PlayCircle className="mr-2 h-5 w-5" /> Try Interactive Demo
+                </span>
               </a>
           </Button>
         )}

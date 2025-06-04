@@ -36,10 +36,13 @@ export default function Footer() {
             <h3 className="text-lg font-semibold font-headline mb-4 text-primary">Explore</h3>
             <ul className="space-y-2.5 text-sm">
               <li><Link href="/" className="hover:text-primary transition-colors">Home</Link></li>
-              <li><Link href="/project-management-app" className="hover:text-primary transition-colors">NexusFlow PM</Link></li>
+              <li><Link href="/practice" className="hover:text-primary transition-colors">Practice</Link></li> {/* Updated */}
+              <li><Link href="/products/verify" className="hover:text-primary transition-colors">Verify</Link></li> {/* New */}
+              <li><Link href="/products/modify" className="hover:text-primary transition-colors">Modify</Link></li> {/* New */}
+              <li><Link href="/products/docs" className="hover:text-primary transition-colors">Docs</Link></li> {/* New */}
               <li><Link href="/products/web-development" className="hover:text-primary transition-colors">Web Solutions</Link></li>
               <li><Link href="/products/digital-marketing" className="hover:text-primary transition-colors">Digital Marketing</Link></li>
-              <li><Link href="/project-management-app#demo" className="hover:text-primary transition-colors">Interactive Demo</Link></li>
+              <li><Link href="/practice#demo" className="hover:text-primary transition-colors">Interactive Demo</Link></li> {/* Updated */}
             </ul>
           </div>
 

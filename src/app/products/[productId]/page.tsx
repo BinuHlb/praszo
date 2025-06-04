@@ -1,4 +1,4 @@
-import { getProductBySlug } from '@/data/mock-data';
+import { getProductBySlug, products as allProductsData } from '@/data/mock-data'; // Import allProductsData
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,11 +14,12 @@ interface ProductPageProps {
 }
 
 export async function generateStaticParams() {
-  // In a real app, fetch slugs from a CMS or database
-  const { products } = await import('@/data/mock-data');
-  return products.filter(p => p.type === 'service').map((product) => ({
-    productId: product.slug,
-  }));
+  // Use the imported allProductsData
+  return allProductsData
+    .filter(p => p.type === 'service') // Keep filtering for services
+    .map((product) => ({
+      productId: product.slug,
+    }));
 }
 
 export default function ProductPage({ params }: ProductPageProps) {

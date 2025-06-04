@@ -1,17 +1,17 @@
 import type { Product, CaseStudy, Testimonial } from '@/lib/types';
-import { LayoutDashboard, BarChart3, Users, Settings, Zap, Briefcase, MessageCircle } from 'lucide-react';
+import { LayoutDashboard, BarChart3, Users, Settings, Zap, Briefcase, MessageCircle, CheckSquare, Edit3, BookOpen } from 'lucide-react';
 
 export const products: Product[] = [
   {
-    id: 'pm-app',
-    name: 'NexusFlow PM',
-    tagline: 'Streamline Your Workflow, Amplify Results.',
-    description: 'Our flagship project management application designed for modern teams. Intuitive, powerful, and fully customizable to fit your unique processes.',
-    longDescription: 'NexusFlow PM is more than just a task manager; it\'s a comprehensive platform that brings clarity, collaboration, and efficiency to your projects. From initial planning to final delivery, NexusFlow PM empowers your team to achieve more with less stress. Features include advanced task management, real-time collaboration, resource allocation, progress tracking, and insightful reporting.',
+    id: 'practice-app', // Changed from pm-app
+    name: 'Practice', // Changed from NexusFlow PM
+    tagline: 'Streamline Your Workflow, Amplify Results with Practice.', // Updated
+    description: 'Our flagship project management application, Practice, is designed for modern teams. Intuitive, powerful, and fully customizable to fit your unique processes.', // Updated
+    longDescription: 'Practice is more than just a task manager; it\'s a comprehensive platform that brings clarity, collaboration, and efficiency to your projects. From initial planning to final delivery, Practice empowers your team to achieve more with less stress. Features include advanced task management, real-time collaboration, resource allocation, progress tracking, and insightful reporting.', // Updated
     image: 'https://placehold.co/600x400.png',
     dataAiHint: 'software interface',
     type: 'app',
-    slug: 'project-management-app',
+    slug: 'practice', // Changed from project-management-app
     features: [
       { title: 'Intuitive Dashboard', description: 'Get a clear overview of all your projects at a glance.', icon: LayoutDashboard },
       { title: 'Advanced Task Management', description: 'Create, assign, and track tasks with ease, including subtasks and dependencies.', icon: BarChart3 },
@@ -19,15 +19,15 @@ export const products: Product[] = [
       { title: 'Resource Allocation', description: 'Efficiently manage team workloads and project resources.', icon: Settings },
     ],
     interactiveDemo: {
-      title: "Explore NexusFlow PM",
-      description: "See how NexusFlow PM can transform your project management. Visualize workflows and feature integrations.",
+      title: "Explore Practice", // Updated
+      description: "See how Practice can transform your project management. Visualize workflows and feature integrations.", // Updated
       imageUrl: "https://placehold.co/500x300.png",
       dataAiHint: 'dashboard analytics',
-      link: "/project-management-app#demo"
+      link: "/practice#demo" // Updated
     },
     testimonials: [
-      { id: 't1', quote: "NexusFlow PM revolutionized how we manage projects. It's a game changer!", author: "Jane Doe", company: "Innovatech Ltd.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile woman" },
-      { id: 't2', quote: "The best PM tool we've ever used. Highly recommended.", author: "John Smith", company: "Tech Solutions Inc.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile man" },
+      { id: 't1', quote: "Practice revolutionized how we manage projects. It's a game changer!", author: "Jane Doe", company: "Innovatech Ltd.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile woman" }, // Updated
+      { id: 't2', quote: "The best PM tool we've ever used. Highly recommended for Practice.", author: "John Smith", company: "Tech Solutions Inc.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile man" }, // Updated
     ],
   },
   {
@@ -69,6 +69,54 @@ export const products: Product[] = [
     testimonials: [
       { id: 't3', quote: "Apex Digital's marketing strategies took our brand to the next level.", author: "Mike Chan", company: "Growth Co.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile asian man" },
     ]
+  },
+  {
+    id: 'verify-serv',
+    name: 'Verify',
+    tagline: 'Ensure Quality and Accuracy.',
+    description: 'Comprehensive verification services to ensure your digital assets meet the highest standards.',
+    longDescription: 'Our Verify service offers meticulous testing and quality assurance for software, websites, and digital campaigns. We help you identify issues before they impact your users or your bottom line.',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'quality check',
+    type: 'service',
+    slug: 'verify',
+    features: [
+      { title: 'Rigorous Testing', description: 'In-depth testing methodologies to uncover potential issues.', icon: CheckSquare },
+      { title: 'Quality Assurance', description: 'Ensuring your product meets quality benchmarks.', icon: Zap },
+      { title: 'User Acceptance Testing', description: 'Validating functionality from the end-user perspective.', icon: Users },
+    ],
+  },
+  {
+    id: 'modify-serv',
+    name: 'Modify',
+    tagline: 'Adapt and Evolve Your Solutions.',
+    description: 'Flexible modification services to update, enhance, or refactor your existing digital products.',
+    longDescription: 'The digital landscape is always changing. Our Modify service helps you adapt your existing applications, websites, and systems to new requirements, technologies, or user feedback, ensuring longevity and relevance.',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'code editing',
+    type: 'service',
+    slug: 'modify',
+    features: [
+      { title: 'Feature Enhancements', description: 'Adding new capabilities to your existing software.', icon: Edit3 },
+      { title: 'System Upgrades', description: 'Modernizing your tech stack for better performance.', icon: Settings },
+      { title: 'Refactoring', description: 'Improving code quality and maintainability.', icon: Zap },
+    ],
+  },
+  {
+    id: 'docs-serv',
+    name: 'Docs',
+    tagline: 'Clear, Concise, Comprehensive Documentation.',
+    description: 'Professional documentation services for your products, APIs, and internal processes.',
+    longDescription: 'Effective documentation is key to user adoption, developer productivity, and knowledge retention. Our Docs service provides expert technical writing and information design to create clear, user-friendly documentation that empowers your users and team.',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'technical writing',
+    type: 'service',
+    slug: 'docs',
+    features: [
+      { title: 'User Manuals', description: 'Creating comprehensive guides for end-users.', icon: BookOpen },
+      { title: 'API Documentation', description: 'Clear and precise documentation for developers.', icon: Settings },
+      { title: 'Knowledge Bases', description: 'Building internal wikis and process documentation.', icon: Users },
+    ],
   },
 ];
 

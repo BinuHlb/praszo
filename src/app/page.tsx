@@ -1,3 +1,4 @@
+
 import HeroSection from '@/components/sections/hero-section';
 import ProductList from '@/components/sections/product-list';
 import ServicesOverview from '@/components/sections/services-overview';
@@ -6,7 +7,7 @@ import InteractiveQuestionnaire from '@/components/sections/interactive-question
 import PartnerLogos from '@/components/sections/partner-logos';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react'; 
 import SectionHeader from '@/components/layout/section-header';
 
 export default function HomePage() {
@@ -17,17 +18,17 @@ export default function HomePage() {
       <ServicesOverview />
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6">
-          <SectionHeader 
+          <SectionHeader
             title="Experience Our Solutions"
-            subtitle="Dive deeper into how our flagship project management tool can revolutionize your workflow."
+            subtitle="Dive deeper into how our flagship project management tool, Practice, can revolutionize your workflow."
           />
           <div className="max-w-3xl mx-auto animate-fade-in">
-            <InteractiveDemoPlaceholder 
-              title="NexusFlow PM: Visualize Your Success"
-              description="Get a hands-on feel for NexusFlow PM's intuitive interface and powerful features. See how it simplifies complex project management tasks and boosts team productivity."
+            <InteractiveDemoPlaceholder
+              title="Practice: Visualize Your Success"
+              description="Get a hands-on feel for Practice's intuitive interface and powerful features. See how it simplifies complex project management tasks and boosts team productivity."
               imageUrl="https://placehold.co/800x450.png"
               dataAiHint="project dashboard"
-              link="/project-management-app#demo"
+              link="/practice#demo"
             />
           </div>
         </div>
@@ -42,7 +43,9 @@ export default function HomePage() {
           </p>
           <Button size="lg" variant="secondary" asChild className="text-primary hover:bg-background/90">
             <Link href="/contact">
-              Get in Touch <ArrowRight className="ml-2 h-5 w-5" />
+              <span className="flex items-center">
+                Get in Touch <ArrowRight className="ml-2 h-5 w-5" />
+              </span>
             </Link>
           </Button>
         </div>
