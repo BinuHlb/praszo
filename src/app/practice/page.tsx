@@ -37,7 +37,7 @@ export default function PracticePage() { // Renamed from ProjectManagementAppPag
                 <a>Request a Demo</a>
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white hover:text-primary">
+            <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white hover:text-[hsl(246,93%,63%)]">
               View Pricing
             </Button>
           </div>

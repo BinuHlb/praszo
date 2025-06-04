@@ -34,7 +34,7 @@ export default function ProjectManagementAppPage() {
             <Button size="lg" variant="secondary" asChild className="text-primary hover:bg-accent hover:text-accent-foreground">
               <Link href="/contact?product=NexusFlow PM">Request a Demo</Link>
             </Button>
-            <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white hover:text-primary">
+            <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white hover:text-[hsl(246,93%,63%)]">
               View Pricing
             </Button>
           </div>
