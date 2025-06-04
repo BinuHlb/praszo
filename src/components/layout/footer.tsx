@@ -12,7 +12,7 @@ export default function Footer() {
           {/* Column 1: Praszo & Socials */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2 mb-2">
-              <AnimatedLogo className="h-10 w-10 text-primary" />
+              <AnimatedLogo className="text-primary" />
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">
               Elevating businesses with innovative digital solutions and strategic insights to achieve market leadership.

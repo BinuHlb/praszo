@@ -150,7 +150,7 @@ export default function Navbar() {
       )}>
       <div className="container mx-auto flex h-full items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
-          <AnimatedLogo className="h-10 w-10" />
+          <AnimatedLogo  />
           
         </Link>
 
