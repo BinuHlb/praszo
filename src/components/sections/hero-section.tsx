@@ -28,8 +28,12 @@ const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, c
   className?: string;
   animationClass?: string;
   blurStdDeviation?: number;
-  shape?: "ellipse" | "rect";
+  shape?: "ellipse" | "rect" | "bubble1" | "bubble2";
 }) => {
+  // Bubbly, rounded, "funny" path definitions
+  const bubble1Path = "M100,200 C50,100 150,50 250,100 C350,150 300,250 200,300 C100,350 50,300 100,200 Z";
+  const bubble2Path = "M300,120 C400,80 450,200 400,300 C350,400 250,380 200,300 C150,220 200,160 300,120 Z";
+
   return (
     <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" className={className}>
       <defs>
@@ -45,7 +49,7 @@ const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, c
           <feGaussianBlur stdDeviation={blurStdDeviation} />
         </filter>
       </defs>
-      {shape === "ellipse" ? (
+      {shape === "ellipse" && (
         <ellipse
           cx="250"
           cy="250"
@@ -55,7 +59,8 @@ const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, c
           className={`fill-[url(#${gradIdLight})] dark:fill-[url(#${gradIdDark})] ${animationClass}`}
           transform="rotate(30 250 250)"
         />
-      ) : (
+      )}
+      {shape === "rect" && (
         <rect
           x="50"
           y="100"
@@ -65,6 +70,20 @@ const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, c
           filter={`url(#blur-${id})`}
           className={`fill-[url(#${gradIdLight})] dark:fill-[url(#${gradIdDark})] ${animationClass}`}
           transform="rotate(-20 250 250)"
+        />
+      )}
+      {shape === "bubble1" && (
+        <path
+          d={bubble1Path}
+          filter={`url(#blur-${id})`}
+          className={`fill-[url(#${gradIdLight})] dark:fill-[url(#${gradIdDark})] ${animationClass}`}
+        />
+      )}
+      {shape === "bubble2" && (
+        <path
+          d={bubble2Path}
+          filter={`url(#blur-${id})`}
+          className={`fill-[url(#${gradIdLight})] dark:fill-[url(#${gradIdDark})] ${animationClass}`}
         />
       )}
     </svg>
@@ -104,38 +123,38 @@ export default function HeroSection() {
     <section 
       ref={heroRef} 
       className="relative py-20 md:py-32 bg-background overflow-hidden"
-      style={{ position: 'relative' }} // Explicitly set position
+      style={{ position: 'relative' }} 
     >
       {/* SVG Background Shapes Layer */}
       <motion.div 
-        className="absolute inset-0 z-0 opacity-70 dark:opacity-60" // Slightly increased opacity
+        className="absolute inset-0 z-0 opacity-90 dark:opacity-80" // Increased opacity
         style={{ y: yBlobs }}
       >
         <AnimatedBlob
           id="blob1"
           gradIdLight="grad1Light"
           gradIdDark="grad1Dark"
-          color1Light="hsla(var(--primary), 0.8)" 
-          color2Light="hsla(var(--primary), 0.4)" 
-          color1Dark="hsla(var(--primary), 0.7)"   
-          color2Dark="hsla(var(--primary), 0.3)"   
-          className="absolute -top-1/3 -left-1/4 w-[65%] h-[65%] md:w-[45%] md:h-[45%]"
+          color1Light="hsla(var(--primary), 0.85)" // Brighter primary
+          color2Light="hsla(var(--secondary), 0.55)" 
+          color1Dark="hsla(var(--primary), 0.75)"   
+          color2Dark="hsla(var(--secondary), 0.45)"   
+          className="absolute top-[5%] left-[10%] w-[80%] h-[80%] md:w-[60%] md:h-[60%]" // Larger and more central
           animationClass="animate-float-slow"
-          blurStdDeviation={90} 
-          shape="ellipse"
+          blurStdDeviation={75} // Slightly less blur for more definition
+          shape="bubble1"
         />
         <AnimatedBlob
           id="blob2"
           gradIdLight="grad2Light"
           gradIdDark="grad2Dark"
-          color1Light="hsla(var(--primary), 0.6)" 
-          color2Light="hsla(var(--accent), 0.5)" 
-          color1Dark="hsla(var(--primary), 0.5)"   
-          color2Dark="hsla(var(--accent), 0.4)" 
-          className="absolute -bottom-1/3 -right-1/4 w-[70%] h-[70%] md:w-[55%] md:h-[55%]"
+          color1Light="hsla(var(--accent), 0.8)" 
+          color2Light="hsla(var(--primary), 0.6)" 
+          color1Dark="hsla(var(--accent), 0.7)"   
+          color2Dark="hsla(var(--primary), 0.5)" 
+          className="absolute bottom-[2%] right-[5%] w-[85%] h-[85%] md:w-[65%] md:h-[65%]" // Larger and more central, overlapping
           animationClass="animate-float-slower"
-          blurStdDeviation={110} 
-          shape="rect"
+          blurStdDeviation={80} // Slightly less blur
+          shape="bubble2"
         />
       </motion.div>
 
@@ -218,4 +237,3 @@ export default function HeroSection() {
     </section>
   );
 }
-
