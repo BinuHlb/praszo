@@ -17,7 +17,7 @@ const subscriptionFormSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
 });
 
-const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, color1Dark, color2Dark, className, animationClass, blurStdDeviation = 60, shape = "ellipse" }: {
+const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, color1Dark, color2Dark, className, animationClass, blurStdDeviation = 70, shape = "ellipse" }: {
   id: string;
   gradIdLight: string;
   gradIdDark: string;
@@ -48,42 +48,88 @@ const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, c
           <feGaussianBlur stdDeviation={blurStdDeviation} />
         </filter>
       </defs>
+      
       {shape === "ellipse" && (
-        <ellipse
-          cx="250"
-          cy="250"
-          rx="200"
-          ry="150"
-          filter={`url(#blur-${id})`}
-          className={`fill-[url(#${gradIdLight})] dark:fill-[url(#${gradIdDark})] ${animationClass}`}
-          transform="rotate(30 250 250)"
-        />
+        <>
+          <ellipse
+            cx="250"
+            cy="250"
+            rx="200"
+            ry="150"
+            filter={`url(#blur-${id})`}
+            className={`block dark:hidden ${animationClass}`}
+            transform="rotate(30 250 250)"
+            fill={`url(#${gradIdLight})`}
+          />
+          <ellipse
+            cx="250"
+            cy="250"
+            rx="200"
+            ry="150"
+            filter={`url(#blur-${id})`}
+            className={`hidden dark:block ${animationClass}`}
+            transform="rotate(30 250 250)"
+            fill={`url(#${gradIdDark})`}
+          />
+        </>
       )}
       {shape === "rect" && (
-        <rect
-          x="50"
-          y="100"
-          width="400"
-          height="300"
-          rx="100"
-          filter={`url(#blur-${id})`}
-          className={`fill-[url(#${gradIdLight})] dark:fill-[url(#${gradIdDark})] ${animationClass}`}
-          transform="rotate(-20 250 250)"
-        />
+         <>
+          <rect
+            x="50"
+            y="100"
+            width="400"
+            height="300"
+            rx="100"
+            filter={`url(#blur-${id})`}
+            className={`block dark:hidden ${animationClass}`}
+            transform="rotate(-20 250 250)"
+            fill={`url(#${gradIdLight})`}
+          />
+          <rect
+            x="50"
+            y="100"
+            width="400"
+            height="300"
+            rx="100"
+            filter={`url(#blur-${id})`}
+            className={`hidden dark:block ${animationClass}`}
+            transform="rotate(-20 250 250)"
+            fill={`url(#${gradIdDark})`}
+          />
+        </>
       )}
       {shape === "bubble1" && (
-        <path
-          d={bubble1Path}
-          filter={`url(#blur-${id})`}
-          className={`fill-[url(#${gradIdLight})] dark:fill-[url(#${gradIdDark})] ${animationClass}`}
-        />
+        <>
+          <path
+            d={bubble1Path}
+            filter={`url(#blur-${id})`}
+            className={`block dark:hidden ${animationClass}`}
+            fill={`url(#${gradIdLight})`}
+          />
+          <path
+            d={bubble1Path}
+            filter={`url(#blur-${id})`}
+            className={`hidden dark:block ${animationClass}`}
+            fill={`url(#${gradIdDark})`}
+          />
+        </>
       )}
       {shape === "bubble2" && (
-        <path
-          d={bubble2Path}
-          filter={`url(#blur-${id})`}
-          className={`fill-[url(#${gradIdLight})] dark:fill-[url(#${gradIdDark})] ${animationClass}`}
-        />
+        <>
+          <path
+            d={bubble2Path}
+            filter={`url(#blur-${id})`}
+            className={`block dark:hidden ${animationClass}`}
+            fill={`url(#${gradIdLight})`}
+          />
+          <path
+            d={bubble2Path}
+            filter={`url(#blur-${id})`}
+            className={`hidden dark:block ${animationClass}`}
+            fill={`url(#${gradIdDark})`}
+          />
+        </>
       )}
     </svg>
   );
@@ -124,45 +170,43 @@ export default function HeroSection() {
       className="relative overflow-hidden"
       style={{ backgroundColor: '#7FFFD4', position: 'relative' }} 
     >
-      {/* SVG Background Shapes Layer (Behind Glassmorphism) */}
       <motion.div 
-        className="absolute inset-0 z-0 opacity-70 dark:opacity-60" // Slightly reduced opacity for blobs
+        className="absolute inset-0 z-0 opacity-90 dark:opacity-80" 
         style={{ y: yBlobs }}
       >
         <AnimatedBlob
           id="blob1"
           gradIdLight="grad1Light"
           gradIdDark="grad1Dark"
-          color1Light="hsla(var(--primary), 0.9)" 
-          color2Light="hsla(var(--secondary), 0.75)" 
-          color1Dark="hsla(var(--primary), 0.8)"   
-          color2Dark="hsla(var(--accent), 0.65)"   
-          className="absolute top-[10%] left-[5%] w-[70%] h-[70%] md:w-[55%] md:h-[55%]" 
+          color1Light="hsla(var(--primary), 0.95)" 
+          color2Light="hsla(var(--secondary), 0.85)" 
+          color1Dark="hsla(var(--primary), 0.85)"   
+          color2Dark="hsla(var(--accent), 0.75)"   
+          className="absolute top-[5%] left-[0%] w-[80%] h-[80%] md:w-[60%] md:h-[60%]"
           animationClass="animate-float-slow"
-          blurStdDeviation={60} 
+          blurStdDeviation={55} 
           shape="bubble1"
         />
         <AnimatedBlob
           id="blob2"
           gradIdLight="grad2Light"
           gradIdDark="grad2Dark"
-          color1Light="hsla(var(--accent), 0.85)" 
-          color2Light="hsla(var(--primary), 0.75)" 
+          color1Light="hsla(var(--accent), 0.9)" 
+          color2Light="hsla(var(--primary), 0.8)" 
           color1Dark="hsla(var(--secondary), 0.8)"   
-          color2Dark="hsla(var(--primary), 0.7)" 
-          className="absolute bottom-[8%] right-[10%] w-[75%] h-[75%] md:w-[60%] md:h-[60%]" 
+          color2Dark="hsla(var(--primary), 0.75)" 
+          className="absolute bottom-[0%] right-[0%] w-[85%] h-[85%] md:w-[65%] md:h-[65%]" 
           animationClass="animate-float-slower"
-          blurStdDeviation={65} 
+          blurStdDeviation={60} 
           shape="bubble2"
         />
       </motion.div>
 
-      {/* Glassmorphism Overlay (Over Blobs, Under Content) */}
+      {/* Glassmorphism Overlay Layer */}
       <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-lg"></div>
 
-      {/* Content Layer (On Top of Glassmorphism Overlay) */}
+      {/* Content Layer */}
       <div className="container relative z-20 mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32">
-        {/* Grid for layout (text and form) */}
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -237,3 +281,4 @@ export default function HeroSection() {
     </section>
   );
 }
+
