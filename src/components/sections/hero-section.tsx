@@ -4,13 +4,14 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ChevronRight, Mail } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
+import { useRef } from 'react';
 
 const subscriptionFormSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
@@ -80,6 +81,14 @@ export default function HeroSection() {
     },
   });
 
+  const heroRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"] 
+  });
+
+  const yBlobs = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]); // Blobs move 30% of the scroll distance
+
   async function onSubmit(values: z.infer<typeof subscriptionFormSchema>) {
     await new Promise(resolve => setTimeout(resolve, 1000));
     console.log('Subscription email:', values.email);
@@ -92,9 +101,12 @@ export default function HeroSection() {
   }
 
   return (
-    <section className="relative py-20 md:py-32 bg-background overflow-hidden">
+    <section ref={heroRef} className="relative py-20 md:py-32 bg-background overflow-hidden">
       {/* SVG Background Shapes Layer */}
-      <div className="absolute inset-0 z-0 opacity-50 dark:opacity-40">
+      <motion.div 
+        className="absolute inset-0 z-0 opacity-50 dark:opacity-40"
+        style={{ y: yBlobs }}
+      >
         <AnimatedBlob
           id="blob1"
           gradIdLight="grad1Light"
@@ -105,7 +117,7 @@ export default function HeroSection() {
           color2Dark="hsla(var(--secondary), 0.3)"
           className="absolute -top-1/4 -left-1/4 w-[70%] h-[70%] md:w-1/2 md:h-1/2"
           animationClass="animate-float-slow"
-          blurStdDeviation={100} // Increased blur
+          blurStdDeviation={100} 
         />
         <AnimatedBlob
           id="blob2"
@@ -117,15 +129,15 @@ export default function HeroSection() {
           color2Dark="hsla(var(--primary), 0.2)" 
           className="absolute -bottom-1/4 -right-1/4 w-[80%] h-[80%] md:w-2/3 md:h-2/3"
           animationClass="animate-float-slower"
-          blurStdDeviation={120} // Increased blur
+          blurStdDeviation={120} 
           shape="rect"
         />
-      </div>
+      </motion.div>
 
       {/* Content Layer */}
       <div className="container relative z-10 mx-auto px-4 md:px-6">
         {/* Glassmorphism Card */}
-        <div className="bg-card/60 dark:bg-neutral-800/50 backdrop-blur-xl rounded-2xl shadow-2xl border border-card/20 dark:border-neutral-700/30">
+        <div className="dark:bg-neutral-800/50 backdrop-blur-xl rounded-2xl  border-card/20 dark:border-neutral-700/30">
           <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center p-8 md:p-12 lg:p-16">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -201,3 +213,4 @@ export default function HeroSection() {
     </section>
   );
 }
+
