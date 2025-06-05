@@ -94,30 +94,30 @@ export default function HeroSection() {
   return (
     <section className="relative py-20 md:py-32 bg-background overflow-hidden">
       {/* SVG Background Shapes Layer */}
-      <div className="absolute inset-0 z-0 opacity-40 dark:opacity-30">
+      <div className="absolute inset-0 z-0 opacity-50 dark:opacity-40">
         <AnimatedBlob
           id="blob1"
           gradIdLight="grad1Light"
           gradIdDark="grad1Dark"
-          color1Light="hsla(var(--primary), 0.7)" // Use HSL with opacity
-          color2Light="hsla(var(--secondary), 0.5)"
-          color1Dark="hsla(var(--primary), 0.6)" // Dark theme primary
-          color2Dark="hsla(var(--secondary), 0.4)" // Dark theme secondary
+          color1Light="hsla(var(--primary), 0.6)" 
+          color2Light="hsla(var(--secondary), 0.4)"
+          color1Dark="hsla(var(--primary), 0.5)" 
+          color2Dark="hsla(var(--secondary), 0.3)"
           className="absolute -top-1/4 -left-1/4 w-[70%] h-[70%] md:w-1/2 md:h-1/2"
           animationClass="animate-float-slow"
-          blurStdDeviation={80}
+          blurStdDeviation={100} // Increased blur
         />
         <AnimatedBlob
           id="blob2"
           gradIdLight="grad2Light"
           gradIdDark="grad2Dark"
-          color1Light="hsla(var(--accent), 0.6)" // Use HSL with opacity
-          color2Light="hsla(var(--primary), 0.4)"
-          color1Dark="hsla(var(--accent), 0.5)" // Dark theme accent
-          color2Dark="hsla(var(--primary), 0.3)" // Dark theme primary
+          color1Light="hsla(var(--accent), 0.5)" 
+          color2Light="hsla(var(--primary), 0.3)"
+          color1Dark="hsla(var(--accent), 0.4)" 
+          color2Dark="hsla(var(--primary), 0.2)" 
           className="absolute -bottom-1/4 -right-1/4 w-[80%] h-[80%] md:w-2/3 md:h-2/3"
           animationClass="animate-float-slower"
-          blurStdDeviation={100}
+          blurStdDeviation={120} // Increased blur
           shape="rect"
         />
       </div>
@@ -157,7 +157,7 @@ export default function HeroSection() {
             </motion.div>
 
             <motion.div
-              className="mt-5 md:mt-0 p-0 md:p-0 border-none" // Adjusted padding/border from original form placement
+              className="mt-5 md:mt-0 p-0 md:p-0 border-none" 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
