@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ChevronRight, Mail } from 'lucide-react';
+import { ChevronRight, Mail, Send } from 'lucide-react'; // Added Send
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -30,7 +30,7 @@ const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, cl
 }) => {
   const bubble1Path = "M100,200 C50,100 150,50 250,100 C350,150 300,250 200,300 C100,350 50,300 100,200 Z";
   const bubble2Path = "M300,120 C400,80 450,200 400,300 C350,400 250,380 200,300 C150,220 200,160 300,120 Z";
-
+  
   const internalGradIdLight = `grad-${id}-light`;
   const internalGradIdDark = `grad-${id}-dark`;
   const filterId = `blur-${id}`;
@@ -192,7 +192,7 @@ export default function HeroSection() {
           color1Light="hsla(var(--accent), 0.9)" 
           color2Light="hsla(var(--primary), 0.8)" 
           color1Dark="hsla(var(--secondary), 0.8)"   
-          color2Dark="hsla(var(--primary), 0.75)" 
+          color2Dark="hsla(var(--primary), 0.75)"  
           className="absolute bottom-[0%] right-[0%] w-[75%] h-[75%] md:w-[60%] md:h-[60%]"
           animationClass="animate-float-slower"
           blurStdDeviation={55} 
@@ -244,35 +244,48 @@ export default function HeroSection() {
             >
               <h3 className="text-xl font-semibold mb-4 text-foreground dark:text-primary-foreground text-center md:text-left">Stay Updated With Praszo</h3>
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col sm:flex-row gap-3 items-start">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem className="flex-grow w-full sm:w-auto">
-                        <FormControl>
-                          <div className="relative">
-                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
-                            <Input
-                              type="email"
-                              placeholder="Enter your email"
-                              {...field}
-                              className="pl-10 h-11 text-base bg-background/70 dark:bg-input/50 border-border focus:bg-background dark:focus:bg-input"
-                            />
-                          </div>
-                        </FormControl>
-                        <FormMessage className="mt-1 text-sm text-destructive" />
-                      </FormItem>
-                    )}
-                  />
-                  <Button type="submit" size="lg" className="w-full sm:w-auto h-11" disabled={form.formState.isSubmitting}>
-                    {form.formState.isSubmitting ? 'Subscribing...' : 'Subscribe'}
-                  </Button>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+                  <div className="relative"> {/* Wrapper for input and button */}
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormControl>
+                            <div className="relative"> {/* Keeps Mail icon positioned correctly */}
+                              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground z-10" />
+                              <Input
+                                type="email"
+                                placeholder="Enter your email"
+                                {...field}
+                                className="pl-10 pr-[120px] h-11 text-base bg-background/70 dark:bg-input/50 border-border focus:bg-background dark:focus:bg-input" 
+                              />
+                            </div>
+                          </FormControl>
+                          <FormMessage className="mt-1 text-sm text-destructive" />
+                        </FormItem>
+                      )}
+                    />
+                    <Button
+                      type="submit"
+                      className="absolute right-1 top-1/2 -translate-y-1/2 h-9 px-3 flex items-center"
+                      disabled={form.formState.isSubmitting}
+                    >
+                      {form.formState.isSubmitting ? (
+                        'Subscribing...'
+                      ) : (
+                        <>
+                          <Send className="mr-2 h-4 w-4" />
+                          Subscribe
+                        </>
+                      )}
+                    </Button>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-2 text-center md:text-left">
+                    No spam, ever. Unsubscribe at any time.
+                  </p>
                 </form>
               </Form>
-              <p className="text-xs text-muted-foreground mt-2 text-center md:text-left">
-                No spam, ever. Unsubscribe at any time.
-              </p>
             </motion.div>
           </div>
         </div>
