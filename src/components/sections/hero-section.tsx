@@ -108,33 +108,33 @@ export default function HeroSection() {
     >
       {/* SVG Background Shapes Layer */}
       <motion.div 
-        className="absolute inset-0 z-0 opacity-60 dark:opacity-50" // Slightly increased opacity
+        className="absolute inset-0 z-0 opacity-70 dark:opacity-60" // Slightly increased opacity
         style={{ y: yBlobs }}
       >
         <AnimatedBlob
           id="blob1"
           gradIdLight="grad1Light"
           gradIdDark="grad1Dark"
-          color1Light="hsla(var(--primary), 0.7)" // Emphasize primary
-          color2Light="hsla(var(--primary), 0.3)" // Lighter primary
-          color1Dark="hsla(var(--primary), 0.6)"   // Emphasize primary (dark)
-          color2Dark="hsla(var(--primary), 0.2)"   // Lighter primary (dark)
-          className="absolute -top-1/4 -left-1/4 w-[70%] h-[70%] md:w-1/2 md:h-1/2"
+          color1Light="hsla(var(--primary), 0.8)" 
+          color2Light="hsla(var(--primary), 0.4)" 
+          color1Dark="hsla(var(--primary), 0.7)"   
+          color2Dark="hsla(var(--primary), 0.3)"   
+          className="absolute -top-1/3 -left-1/4 w-[65%] h-[65%] md:w-[45%] md:h-[45%]"
           animationClass="animate-float-slow"
-          blurStdDeviation={110} // Increased blur
+          blurStdDeviation={90} 
           shape="ellipse"
         />
         <AnimatedBlob
           id="blob2"
           gradIdLight="grad2Light"
           gradIdDark="grad2Dark"
-          color1Light="hsla(var(--primary), 0.5)" // Primary mixed with accent/secondary
-          color2Light="hsla(var(--accent), 0.4)" 
-          color1Dark="hsla(var(--primary), 0.4)"   // Primary mixed (dark)
-          color2Dark="hsla(var(--accent), 0.3)" 
-          className="absolute -bottom-1/4 -right-1/4 w-[80%] h-[80%] md:w-2/3 md:h-2/3"
+          color1Light="hsla(var(--primary), 0.6)" 
+          color2Light="hsla(var(--accent), 0.5)" 
+          color1Dark="hsla(var(--primary), 0.5)"   
+          color2Dark="hsla(var(--accent), 0.4)" 
+          className="absolute -bottom-1/3 -right-1/4 w-[70%] h-[70%] md:w-[55%] md:h-[55%]"
           animationClass="animate-float-slower"
-          blurStdDeviation={130} // Increased blur
+          blurStdDeviation={110} 
           shape="rect"
         />
       </motion.div>
@@ -218,3 +218,4 @@ export default function HeroSection() {
     </section>
   );
 }
+
