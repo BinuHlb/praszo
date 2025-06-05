@@ -11,8 +11,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Rajdhani', 'sans-serif'],
-        headline: ['Orbitron', 'sans-serif'], 
+        body: ['Lato', 'sans-serif'],
+        headline: ['Playfair Display', 'serif'], 
         code: ['monospace'],
       },
       colors: {
