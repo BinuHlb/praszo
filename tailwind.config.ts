@@ -1,3 +1,4 @@
+
 import type {Config} from 'tailwindcss';
 
 export default {
@@ -10,8 +11,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Inter', 'sans-serif'],
-        headline: ['Manrope', 'sans-serif'],
+        body: ['Quicksand', 'sans-serif'],
+        headline: ['Fredoka One', 'sans-serif'], // Using sans-serif as a generic fallback for Fredoka One
         code: ['monospace'],
       },
       colors: {
