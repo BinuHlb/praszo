@@ -11,8 +11,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // Updated headline font to Quicksand
-        headline: ['Quicksand', 'sans-serif'],
+        // Updated headline font to Montserrat
+        headline: ['Montserrat', 'sans-serif'],
         // Body font remains Lato
         body: ['Lato', 'sans-serif'],
         code: ['monospace'],
