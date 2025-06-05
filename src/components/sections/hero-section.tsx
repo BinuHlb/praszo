@@ -87,7 +87,7 @@ export default function HeroSection() {
     offset: ["start start", "end start"] 
   });
 
-  const yBlobs = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]); // Blobs move 30% of the scroll distance
+  const yBlobs = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   async function onSubmit(values: z.infer<typeof subscriptionFormSchema>) {
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -101,7 +101,11 @@ export default function HeroSection() {
   }
 
   return (
-    <section ref={heroRef} className="relative py-20 md:py-32 bg-background overflow-hidden">
+    <section 
+      ref={heroRef} 
+      className="relative py-20 md:py-32 bg-background overflow-hidden"
+      style={{ position: 'relative' }} // Explicitly set position
+    >
       {/* SVG Background Shapes Layer */}
       <motion.div 
         className="absolute inset-0 z-0 opacity-50 dark:opacity-40"
@@ -213,4 +217,3 @@ export default function HeroSection() {
     </section>
   );
 }
-
