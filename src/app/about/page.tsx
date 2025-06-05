@@ -50,11 +50,11 @@ export default function AboutPage() {
         <motion.div
           className="container mx-auto px-4 md:px-6 text-center"
           initial="hidden"
-          animate="visible" // Changed from whileInView
+          animate="visible" 
           viewport={{ once: true }}
           variants={heroTextVariants}
         >
-          <h1 className="text-4xl md:text-5xl font-bold font-headline mb-4">About Praszo</h1>
+          <h1 className="text-5xl md:text-6xl font-bold font-headline mb-4">About Praszo</h1>
           <p className="text-lg md:text-xl max-w-3xl mx-auto text-balance">
             Innovating the Future of Digital Excellence. Discover the story, mission, and values that drive Praszo to deliver cutting-edge digital solutions and empower businesses worldwide.
           </p>
@@ -81,7 +81,7 @@ export default function AboutPage() {
                 textAlignment="left"
                 titleClassName="text-primary"
                 className="mb-0"
-                animateOnLoad={true} // Added prop
+                animateOnLoad={true} 
               />
                <p className="text-muted-foreground">
                 We believe that technology, when wielded creatively and strategically, can unlock unprecedented opportunities. Our journey is one of continuous learning, adaptation, and a relentless pursuit of delivering impactful results for our partners.
@@ -94,16 +94,16 @@ export default function AboutPage() {
       <section className="py-16 md:py-24 bg-secondary overflow-hidden">
         <div className="container mx-auto px-4 md:px-6">
           <SectionHeader
-            title="Mission &amp; Vision"
+            title="Mission & Vision"
             subtitle="Guiding our strategies and inspiring our actions."
             titleClassName="text-primary"
-            animateOnLoad={true} // Added prop
+            animateOnLoad={true} 
           />
           <motion.div
             className="grid md:grid-cols-2 gap-8"
             variants={cardContainerVariants}
             initial="hidden"
-            animate="visible" // Changed from whileInView
+            animate="visible" 
             viewport={{ once: true, amount: 0.1 }}
           >
             <motion.div variants={cardItemVariants}>
@@ -141,13 +141,13 @@ export default function AboutPage() {
           <SectionHeader
             title="Core Values That Define Us"
             subtitle="These principles are at the heart of everything we do at Praszo, guiding our interactions and decisions."
-            animateOnLoad={true} // Added prop
+            animateOnLoad={true} 
           />
           <motion.div
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8"
             variants={cardContainerVariants}
             initial="hidden"
-            animate="visible" // Changed from whileInView
+            animate="visible" 
             viewport={{ once: true, amount: 0.1 }}
           >
             {coreValues.map((value) => (

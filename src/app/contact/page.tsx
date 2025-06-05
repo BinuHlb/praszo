@@ -1,3 +1,4 @@
+
 import ContactForm from '@/components/shared/contact-form';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
@@ -8,7 +9,7 @@ export default function ContactPage() {
     <>
       <section className="py-20 md:py-28 bg-gradient-to-b from-primary to-indigo-700 text-primary-foreground">
         <div className="container mx-auto px-4 md:px-6 text-center animate-slide-up">
-          <h1 className="text-4xl md:text-5xl font-bold font-headline mb-4">Get in Touch</h1>
+          <h1 className="text-5xl md:text-6xl font-bold font-headline mb-4">Get in Touch</h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto text-balance">
             We&apos;re here to help and answer any question you might have. We look forward to hearing from you!
           </p>

@@ -50,7 +50,7 @@ export default function HeroSection() {
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="space-y-6"
         >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-headline tracking-tight text-balance">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-headline tracking-tight text-balance">
             Elevate Your Business with <span className="text-primary">Praszo</span> Solutions
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground text-balance">

@@ -11,8 +11,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // Updated headline font to Montserrat
-        headline: ['Montserrat', 'sans-serif'],
+        // Updated headline font to Manrope
+        headline: ['Manrope', 'sans-serif'],
         // Body font remains Lato
         body: ['Lato', 'sans-serif'],
         code: ['monospace'],

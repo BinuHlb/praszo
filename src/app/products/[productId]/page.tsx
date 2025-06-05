@@ -35,7 +35,7 @@ export default function ProductPage({ params }: ProductPageProps) {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-slide-up">
               <span className="text-sm font-semibold uppercase tracking-wider text-primary-foreground">{product.type === 'app' ? 'Application' : 'Service'}</span>
-              <h1 className="text-4xl md:text-5xl font-bold font-headline text-primary-foreground">{product.name}</h1>
+              <h1 className="text-5xl md:text-6xl font-bold font-headline text-primary-foreground">{product.name}</h1>
               <p className="text-lg md:text-xl text-primary-foreground/90 text-balance">{product.tagline}</p>
               <Button size="lg" variant="secondary" asChild>
                 <Link href={`/contact?product=${encodeURIComponent(product.name)}`}>
