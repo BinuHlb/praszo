@@ -17,10 +17,8 @@ const subscriptionFormSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
 });
 
-const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, color1Dark, color2Dark, className, animationClass, blurStdDeviation = 70, shape = "ellipse" }: {
-  id: string;
-  gradIdLight: string;
-  gradIdDark: string;
+const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, className, animationClass, blurStdDeviation = 70, shape = "ellipse" }: {
+  id: string; // Unique ID for this blob instance
   color1Light: string;
   color2Light: string;
   color1Dark: string;
@@ -33,18 +31,22 @@ const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, c
   const bubble1Path = "M100,200 C50,100 150,50 250,100 C350,150 300,250 200,300 C100,350 50,300 100,200 Z";
   const bubble2Path = "M300,120 C400,80 450,200 400,300 C350,400 250,380 200,300 C150,220 200,160 300,120 Z";
 
+  const internalGradIdLight = `grad-${id}-light`;
+  const internalGradIdDark = `grad-${id}-dark`;
+  const filterId = `blur-${id}`;
+
   return (
     <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" className={className}>
       <defs>
-        <linearGradient id={gradIdLight} x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id={internalGradIdLight} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor={color1Light} />
           <stop offset="100%" stopColor={color2Light} />
         </linearGradient>
-        <linearGradient id={gradIdDark} x1="0%" y1="0%" x2="100%" y2="100%">
+        <linearGradient id={internalGradIdDark} x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor={color1Dark} />
           <stop offset="100%" stopColor={color2Dark} />
         </linearGradient>
-        <filter id={`blur-${id}`}>
+        <filter id={filterId}>
           <feGaussianBlur stdDeviation={blurStdDeviation} />
         </filter>
       </defs>
@@ -56,20 +58,20 @@ const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, c
             cy="250"
             rx="200"
             ry="150"
-            filter={`url(#blur-${id})`}
+            filter={`url(#${filterId})`}
             className={`block dark:hidden ${animationClass}`}
             transform="rotate(30 250 250)"
-            fill={`url(#${gradIdLight})`}
+            fill={`url(#${internalGradIdLight})`}
           />
           <ellipse
             cx="250"
             cy="250"
             rx="200"
             ry="150"
-            filter={`url(#blur-${id})`}
+            filter={`url(#${filterId})`}
             className={`hidden dark:block ${animationClass}`}
             transform="rotate(30 250 250)"
-            fill={`url(#${gradIdDark})`}
+            fill={`url(#${internalGradIdDark})`}
           />
         </>
       )}
@@ -81,10 +83,10 @@ const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, c
             width="400"
             height="300"
             rx="100"
-            filter={`url(#blur-${id})`}
+            filter={`url(#${filterId})`}
             className={`block dark:hidden ${animationClass}`}
             transform="rotate(-20 250 250)"
-            fill={`url(#${gradIdLight})`}
+            fill={`url(#${internalGradIdLight})`}
           />
           <rect
             x="50"
@@ -92,10 +94,10 @@ const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, c
             width="400"
             height="300"
             rx="100"
-            filter={`url(#blur-${id})`}
+            filter={`url(#${filterId})`}
             className={`hidden dark:block ${animationClass}`}
             transform="rotate(-20 250 250)"
-            fill={`url(#${gradIdDark})`}
+            fill={`url(#${internalGradIdDark})`}
           />
         </>
       )}
@@ -103,15 +105,15 @@ const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, c
         <>
           <path
             d={bubble1Path}
-            filter={`url(#blur-${id})`}
+            filter={`url(#${filterId})`}
             className={`block dark:hidden ${animationClass}`}
-            fill={`url(#${gradIdLight})`}
+            fill={`url(#${internalGradIdLight})`}
           />
           <path
             d={bubble1Path}
-            filter={`url(#blur-${id})`}
+            filter={`url(#${filterId})`}
             className={`hidden dark:block ${animationClass}`}
-            fill={`url(#${gradIdDark})`}
+            fill={`url(#${internalGradIdDark})`}
           />
         </>
       )}
@@ -119,15 +121,15 @@ const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, c
         <>
           <path
             d={bubble2Path}
-            filter={`url(#blur-${id})`}
+            filter={`url(#${filterId})`}
             className={`block dark:hidden ${animationClass}`}
-            fill={`url(#${gradIdLight})`}
+            fill={`url(#${internalGradIdLight})`}
           />
           <path
             d={bubble2Path}
-            filter={`url(#blur-${id})`}
+            filter={`url(#${filterId})`}
             className={`hidden dark:block ${animationClass}`}
-            fill={`url(#${gradIdDark})`}
+            fill={`url(#${internalGradIdDark})`}
           />
         </>
       )}
@@ -171,33 +173,29 @@ export default function HeroSection() {
       style={{ backgroundColor: '#7FFFD4', position: 'relative' }} 
     >
       <motion.div 
-        className="absolute inset-0 z-0 opacity-90 dark:opacity-80" 
+        className="absolute inset-0 z-0 opacity-95 dark:opacity-85" 
         style={{ y: yBlobs }}
       >
         <AnimatedBlob
-          id="blob1"
-          gradIdLight="grad1Light"
-          gradIdDark="grad1Dark"
+          id="blob1" // Unique ID for this instance
           color1Light="hsla(var(--primary), 0.95)" 
           color2Light="hsla(var(--secondary), 0.85)" 
           color1Dark="hsla(var(--primary), 0.85)"   
           color2Dark="hsla(var(--accent), 0.75)"   
-          className="absolute top-[5%] left-[0%] w-[80%] h-[80%] md:w-[60%] md:h-[60%]"
+          className="absolute top-[5%] left-[0%] w-[70%] h-[70%] md:w-[55%] md:h-[55%]" // Slightly adjusted size/pos
           animationClass="animate-float-slow"
-          blurStdDeviation={55} 
+          blurStdDeviation={50} // Reduced blur
           shape="bubble1"
         />
         <AnimatedBlob
-          id="blob2"
-          gradIdLight="grad2Light"
-          gradIdDark="grad2Dark"
+          id="blob2" // Unique ID for this instance
           color1Light="hsla(var(--accent), 0.9)" 
           color2Light="hsla(var(--primary), 0.8)" 
           color1Dark="hsla(var(--secondary), 0.8)"   
           color2Dark="hsla(var(--primary), 0.75)" 
-          className="absolute bottom-[0%] right-[0%] w-[85%] h-[85%] md:w-[65%] md:h-[65%]" 
+          className="absolute bottom-[0%] right-[0%] w-[75%] h-[75%] md:w-[60%] md:h-[60%]" // Slightly adjusted size/pos
           animationClass="animate-float-slower"
-          blurStdDeviation={60} 
+          blurStdDeviation={55} // Reduced blur
           shape="bubble2"
         />
       </motion.div>
@@ -281,4 +279,3 @@ export default function HeroSection() {
     </section>
   );
 }
-
