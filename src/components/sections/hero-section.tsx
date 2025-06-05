@@ -169,7 +169,7 @@ export default function HeroSection() {
   return (
     <section 
       ref={heroRef} 
-      className="relative overflow-hidden"
+      className="overflow-hidden"
       style={{ backgroundColor: '#7FFFD4', position: 'relative' }} 
     >
       <motion.div 
@@ -184,7 +184,7 @@ export default function HeroSection() {
           color2Dark="hsla(var(--accent), 0.75)"   
           className="absolute top-[5%] left-[0%] w-[70%] h-[70%] md:w-[55%] md:h-[55%]"
           animationClass="animate-float-slow"
-          blurStdDeviation={60} 
+          blurStdDeviation={50} 
           shape="bubble1"
         />
         <AnimatedBlob
@@ -195,7 +195,7 @@ export default function HeroSection() {
           color2Dark="hsla(var(--primary), 0.75)" 
           className="absolute bottom-[0%] right-[0%] w-[75%] h-[75%] md:w-[60%] md:h-[60%]"
           animationClass="animate-float-slower"
-          blurStdDeviation={65} 
+          blurStdDeviation={55} 
           shape="bubble2"
         />
       </motion.div>
@@ -220,7 +220,7 @@ export default function HeroSection() {
                 We craft innovative digital experiences and powerful software to propel your brand forward. Discover the Apex advantage.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" variant="outline" asChild className="border-foreground/50 text-foreground hover:bg-foreground/10 dark:border-primary-foreground/50 dark:text-primary-foreground dark:hover:bg-primary-foreground/10">
+                <Button size="lg" variant="outline" asChild className="border-foreground/50 text-foreground hover:bg-foreground/10 dark:border-foreground/50 dark:text-foreground dark:hover:bg-foreground/10">
                   <Link href="/contact">
                     <span className="flex items-center">
                       Start Your Project <ChevronRight className="ml-2 h-5 w-5" />
@@ -279,4 +279,3 @@ export default function HeroSection() {
     </section>
   );
 }
-
