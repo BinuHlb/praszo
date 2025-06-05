@@ -173,29 +173,29 @@ export default function HeroSection() {
       style={{ backgroundColor: '#7FFFD4', position: 'relative' }} 
     >
       <motion.div 
-        className="absolute inset-0 z-0 opacity-40 dark:opacity-30" 
+        className="absolute inset-0 z-0 opacity-70 dark:opacity-60" // Adjusted opacity
         style={{ y: yBlobs }}
       >
         <AnimatedBlob
           id="blob1"
-          color1Light="hsla(var(--primary), 0.95)" 
-          color2Light="hsla(var(--secondary), 0.85)" 
-          color1Dark="hsla(var(--primary), 0.85)"   
-          color2Dark="hsla(var(--accent), 0.75)"   
-          className="absolute top-[5%] left-[0%] w-[70%] h-[70%] md:w-[55%] md:h-[55%]"
+          color1Light="hsla(0, 0%, 100%, 0.25)" // White gradient
+          color2Light="hsla(0, 0%, 100%, 0.1)"  // White gradient
+          color1Dark="hsla(0, 0%, 100%, 0.2)"   // White gradient
+          color2Dark="hsla(0, 0%, 100%, 0.05)"  // White gradient
+          className="absolute top-[5%] left-[5%] w-[80%] h-[80%] md:w-[60%] md:h-[60%]"
           animationClass="animate-float-slow"
           blurStdDeviation={50} 
           shape="bubble1"
         />
         <AnimatedBlob
           id="blob2"
-          color1Light="hsla(var(--accent), 0.9)" 
-          color2Light="hsla(var(--primary), 0.8)" 
-          color1Dark="hsla(var(--secondary), 0.8)"   
-          color2Dark="hsla(var(--primary), 0.75)"  
-          className="absolute bottom-[0%] right-[0%] w-[75%] h-[75%] md:w-[60%] md:h-[60%]"
+          color1Light="hsla(0, 0%, 100%, 0.3)"  // White gradient
+          color2Light="hsla(0, 0%, 100%, 0.15)" // White gradient
+          color1Dark="hsla(0, 0%, 100%, 0.25)"  // White gradient
+          color2Dark="hsla(0, 0%, 100%, 0.1)"   // White gradient
+          className="absolute bottom-[5%] right-[5%] w-[70%] h-[70%] md:w-[55%] md:h-[55%]"
           animationClass="animate-float-slower"
-          blurStdDeviation={55} 
+          blurStdDeviation={60} 
           shape="bubble2"
         />
       </motion.div>
@@ -292,3 +292,4 @@ export default function HeroSection() {
     </section>
   );
 }
+
