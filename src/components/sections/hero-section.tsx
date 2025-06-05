@@ -59,7 +59,7 @@ const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, cl
             rx="200"
             ry="150"
             filter={`url(#${filterId})`}
-            className={`block dark:hidden ${animationClass}`}
+            className="block dark:hidden" // Removed animationClass from individual elements
             transform="rotate(30 250 250)"
             fill={`url(#${internalGradIdLight})`}
           />
@@ -69,7 +69,7 @@ const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, cl
             rx="200"
             ry="150"
             filter={`url(#${filterId})`}
-            className={`hidden dark:block ${animationClass}`}
+            className="hidden dark:block" // Removed animationClass from individual elements
             transform="rotate(30 250 250)"
             fill={`url(#${internalGradIdDark})`}
           />
@@ -84,7 +84,7 @@ const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, cl
             height="300"
             rx="100"
             filter={`url(#${filterId})`}
-            className={`block dark:hidden ${animationClass}`}
+            className="block dark:hidden"
             transform="rotate(-20 250 250)"
             fill={`url(#${internalGradIdLight})`}
           />
@@ -95,7 +95,7 @@ const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, cl
             height="300"
             rx="100"
             filter={`url(#${filterId})`}
-            className={`hidden dark:block ${animationClass}`}
+            className="hidden dark:block"
             transform="rotate(-20 250 250)"
             fill={`url(#${internalGradIdDark})`}
           />
@@ -106,13 +106,13 @@ const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, cl
           <path
             d={bubble1Path}
             filter={`url(#${filterId})`}
-            className={`block dark:hidden ${animationClass}`}
+            className={`block dark:hidden ${animationClass || ''}`}
             fill={`url(#${internalGradIdLight})`}
           />
           <path
             d={bubble1Path}
             filter={`url(#${filterId})`}
-            className={`hidden dark:block ${animationClass}`}
+            className={`hidden dark:block ${animationClass || ''}`}
             fill={`url(#${internalGradIdDark})`}
           />
         </>
@@ -122,13 +122,13 @@ const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, cl
           <path
             d={bubble2Path}
             filter={`url(#${filterId})`}
-            className={`block dark:hidden ${animationClass}`}
+            className={`block dark:hidden ${animationClass || ''}`}
             fill={`url(#${internalGradIdLight})`}
           />
           <path
             d={bubble2Path}
             filter={`url(#${filterId})`}
-            className={`hidden dark:block ${animationClass}`}
+            className={`hidden dark:block ${animationClass || ''}`}
             fill={`url(#${internalGradIdDark})`}
           />
         </>
@@ -178,29 +178,29 @@ export default function HeroSection() {
       >
         <AnimatedBlob
           id="blob1"
-          color1Light="hsla(0, 0%, 100%, 0.8)" 
-          color2Light="hsla(0, 0%, 100%, 0.5)"  
-          color1Dark="hsla(0, 0%, 100%, 0.2)"  
-          color2Dark="hsla(0, 0%, 100%, 0.1)" 
-          className="absolute top-[0%] left-[0%] w-[120%] h-[100%] md:w-[90%] md:h-[90%]"
+          color1Light="hsla(0, 0%, 100%, 0.8)" // White shades
+          color2Light="hsla(0, 0%, 100%, 0.5)"
+          color1Dark="hsla(0, 0%, 100%, 0.3)" // Slightly more visible white for dark mode
+          color2Dark="hsla(0, 0%, 100%, 0.15)"
+          className="absolute top-[-20%] left-[-25%] w-[150%] h-[130%] md:w-[120%] md:h-[110%]"
           animationClass="animate-float-slow"
-          blurStdDeviation={50} 
+          blurStdDeviation={60} 
           shape="bubble1"
         />
         <AnimatedBlob
           id="blob2"
-          color1Light="hsla(0, 0%, 100%, 0.7)"  
-          color2Light="hsla(0, 0%, 100%, 0.9)" 
-          color1Dark="hsla(0, 0%, 100%, 0.25)"  
-          color2Dark="hsla(0, 0%, 100%, 0.15)"  
-          className="absolute bottom-[0%] right-[0%] w-[130%] h-[90%] md:w-[110%] md:h-[75%]"
+          color1Light="hsla(0, 0%, 100%, 0.7)" // White shades
+          color2Light="hsla(0, 0%, 100%, 0.9)"
+          color1Dark="hsla(0, 0%, 100%, 0.25)" // Slightly more visible white for dark mode
+          color2Dark="hsla(0, 0%, 100%, 0.4)"
+          className="absolute bottom-[-25%] right-[-30%] w-[160%] h-[120%] md:w-[130%] md:h-[100%]"
           animationClass="animate-float-slower"
-          blurStdDeviation={60} 
+          blurStdDeviation={55} 
           shape="bubble2"
         />
       </motion.div>
 
-      <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-lg"></div>
+      <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-xl"></div>
 
       <div className="container relative z-20 mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
@@ -256,7 +256,7 @@ export default function HeroSection() {
                                 type="email"
                                 placeholder="Enter your email"
                                 {...field}
-                                className="pl-10 pr-[120px] h-11 text-base bg-background/70 dark:bg-input/50 border-border focus:bg-background dark:focus:bg-input" 
+                                className="pl-10 pr-[140px] h-12 text-base bg-background/70 dark:bg-input/50 border-border focus:bg-background dark:focus:bg-input" 
                               />
                             </div>
                           </FormControl>
@@ -266,7 +266,7 @@ export default function HeroSection() {
                     />
                     <Button
                       type="submit"
-                      className="absolute right-1 top-1/2 -translate-y-1/2 h-9 px-3 flex items-center"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 h-10 px-4 flex items-center bg-accent hover:bg-accent/90 text-accent-foreground"
                       disabled={form.formState.isSubmitting}
                     >
                       {form.formState.isSubmitting ? (
