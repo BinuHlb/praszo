@@ -12,8 +12,8 @@
     --popover-foreground: 275 10% 20%;
     --primary: 246 93% 63%; /* New Primary Color: #5c49f7 */
     --primary-foreground: 0 0% 98%; /* Light color for text on primary */
-    --secondary: 275 20% 88%; /* Lighter shade of indigo/purple */
-    --secondary-foreground: 246 93% 63%; /* Adjusted to new primary */
+    --secondary: 160 100% 75%; /* Aquamarine #7FFFD4 */
+    --secondary-foreground: 180 60% 25%; /* Darker Teal/Indigo for text on Aquamarine */
     --muted: 275 10% 75%;
     --muted-foreground: 275 10% 45%;
     --accent: 217 44% 16%; /* New Accent: Dark Blue #17243a */
@@ -50,8 +50,8 @@
     --popover-foreground: 275 15% 90%;
     --primary: 246 93% 75%; /* New Dark Primary Color (lighter shade of #5c49f7) */
     --primary-foreground: 246 93% 20%; /* Darker color for text on dark primary */
-    --secondary: 275 20% 25%;
-    --secondary-foreground: 246 93% 75%; /* Adjusted to new dark primary */
+    --secondary: 160 70% 40%; /* Muted Aquamarine for dark theme */
+    --secondary-foreground: 160 100% 90%; /* Light Teal/Cyan for text on dark Aquamarine */
     --muted: 275 10% 30%;
     --muted-foreground: 275 10% 65%;
     --accent: 217 44% 50%; /* New Dark Accent: Lighter shade of #17243a */

@@ -121,48 +121,47 @@ export default function HeroSection() {
   return (
     <section 
       ref={heroRef} 
-      className="relative py-20 md:py-32 bg-background overflow-hidden"
-      style={{ position: 'relative' }} 
+      className="relative overflow-hidden"
+      style={{ backgroundColor: '#7FFFD4', position: 'relative' }} 
     >
-      {/* SVG Background Shapes Layer */}
+      {/* SVG Background Shapes Layer (Behind Glassmorphism) */}
       <motion.div 
-        className="absolute inset-0 z-0 opacity-95 dark:opacity-85" // Increased opacity
+        className="absolute inset-0 z-0 opacity-70 dark:opacity-60" // Slightly reduced opacity for blobs
         style={{ y: yBlobs }}
       >
         <AnimatedBlob
           id="blob1"
           gradIdLight="grad1Light"
           gradIdDark="grad1Dark"
-          color1Light="hsla(var(--primary), 0.85)" // More vibrant primary
-          color2Light="hsla(var(--secondary), 0.65)" // More vibrant secondary
-          color1Dark="hsla(var(--primary), 0.75)"   
-          color2Dark="hsla(var(--accent), 0.55)"   
-          className="absolute top-[10%] left-[5%] w-[70%] h-[70%] md:w-[55%] md:h-[55%]" // Adjusted positioning & size
+          color1Light="hsla(var(--primary), 0.9)" 
+          color2Light="hsla(var(--secondary), 0.75)" 
+          color1Dark="hsla(var(--primary), 0.8)"   
+          color2Dark="hsla(var(--accent), 0.65)"   
+          className="absolute top-[10%] left-[5%] w-[70%] h-[70%] md:w-[55%] md:h-[55%]" 
           animationClass="animate-float-slow"
-          blurStdDeviation={65} // Slightly reduced blur
+          blurStdDeviation={60} 
           shape="bubble1"
         />
         <AnimatedBlob
           id="blob2"
           gradIdLight="grad2Light"
           gradIdDark="grad2Dark"
-          color1Light="hsla(var(--accent), 0.8)" // More vibrant accent
-          color2Light="hsla(var(--primary), 0.7)" // More vibrant primary
-          color1Dark="hsla(var(--secondary), 0.75)"   
-          color2Dark="hsla(var(--primary), 0.65)" 
-          className="absolute bottom-[8%] right-[10%] w-[75%] h-[75%] md:w-[60%] md:h-[60%]" // Adjusted positioning & size
+          color1Light="hsla(var(--accent), 0.85)" 
+          color2Light="hsla(var(--primary), 0.75)" 
+          color1Dark="hsla(var(--secondary), 0.8)"   
+          color2Dark="hsla(var(--primary), 0.7)" 
+          className="absolute bottom-[8%] right-[10%] w-[75%] h-[75%] md:w-[60%] md:h-[60%]" 
           animationClass="animate-float-slower"
-          blurStdDeviation={70} // Slightly reduced blur
+          blurStdDeviation={65} 
           shape="bubble2"
         />
       </motion.div>
 
-      {/* Content Layer - This container IS the glassmorphism card now */}
-      <div className="container relative z-10 mx-auto px-4 md:px-6 
-                      dark:bg-card/40 bg-background/40 backdrop-blur-xl 
-                      rounded-2xl border border-card/10 dark:border-neutral-700/20 
-                      py-8 md:py-12 lg:py-16">
-        
+      {/* Glassmorphism Overlay (Over Blobs, Under Content) */}
+      <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-lg"></div>
+
+      {/* Content Layer (On Top of Glassmorphism Overlay) */}
+      <div className="container relative z-20 mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32">
         {/* Grid for layout (text and form) */}
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
@@ -172,14 +171,14 @@ export default function HeroSection() {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="space-y-6"
             >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-headline tracking-tight text-balance">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-headline tracking-tight text-balance text-foreground dark:text-primary-foreground">
                 Elevate Your Business with <span className="text-primary">Praszo</span> Solutions
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground text-balance">
+              <p className="text-lg md:text-xl text-foreground/80 dark:text-primary-foreground/90 text-balance">
                 We craft innovative digital experiences and powerful software to propel your brand forward. Discover the Apex advantage.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" variant="outline" asChild>
+                <Button size="lg" variant="outline" asChild className="border-foreground/50 text-foreground hover:bg-foreground/10 dark:border-primary-foreground/50 dark:text-primary-foreground dark:hover:bg-primary-foreground/10">
                   <Link href="/contact">
                     <span className="flex items-center">
                       Start Your Project <ChevronRight className="ml-2 h-5 w-5" />
@@ -195,13 +194,13 @@ export default function HeroSection() {
             </motion.div>
 
             <motion.div
-              className="mt-5 md:mt-0 p-0 md:p-0 border-none" 
+              className="mt-5 md:mt-0" 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <h3 className="text-xl font-semibold mb-4 text-foreground text-center md:text-left">Stay Updated With Praszo</h3>
+              <h3 className="text-xl font-semibold mb-4 text-foreground dark:text-primary-foreground text-center md:text-left">Stay Updated With Praszo</h3>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col sm:flex-row gap-3 items-start">
                   <FormField
@@ -216,11 +215,11 @@ export default function HeroSection() {
                               type="email"
                               placeholder="Enter your email"
                               {...field}
-                              className="pl-10 h-11 text-base bg-input/70 dark:bg-neutral-700/50 border-border focus:bg-input dark:focus:bg-neutral-700" // Adjusted input background
+                              className="pl-10 h-11 text-base bg-background/70 dark:bg-input/50 border-border focus:bg-background dark:focus:bg-input"
                             />
                           </div>
                         </FormControl>
-                        <FormMessage className="mt-1 text-sm" />
+                        <FormMessage className="mt-1 text-sm text-destructive" />
                       </FormItem>
                     )}
                   />
