@@ -173,37 +173,35 @@ export default function HeroSection() {
       style={{ backgroundColor: '#7FFFD4', position: 'relative' }} 
     >
       <motion.div 
-        className="absolute inset-0 z-0 opacity-70 dark:opacity-60" // Adjusted opacity
+        className="absolute inset-0 z-0 opacity-70 dark:opacity-60"
         style={{ y: yBlobs }}
       >
         <AnimatedBlob
           id="blob1"
-          color1Light="hsla(0, 0%, 100%, 0.25)" // White gradient
-          color2Light="hsla(0, 0%, 100%, 0.1)"  // White gradient
-          color1Dark="hsla(0, 0%, 100%, 0.2)"   // White gradient
-          color2Dark="hsla(0, 0%, 100%, 0.05)"  // White gradient
-          className="absolute top-[5%] left-[5%] w-[80%] h-[80%] md:w-[60%] md:h-[60%]"
+          color1Light="hsla(0, 0%, 100%, 0.8)" 
+          color2Light="hsla(0, 0%, 100%, 0.5)"  
+          color1Dark="hsla(0, 0%, 100%, 0.2)"  
+          color2Dark="hsla(0, 0%, 100%, 0.1)" 
+          className="absolute top-[0%] left-[0%] w-[120%] h-[100%] md:w-[90%] md:h-[90%]"
           animationClass="animate-float-slow"
           blurStdDeviation={50} 
           shape="bubble1"
         />
         <AnimatedBlob
           id="blob2"
-          color1Light="hsla(0, 0%, 100%, 0.3)"  // White gradient
-          color2Light="hsla(0, 0%, 100%, 0.15)" // White gradient
-          color1Dark="hsla(0, 0%, 100%, 0.25)"  // White gradient
-          color2Dark="hsla(0, 0%, 100%, 0.1)"   // White gradient
-          className="absolute bottom-[5%] right-[5%] w-[70%] h-[70%] md:w-[55%] md:h-[55%]"
+          color1Light="hsla(0, 0%, 100%, 0.7)"  
+          color2Light="hsla(0, 0%, 100%, 0.9)" 
+          color1Dark="hsla(0, 0%, 100%, 0.25)"  
+          color2Dark="hsla(0, 0%, 100%, 0.15)"  
+          className="absolute bottom-[0%] right-[0%] w-[130%] h-[90%] md:w-[110%] md:h-[75%]"
           animationClass="animate-float-slower"
           blurStdDeviation={60} 
           shape="bubble2"
         />
       </motion.div>
 
-      {/* Glassmorphism Overlay Layer */}
       <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-lg"></div>
 
-      {/* Content Layer */}
       <div className="container relative z-20 mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
@@ -245,14 +243,14 @@ export default function HeroSection() {
               <h3 className="text-xl font-semibold mb-4 text-foreground dark:text-primary-foreground text-center md:text-left">Stay Updated With Praszo</h3>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-                  <div className="relative"> {/* Wrapper for input and button */}
+                  <div className="relative"> 
                     <FormField
                       control={form.control}
                       name="email"
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
-                            <div className="relative"> {/* Keeps Mail icon positioned correctly */}
+                            <div className="relative"> 
                               <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground z-10" />
                               <Input
                                 type="email"
@@ -292,4 +290,3 @@ export default function HeroSection() {
     </section>
   );
 }
-
