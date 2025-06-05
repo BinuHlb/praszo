@@ -11,8 +11,10 @@ export default {
   theme: {
     extend: {
       fontFamily: {
+        // Updated headline font to Quicksand
+        headline: ['Quicksand', 'sans-serif'],
+        // Body font remains Lato
         body: ['Lato', 'sans-serif'],
-        headline: ['Playfair Display', 'serif'], 
         code: ['monospace'],
       },
       colors: {
