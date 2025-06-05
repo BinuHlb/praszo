@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ChevronRight, Mail, Send } from 'lucide-react'; // Added Send
+import { ChevronRight, Mail, Send } from 'lucide-react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -173,7 +173,7 @@ export default function HeroSection() {
       style={{ backgroundColor: '#7FFFD4', position: 'relative' }} 
     >
       <motion.div 
-        className="absolute inset-0 z-0 opacity-60 dark:opacity-50" 
+        className="absolute inset-0 z-0 opacity-40 dark:opacity-30" 
         style={{ y: yBlobs }}
       >
         <AnimatedBlob
