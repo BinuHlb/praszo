@@ -11,8 +11,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        body: ['Quicksand', 'sans-serif'],
-        headline: ['Fredoka One', 'sans-serif'], // Using sans-serif as a generic fallback for Fredoka One
+        body: ['Rajdhani', 'sans-serif'],
+        headline: ['Orbitron', 'sans-serif'], 
         code: ['monospace'],
       },
       colors: {
