@@ -11,9 +11,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        // Updated headline font to Manrope
         headline: ['Manrope', 'sans-serif'],
-        // Body font remains Lato
         body: ['Lato', 'sans-serif'],
         code: ['monospace'],
       },
@@ -99,12 +97,20 @@ export default {
           '0%': { opacity: '0', transform: 'translateY(20px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px) translateX(0px) rotate(0deg)' },
+          '25%': { transform: 'translateY(-15px) translateX(10px) rotate(5deg)' },
+          '50%': { transform: 'translateY(0px) translateX(15px) rotate(0deg)' },
+          '75%': { transform: 'translateY(15px) translateX(-10px) rotate(-5deg)' },
+        },
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
         'fade-in': 'fadeIn 1s ease-out forwards',
         'slide-up': 'slideUp 0.8s ease-out forwards',
+        'float-slow': 'float 18s ease-in-out infinite',
+        'float-slower': 'float 25s ease-in-out infinite',
       },
     },
   },
