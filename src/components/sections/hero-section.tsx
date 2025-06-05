@@ -30,7 +30,6 @@ const AnimatedBlob = ({ id, gradIdLight, gradIdDark, color1Light, color2Light, c
   blurStdDeviation?: number;
   shape?: "ellipse" | "rect" | "bubble1" | "bubble2";
 }) => {
-  // Bubbly, rounded, "funny" path definitions
   const bubble1Path = "M100,200 C50,100 150,50 250,100 C350,150 300,250 200,300 C100,350 50,300 100,200 Z";
   const bubble2Path = "M300,120 C400,80 450,200 400,300 C350,400 250,380 200,300 C150,220 200,160 300,120 Z";
 
@@ -127,42 +126,45 @@ export default function HeroSection() {
     >
       {/* SVG Background Shapes Layer */}
       <motion.div 
-        className="absolute inset-0 z-0 opacity-90 dark:opacity-80" // Increased opacity
+        className="absolute inset-0 z-0 opacity-95 dark:opacity-85" // Increased opacity
         style={{ y: yBlobs }}
       >
         <AnimatedBlob
           id="blob1"
           gradIdLight="grad1Light"
           gradIdDark="grad1Dark"
-          color1Light="hsla(var(--primary), 0.85)" // Brighter primary
-          color2Light="hsla(var(--secondary), 0.55)" 
+          color1Light="hsla(var(--primary), 0.85)" // More vibrant primary
+          color2Light="hsla(var(--secondary), 0.65)" // More vibrant secondary
           color1Dark="hsla(var(--primary), 0.75)"   
-          color2Dark="hsla(var(--secondary), 0.45)"   
-          className="absolute top-[5%] left-[10%] w-[80%] h-[80%] md:w-[60%] md:h-[60%]" // Larger and more central
+          color2Dark="hsla(var(--accent), 0.55)"   
+          className="absolute top-[10%] left-[5%] w-[70%] h-[70%] md:w-[55%] md:h-[55%]" // Adjusted positioning & size
           animationClass="animate-float-slow"
-          blurStdDeviation={75} // Slightly less blur for more definition
+          blurStdDeviation={65} // Slightly reduced blur
           shape="bubble1"
         />
         <AnimatedBlob
           id="blob2"
           gradIdLight="grad2Light"
           gradIdDark="grad2Dark"
-          color1Light="hsla(var(--accent), 0.8)" 
-          color2Light="hsla(var(--primary), 0.6)" 
-          color1Dark="hsla(var(--accent), 0.7)"   
-          color2Dark="hsla(var(--primary), 0.5)" 
-          className="absolute bottom-[2%] right-[5%] w-[85%] h-[85%] md:w-[65%] md:h-[65%]" // Larger and more central, overlapping
+          color1Light="hsla(var(--accent), 0.8)" // More vibrant accent
+          color2Light="hsla(var(--primary), 0.7)" // More vibrant primary
+          color1Dark="hsla(var(--secondary), 0.75)"   
+          color2Dark="hsla(var(--primary), 0.65)" 
+          className="absolute bottom-[8%] right-[10%] w-[75%] h-[75%] md:w-[60%] md:h-[60%]" // Adjusted positioning & size
           animationClass="animate-float-slower"
-          blurStdDeviation={80} // Slightly less blur
+          blurStdDeviation={70} // Slightly reduced blur
           shape="bubble2"
         />
       </motion.div>
 
-      {/* Content Layer */}
-      <div className="container relative z-10 mx-auto px-4 md:px-6">
-        {/* Glassmorphism Card */}
-        <div className="dark:bg-neutral-800/50 backdrop-blur-xl rounded-2xl  border-card/20 dark:border-neutral-700/30">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center p-8 md:p-12 lg:p-16">
+      {/* Content Layer - This container IS the glassmorphism card now */}
+      <div className="container relative z-10 mx-auto px-4 md:px-6 
+                      dark:bg-card/40 bg-background/40 backdrop-blur-xl 
+                      rounded-2xl border border-card/10 dark:border-neutral-700/20 
+                      py-8 md:py-12 lg:py-16">
+        
+        {/* Grid for layout (text and form) */}
+        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -214,7 +216,7 @@ export default function HeroSection() {
                               type="email"
                               placeholder="Enter your email"
                               {...field}
-                              className="pl-10 h-11 text-base bg-background/70 dark:bg-neutral-700/50 border-border focus:bg-background dark:focus:bg-neutral-700"
+                              className="pl-10 h-11 text-base bg-input/70 dark:bg-neutral-700/50 border-border focus:bg-input dark:focus:bg-neutral-700" // Adjusted input background
                             />
                           </div>
                         </FormControl>
@@ -233,7 +235,6 @@ export default function HeroSection() {
             </motion.div>
           </div>
         </div>
-      </div>
     </section>
   );
 }
