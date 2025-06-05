@@ -18,7 +18,7 @@ const subscriptionFormSchema = z.object({
 });
 
 const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, className, animationClass, blurStdDeviation = 70, shape = "ellipse" }: {
-  id: string; // Unique ID for this blob instance
+  id: string;
   color1Light: string;
   color2Light: string;
   color1Dark: string;
@@ -173,29 +173,29 @@ export default function HeroSection() {
       style={{ backgroundColor: '#7FFFD4', position: 'relative' }} 
     >
       <motion.div 
-        className="absolute inset-0 z-0 opacity-95 dark:opacity-85" 
+        className="absolute inset-0 z-0 opacity-60 dark:opacity-50" 
         style={{ y: yBlobs }}
       >
         <AnimatedBlob
-          id="blob1" // Unique ID for this instance
+          id="blob1"
           color1Light="hsla(var(--primary), 0.95)" 
           color2Light="hsla(var(--secondary), 0.85)" 
           color1Dark="hsla(var(--primary), 0.85)"   
           color2Dark="hsla(var(--accent), 0.75)"   
-          className="absolute top-[5%] left-[0%] w-[70%] h-[70%] md:w-[55%] md:h-[55%]" // Slightly adjusted size/pos
+          className="absolute top-[5%] left-[0%] w-[70%] h-[70%] md:w-[55%] md:h-[55%]"
           animationClass="animate-float-slow"
-          blurStdDeviation={50} // Reduced blur
+          blurStdDeviation={60} 
           shape="bubble1"
         />
         <AnimatedBlob
-          id="blob2" // Unique ID for this instance
+          id="blob2"
           color1Light="hsla(var(--accent), 0.9)" 
           color2Light="hsla(var(--primary), 0.8)" 
           color1Dark="hsla(var(--secondary), 0.8)"   
           color2Dark="hsla(var(--primary), 0.75)" 
-          className="absolute bottom-[0%] right-[0%] w-[75%] h-[75%] md:w-[60%] md:h-[60%]" // Slightly adjusted size/pos
+          className="absolute bottom-[0%] right-[0%] w-[75%] h-[75%] md:w-[60%] md:h-[60%]"
           animationClass="animate-float-slower"
-          blurStdDeviation={55} // Reduced blur
+          blurStdDeviation={65} 
           shape="bubble2"
         />
       </motion.div>
@@ -279,3 +279,4 @@ export default function HeroSection() {
     </section>
   );
 }
+
