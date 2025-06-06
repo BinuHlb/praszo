@@ -10,14 +10,14 @@ import SectionHeader from '@/components/layout/section-header';
 import { motion } from 'framer-motion';
 
 const partnerLogosList = [
-  { src: 'https://picsum.photos/seed/partner1/100/80', alt: 'Partner Logo 1', dataAiHint: 'company logo' },
-  { src: 'https://picsum.photos/seed/partner2/100/80', alt: 'Partner Logo 2', dataAiHint: 'company logo' },
-  { src: 'https://picsum.photos/seed/partner3/100/80', alt: 'Partner Logo 3', dataAiHint: 'company logo' },
-  { src: 'https://picsum.photos/seed/partner4/100/80', alt: 'Partner Logo 4', dataAiHint: 'company logo' },
-  { src: 'https://picsum.photos/seed/partner5/100/80', alt: 'Partner Logo 5', dataAiHint: 'company logo' },
-  { src: 'https://picsum.photos/seed/partner6/100/80', alt: 'Partner Logo 6', dataAiHint: 'company logo' },
-  { src: 'https://picsum.photos/seed/partner7/100/80', alt: 'Partner Logo 7', dataAiHint: 'company logo' },
-  { src: 'https://picsum.photos/seed/partner8/100/80', alt: 'Partner Logo 8', dataAiHint: 'company logo' },
+  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 1', dataAiHint: 'company logo' },
+  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 2', dataAiHint: 'company logo' },
+  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 3', dataAiHint: 'company logo' },
+  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 4', dataAiHint: 'company logo' },
+  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 5', dataAiHint: 'company logo' },
+  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 6', dataAiHint: 'company logo' },
+  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 7', dataAiHint: 'company logo' },
+  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 8', dataAiHint: 'company logo' },
 ];
 
 const sectionVariants = {

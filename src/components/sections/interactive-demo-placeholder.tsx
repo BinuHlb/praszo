@@ -18,7 +18,7 @@ interface InteractiveDemoPlaceholderProps {
 
 export default function InteractiveDemoPlaceholder({ title, description, imageUrl, dataAiHint, link, videoUrl }: InteractiveDemoPlaceholderProps) {
   const [showVideo, setShowVideo] = useState(false);
-  const finalImageUrl = imageUrl || "https://picsum.photos/seed/genericDemo/1200/675";
+  const finalImageUrl = imageUrl || "https://placehold.co/1200x675.png";
   const finalDataAiHint = dataAiHint || "technology interface";
 
 

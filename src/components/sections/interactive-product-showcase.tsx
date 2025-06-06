@@ -61,7 +61,7 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
 
   const { scrollYProgress } = useScroll({
     target: showcaseRootRef,
-    offset: ['start start', 'end end'], // Tracks scroll through the entire showcaseRootRef
+    offset: ['start start', 'end end'],
   });
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -73,10 +73,9 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
         setActiveIndex(0);
         return;
       }
-      // Ensure activeIndex is correctly calculated and clamped
       let newIndex = Math.floor(latest * numProducts);
-      if (latest >= 1.0) { // Handle edge case where latest is exactly 1.0
-          newIndex = numProducts - 1;
+      if (latest >= 1.0) {
+        newIndex = numProducts - 1;
       }
       newIndex = Math.max(0, Math.min(numProducts - 1, newIndex));
       setActiveIndex(newIndex);
@@ -92,7 +91,7 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
       opacity: 1, 
       scale: 1, 
       y: 0, 
-      transition: { duration: 0.7, ease: [0.42, 0, 0.58, 1], delay:0.05 } // Custom cubic-bezier
+      transition: { duration: 0.7, ease: [0.42, 0, 0.58, 1], delay: 0.05 } 
     },
     exit: { 
       opacity: 0, 
@@ -116,10 +115,9 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
   return (
     <div
       ref={showcaseRootRef}
-      className="relative bg-background dark:bg-neutral-900/30 z-[5]" // Ensure this has a z-index if needed in page context
+      className="relative bg-background dark:bg-neutral-900/30 z-[5]" 
       style={{ height: showcaseHeight }}
     >
-      {/* This div becomes sticky within showcaseRootRef */}
       <div className="sticky top-16 h-[calc(100vh-4rem)] flex flex-col md:flex-row items-center overflow-hidden z-30">
         <div className="relative w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-8 md:p-12 lg:p-16 overflow-hidden">
           <SvgBackgroundShapes />
@@ -133,7 +131,7 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
               exit="exit"
             >
               <Image
-                src={currentProduct?.image || "https://picsum.photos/seed/showcaseDefault/600/800"}
+                src={currentProduct?.image || "https://placehold.co/600x800.png"}
                 alt={currentProduct?.name || "Product Image"}
                 fill
                 priority={activeIndex === 0} 
@@ -155,7 +153,7 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  className="w-full"
+                  className="w-full" 
                 >
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-headline font-bold text-primary mb-3 md:mb-4 text-balance">
                     {currentProduct.name}
