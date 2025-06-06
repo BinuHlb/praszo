@@ -169,11 +169,11 @@ export default function HeroSection() {
   return (
     <section 
       ref={heroRef} 
-      className="overflow-hidden sticky top-0 h-screen z-10" // Made sticky, full height, and z-10
-      style={{ backgroundColor: '#7FFFD4', position: 'sticky' }}  // ensure sticky is applied
+      className="overflow-hidden sticky top-0 h-screen z-10"
+      style={{ backgroundColor: 'hsl(var(--secondary))' }}
     >
       <motion.div 
-        className="absolute inset-0 z-0 opacity-70 dark:opacity-60" // Blobs container, z-0 within Hero
+        className="absolute inset-0 z-0 opacity-70 dark:opacity-60" 
         style={{ y: yBlobs }}
       >
         <AnimatedBlob
@@ -200,9 +200,9 @@ export default function HeroSection() {
         />
       </motion.div>
 
-      <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-xl"></div> {/* Overlay, z-10 within Hero */}
+      <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-xl"></div>
 
-      <div className="container relative z-20 mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32 flex flex-col justify-center h-full"> {/* Content container, z-20 within Hero, ensure it can center content if h-full */}
+      <div className="container relative z-20 mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32 flex flex-col justify-center h-full">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -256,7 +256,7 @@ export default function HeroSection() {
                                 type="email"
                                 placeholder="Enter your email"
                                 {...field}
-                                className="pl-10 pr-[140px] h-12 text-base bg-background/70 dark:bg-input/50 border-border focus:bg-background dark:focus:bg-input" 
+                                className="pl-10 pr-[150px] h-14 text-base bg-background/70 dark:bg-input/50 border-border focus:bg-background dark:focus:bg-input" 
                               />
                             </div>
                           </FormControl>
@@ -266,7 +266,7 @@ export default function HeroSection() {
                     />
                     <Button
                       type="submit"
-                      className="absolute right-2 top-1/2 -translate-y-1/2 h-10 px-6 flex items-center bg-accent hover:bg-accent/90 text-accent-foreground" // Increased px
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 h-11 px-5 flex items-center bg-accent hover:bg-accent/90 text-accent-foreground" 
                       disabled={form.formState.isSubmitting}
                     >
                       {form.formState.isSubmitting ? (
