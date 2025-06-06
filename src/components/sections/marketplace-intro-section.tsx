@@ -15,13 +15,13 @@ const sectionVariants = {
 export default function MarketplaceIntroSection() {
   return (
     <motion.section
-      className="py-16 md:py-24 bg-secondary relative z-20" // Added relative z-20
+      className="h-screen bg-card relative z-20 flex flex-col justify-center" // Updated: h-screen, bg-card, flex for centering
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
     >
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6 py-16 md:py-24"> {/* Padding retained on inner container */}
         <SectionHeader
           title="A Hub of Digital Excellence"
           subtitle="Praszo is your one-stop marketplace for a diverse range of cutting-edge digital products and expert services. We empower your business to thrive in the digital age."
