@@ -9,6 +9,7 @@ import TestimonialCard from '@/components/shared/testimonial-card';
 import CaseStudyCard from '@/components/shared/case-study-card';
 import InteractiveDemoPlaceholder from '@/components/sections/interactive-demo-placeholder';
 import SectionHeader from '@/components/layout/section-header';
+import PageTransition from '@/components/layout/page-transition'; // Added
 
 interface ProductPageProps {
   params: { productId: string };
@@ -30,6 +31,7 @@ export default function ProductPage({ params }: ProductPageProps) {
 
   return (
     <>
+      {/* Hero-like section - outside PageTransition */}
       <section className="py-20 md:py-28 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -57,83 +59,88 @@ export default function ProductPage({ params }: ProductPageProps) {
         </div>
       </section>
 
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="max-w-3xl mx-auto animate-slide-up mb-12">
-            <SectionHeader
-              title="Detailed Overview"
-              subtitle={product.longDescription}
-              titleClassName="text-primary"
-              textAlignment="center"
-            />
-          </div>
-
-          {product.features && product.features.length > 0 && (
-            <div className="mb-16">
-              <SectionHeader title="Key Features & Benefits" className="mb-10" />
-              <div className="grid sm:grid-cols-2 gap-8">
-                {product.features.map((feature, index) => (
-                  <div key={feature.title} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>
-                    <Card className="h-full hover:shadow-lg transition-shadow">
-                      <CardHeader>
-                        <div className="flex items-center gap-3">
-                           {feature.icon ? <feature.icon className="h-7 w-7 text-accent" /> : <CheckCircle className="h-7 w-7 text-accent" /> }
-                          <CardTitle className="text-xl font-headline">{feature.title}</CardTitle>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-muted-foreground">{feature.description}</p>
-                      </CardContent>
-                    </Card>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {product.interactiveDemo && (
-            <section id="demo" className="mb-16">
-              <SectionHeader title="Interactive Experience" className="mb-10" />
-              <div className="max-w-3xl mx-auto animate-fade-in">
-                <InteractiveDemoPlaceholder
-                  title={product.interactiveDemo.title}
-                  description={product.interactiveDemo.description}
-                  imageUrl={product.interactiveDemo.imageUrl}
-                  dataAiHint={product.interactiveDemo.dataAiHint}
-                  link={product.interactiveDemo.link}
-                  videoUrl={product.interactiveDemo.videoUrl} // Added videoUrl prop
+      <PageTransition>
+        <>
+          {/* Content section - inside PageTransition */}
+          <section className="py-16 md:py-24">
+            <div className="container mx-auto px-4 md:px-6">
+              <div className="max-w-3xl mx-auto animate-slide-up mb-12">
+                <SectionHeader
+                  title="Detailed Overview"
+                  subtitle={product.longDescription}
+                  titleClassName="text-primary"
+                  textAlignment="center"
                 />
               </div>
-            </section>
-          )}
 
-          {product.caseStudies && product.caseStudies.length > 0 && (
-            <section className="mb-16">
-              <SectionHeader title="Success Stories" className="mb-10" />
-              <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
-                {product.caseStudies.map((study, index) => (
-                  <div key={study.id} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>
-                     <CaseStudyCard caseStudy={study} />
+              {product.features && product.features.length > 0 && (
+                <div className="mb-16">
+                  <SectionHeader title="Key Features & Benefits" className="mb-10" />
+                  <div className="grid sm:grid-cols-2 gap-8">
+                    {product.features.map((feature, index) => (
+                      <div key={feature.title} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>
+                        <Card className="h-full hover:shadow-lg transition-shadow">
+                          <CardHeader>
+                            <div className="flex items-center gap-3">
+                               {feature.icon ? <feature.icon className="h-7 w-7 text-accent" /> : <CheckCircle className="h-7 w-7 text-accent" /> }
+                              <CardTitle className="text-xl font-headline">{feature.title}</CardTitle>
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-muted-foreground">{feature.description}</p>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-            </section>
-          )}
+                </div>
+              )}
 
-          {product.testimonials && product.testimonials.length > 0 && (
-            <section>
-              <SectionHeader title="Client Testimonials" className="mb-10" />
-              <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
-                {product.testimonials.map((testimonial, index) => (
-                  <div key={testimonial.id} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>
-                    <TestimonialCard testimonial={testimonial} />
+              {product.interactiveDemo && (
+                <section id="demo" className="mb-16">
+                  <SectionHeader title="Interactive Experience" className="mb-10" />
+                  <div className="max-w-3xl mx-auto animate-fade-in">
+                    <InteractiveDemoPlaceholder
+                      title={product.interactiveDemo.title}
+                      description={product.interactiveDemo.description}
+                      imageUrl={product.interactiveDemo.imageUrl}
+                      dataAiHint={product.interactiveDemo.dataAiHint}
+                      link={product.interactiveDemo.link}
+                      videoUrl={product.interactiveDemo.videoUrl} // Added videoUrl prop
+                    />
                   </div>
-                ))}
-              </div>
-            </section>
-          )}
-        </div>
-      </section>
+                </section>
+              )}
+
+              {product.caseStudies && product.caseStudies.length > 0 && (
+                <section className="mb-16">
+                  <SectionHeader title="Success Stories" className="mb-10" />
+                  <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+                    {product.caseStudies.map((study, index) => (
+                      <div key={study.id} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>
+                         <CaseStudyCard caseStudy={study} />
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {product.testimonials && product.testimonials.length > 0 && (
+                <section>
+                  <SectionHeader title="Client Testimonials" className="mb-10" />
+                  <div className="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+                    {product.testimonials.map((testimonial, index) => (
+                      <div key={testimonial.id} className="animate-fade-in" style={{ animationDelay: `${index * 0.1}s`}}>
+                        <TestimonialCard testimonial={testimonial} />
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+            </div>
+          </section>
+        </>
+      </PageTransition>
     </>
   );
 }
