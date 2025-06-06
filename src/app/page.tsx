@@ -15,12 +15,13 @@ import { getProductBySlug, products as allProducts } from '@/data/mock-data';
 import { motion } from 'framer-motion';
 import PageTransition from '@/components/layout/page-transition';
 import InteractiveProductShowcase from '@/components/sections/interactive-product-showcase';
-import MarketplaceIntroSection from '@/components/sections/marketplace-intro-section'; // Added import
+import MarketplaceIntroSection from '@/components/sections/marketplace-intro-section';
 import React from 'react';
 
 export default function HomePage() {
   const practiceProduct = getProductBySlug('practice');
 
+  // Use all products for the showcase
   const showcaseProducts = allProducts;
 
 
@@ -31,9 +32,11 @@ export default function HomePage() {
 
   return (
     <>
-      <HeroSection /> {/* HeroSection is outside PageTransition */}
-      
-      <MarketplaceIntroSection /> {/* Added new section here */}
+      {/* Wrapper for Hero and Marketplace Intro to manage sticky hero unsticking */}
+      <div className="relative">
+        <HeroSection /> {/* HeroSection is sticky top-0 h-screen z-10 */}
+        <MarketplaceIntroSection /> {/* MarketplaceIntro is relative z-20, scrolls over Hero */}
+      </div>
 
       {showcaseProducts && showcaseProducts.length > 0 && (
         <InteractiveProductShowcase products={showcaseProducts} />
