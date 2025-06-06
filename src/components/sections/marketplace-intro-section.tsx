@@ -15,10 +15,10 @@ const sectionVariants = {
 export default function MarketplaceIntroSection() {
   return (
     <motion.section
-      className="h-screen bg-card relative z-20 flex flex-col justify-center"
+      className="h-screen bg-card sticky top-0 z-20 flex flex-col justify-center" // Changed to sticky top-0
       variants={sectionVariants}
       initial="hidden"
-      whileInView="visible"
+      whileInView="visible" // This will apply when the section itself first comes into view before sticking
       viewport={{ once: true, amount: 0.1 }}
     >
       <div className="container mx-auto px-4 md:px-6 py-16 md:py-24">

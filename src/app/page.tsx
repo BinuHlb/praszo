@@ -31,13 +31,11 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Wrapper for Hero and Marketplace Intro to manage sticky hero unsticking */}
-      <div className="relative">
-        <HeroSection /> {/* HeroSection is sticky top-0 h-screen z-10 */}
-        <MarketplaceIntroSection /> {/* MarketplaceIntro is relative z-20, scrolls over Hero */}
-      </div>
+      {/* Sections for sequential parallax effect */}
+      <HeroSection /> {/* HeroSection is sticky top-0 h-screen z-10 */}
+      <MarketplaceIntroSection /> {/* MarketplaceIntro will be sticky top-0 h-screen z-20, scrolls over Hero */}
       
-      {/* InteractiveProductShowcase scrolls within its own defined height */}
+      {/* InteractiveProductShowcase scrolls within its own defined height, over MarketplaceIntroSection */}
       {showcaseProducts && showcaseProducts.length > 0 && (
         <InteractiveProductShowcase products={showcaseProducts} />
       )}
