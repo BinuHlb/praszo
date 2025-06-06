@@ -59,7 +59,7 @@ const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, cl
             rx="200"
             ry="150"
             filter={`url(#${filterId})`}
-            className="block dark:hidden" // Removed animationClass from individual elements
+            className="block dark:hidden" 
             transform="rotate(30 250 250)"
             fill={`url(#${internalGradIdLight})`}
           />
@@ -69,7 +69,7 @@ const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, cl
             rx="200"
             ry="150"
             filter={`url(#${filterId})`}
-            className="hidden dark:block" // Removed animationClass from individual elements
+            className="hidden dark:block" 
             transform="rotate(30 250 250)"
             fill={`url(#${internalGradIdDark})`}
           />
@@ -169,18 +169,18 @@ export default function HeroSection() {
   return (
     <section 
       ref={heroRef} 
-      className="overflow-hidden"
-      style={{ backgroundColor: '#7FFFD4', position: 'relative' }} 
+      className="overflow-hidden sticky top-0 h-screen z-10" // Made sticky, full height, and z-10
+      style={{ backgroundColor: '#7FFFD4', position: 'sticky' }}  // ensure sticky is applied
     >
       <motion.div 
-        className="absolute inset-0 z-0 opacity-70 dark:opacity-60"
+        className="absolute inset-0 z-0 opacity-70 dark:opacity-60" // Blobs container, z-0 within Hero
         style={{ y: yBlobs }}
       >
         <AnimatedBlob
           id="blob1"
-          color1Light="hsla(0, 0%, 100%, 0.8)" // White shades
+          color1Light="hsla(0, 0%, 100%, 0.8)" 
           color2Light="hsla(0, 0%, 100%, 0.5)"
-          color1Dark="hsla(0, 0%, 100%, 0.3)" // Slightly more visible white for dark mode
+          color1Dark="hsla(0, 0%, 100%, 0.3)" 
           color2Dark="hsla(0, 0%, 100%, 0.15)"
           className="absolute top-[-20%] left-[-25%] w-[150%] h-[130%] md:w-[120%] md:h-[110%]"
           animationClass="animate-float-slow"
@@ -189,9 +189,9 @@ export default function HeroSection() {
         />
         <AnimatedBlob
           id="blob2"
-          color1Light="hsla(0, 0%, 100%, 0.7)" // White shades
+          color1Light="hsla(0, 0%, 100%, 0.7)" 
           color2Light="hsla(0, 0%, 100%, 0.9)"
-          color1Dark="hsla(0, 0%, 100%, 0.25)" // Slightly more visible white for dark mode
+          color1Dark="hsla(0, 0%, 100%, 0.25)" 
           color2Dark="hsla(0, 0%, 100%, 0.4)"
           className="absolute bottom-[-25%] right-[-30%] w-[160%] h-[120%] md:w-[130%] md:h-[100%]"
           animationClass="animate-float-slower"
@@ -200,9 +200,9 @@ export default function HeroSection() {
         />
       </motion.div>
 
-      <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-xl"></div>
+      <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-xl"></div> {/* Overlay, z-10 within Hero */}
 
-      <div className="container relative z-20 mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32">
+      <div className="container relative z-20 mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32 flex flex-col justify-center h-full"> {/* Content container, z-20 within Hero, ensure it can center content if h-full */}
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -266,7 +266,7 @@ export default function HeroSection() {
                     />
                     <Button
                       type="submit"
-                      className="absolute right-2 top-1/2 -translate-y-1/2 h-10 px-4 flex items-center bg-accent hover:bg-accent/90 text-accent-foreground"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 h-10 px-6 flex items-center bg-accent hover:bg-accent/90 text-accent-foreground" // Increased px
                       disabled={form.formState.isSubmitting}
                     >
                       {form.formState.isSubmitting ? (

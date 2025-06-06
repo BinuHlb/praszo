@@ -15,7 +15,7 @@ const sectionVariants = {
 export default function MarketplaceIntroSection() {
   return (
     <motion.section
-      className="py-16 md:py-24 bg-secondary" // Using secondary for some visual separation
+      className="py-16 md:py-24 bg-secondary relative z-20" // Added relative z-20
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
