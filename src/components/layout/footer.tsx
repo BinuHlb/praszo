@@ -7,12 +7,13 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-accent text-accent-foreground py-12 md:py-16">
+    <footer className="bg-accent dark:bg-[hsl(var(--background))] text-accent-foreground py-12 md:py-16">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-10">
           {/* Column 1: Praszo & Socials */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2 mb-2">
+              {/* AnimatedLogoDark is suitable here as accent-foreground is light */}
               <AnimatedLogoDark /> 
             </Link>
             <p className="text-sm text-accent-foreground/80 max-w-xs">
