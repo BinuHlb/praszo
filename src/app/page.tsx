@@ -16,12 +16,11 @@ import { motion } from 'framer-motion';
 import PageTransition from '@/components/layout/page-transition';
 import InteractiveProductShowcase from '@/components/sections/interactive-product-showcase';
 import MarketplaceIntroSection from '@/components/sections/marketplace-intro-section';
+import CounterStatsSection from '@/components/sections/counter-stats-section'; // Added
 import React from 'react';
 
 export default function HomePage() {
   const practiceProduct = getProductBySlug('practice');
-
-  // Use all products for the showcase
   const showcaseProducts = allProducts;
 
 
@@ -37,10 +36,13 @@ export default function HomePage() {
         <HeroSection /> {/* HeroSection is sticky top-0 h-screen z-10 */}
         <MarketplaceIntroSection /> {/* MarketplaceIntro is relative z-20, scrolls over Hero */}
       </div>
-
+      
+      {/* InteractiveProductShowcase scrolls within its own defined height */}
       {showcaseProducts && showcaseProducts.length > 0 && (
         <InteractiveProductShowcase products={showcaseProducts} />
       )}
+
+      <CounterStatsSection /> {/* Added new counter section here */}
 
       <PageTransition>
         <>
