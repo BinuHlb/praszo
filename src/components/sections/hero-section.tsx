@@ -11,7 +11,7 @@ import * as z from 'zod';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 const subscriptionFormSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
@@ -147,13 +147,18 @@ export default function HeroSection() {
     },
   });
 
-  const sectionRef = useRef<HTMLElement>(null); // Ref for the main section for scroll progress
+  const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef, 
     offset: ["start start", "end start"] 
   });
 
-  const yBlobs = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]); // Blob parallax based on section scroll
+  const yBlobs = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   async function onSubmit(values: z.infer<typeof subscriptionFormSchema>) {
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -168,15 +173,19 @@ export default function HeroSection() {
 
   return (
     <section 
-      ref={sectionRef} // Added ref here
-      className="sticky top-0 h-screen z-10" // Main sticky section
-      style={{ backgroundColor: 'hsl(var(--secondary))' }} // Base background
+      ref={sectionRef}
+      className="sticky top-0 h-screen z-10"
+      style={{ backgroundColor: 'hsl(var(--secondary))' }}
     >
-      {/* Inner container for overflow control, blobs, and backdrop */}
-      <div className="absolute inset-0 overflow-hidden"> {/* overflow-hidden is on this inner div */}
+      <motion.div
+        className="absolute inset-0 overflow-hidden"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isMounted ? 1 : 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
         <motion.div 
           className="absolute inset-0 z-0 opacity-70 dark:opacity-60" 
-          style={{ y: yBlobs }} // Blob parallax
+          style={{ y: yBlobs }}
         >
           <AnimatedBlob
             id="blob1"
@@ -201,10 +210,9 @@ export default function HeroSection() {
             shape="bubble2"
           />
         </motion.div>
-        <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-xl"></div> {/* Overlay / Backdrop */}
-      </div>
+        <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-xl"></div>
+      </motion.div>
       
-      {/* Content container, relative to HeroSection, z-index higher than blobs/backdrop */}
       <div className="relative z-20 container mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32 flex flex-col justify-center h-full">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
