@@ -41,7 +41,7 @@ export default function HomePage() {
       )}
 
       {/* Wrapper for subsequent sections to ensure they stack above previous sticky elements */}
-      <div style={{ position: 'relative', zIndex: 40 }}>
+      <div className="relative z-40 bg-background">
         <CounterStatsSection /> 
         <PageTransition>
           <>
