@@ -50,8 +50,8 @@
     --popover-foreground: 275 15% 90%;
     --primary: 246 93% 75%; /* New Dark Primary Color (lighter shade of #5c49f7) */
     --primary-foreground: 246 93% 20%; /* Darker color for text on dark primary */
-    --secondary: 160 70% 30%; /* Darker Muted Aquamarine for dark theme */
-    --secondary-foreground: 160 100% 90%; /* Light Teal/Cyan for text on dark Aquamarine */
+    --secondary: 246 93% 12%; /* Darkest version of primary HSL(246, 93%, 12%) */
+    --secondary-foreground: 275 15% 90%; /* Light desaturated indigo for text, good contrast on dark primary shade */
     --muted: 275 10% 30%;
     --muted-foreground: 275 10% 65%;
     --accent: 217 44% 50%; /* New Dark Accent: Lighter shade of #17243a */
