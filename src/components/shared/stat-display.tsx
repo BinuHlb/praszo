@@ -45,7 +45,7 @@ export default function StatDisplay({
   }, [isInView, value, duration, easing, suffix, prefix]);
 
   return (
-    <div className={cn("text-center p-6 bg-card rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300", className)}>
+    <div className={cn("text-center p-6  transition-shadow duration-300", className)}>
       {Icon && (
         <div className="mb-4 flex justify-center">
           <Icon className="h-12 w-12 text-primary" />
