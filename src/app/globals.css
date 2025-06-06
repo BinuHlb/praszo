@@ -50,7 +50,7 @@
     --popover-foreground: 275 15% 90%;
     --primary: 246 93% 75%; /* New Dark Primary Color (lighter shade of #5c49f7) */
     --primary-foreground: 246 93% 20%; /* Darker color for text on dark primary */
-    --secondary: 160 70% 40%; /* Muted Aquamarine for dark theme */
+    --secondary: 160 70% 30%; /* Darker Muted Aquamarine for dark theme */
     --secondary-foreground: 160 100% 90%; /* Light Teal/Cyan for text on dark Aquamarine */
     --muted: 275 10% 30%;
     --muted-foreground: 275 10% 65%;
