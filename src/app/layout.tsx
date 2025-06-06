@@ -34,7 +34,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Navbar />
-          <main className="flex-grow">
+          <main className="flex-grow relative"> {/* Added position: relative */}
             {/* PageTransition removed from here */}
             {children}
           </main>

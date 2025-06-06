@@ -14,7 +14,7 @@ interface InteractiveProductShowcaseProps {
   products: Product[];
 }
 
-const SCROLL_DURATION_PER_PRODUCT_VH = 100; 
+const SCROLL_DURATION_PER_PRODUCT_VH = 120; // Increased for more scroll time per product
 
 const SvgBackgroundShapes = () => {
   return (
@@ -61,11 +61,10 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
 
   const { scrollYProgress } = useScroll({
     target: showcaseRootRef,
-    offset: ['start start', 'end end'], 
+    offset: ['start start', 'end end'],
   });
 
   const [activeIndex, setActiveIndex] = useState(0);
-  const [prevIndex, setPrevIndex] = useState(0);
 
   useEffect(() => {
     return scrollYProgress.on("change", (latest) => {
@@ -74,21 +73,15 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
         setActiveIndex(0);
         return;
       }
-      let newIndex = Math.floor(latest * numProducts);
-      // Ensure newIndex is within bounds [0, numProducts - 1]
-      newIndex = Math.max(0, Math.min(numProducts - 1, newIndex));
-      
+      // Ensure index is always within bounds [0, numProducts - 1]
+      // latest can sometimes slightly exceed 1 due to scroll momentum
+      const rawIndex = latest * numProducts;
+      const newIndex = Math.max(0, Math.min(numProducts - 1, Math.floor(rawIndex)));
       setActiveIndex(newIndex);
     });
   }, [scrollYProgress, products.length]);
 
-  useEffect(() => {
-    setPrevIndex(activeIndex);
-  }, [activeIndex]);
-
-  const direction = activeIndex > prevIndex ? 1 : -1;
   const currentProduct = products[activeIndex];
-  
   const showcaseHeight = products.length > 0 ? `${products.length * SCROLL_DURATION_PER_PRODUCT_VH}vh` : 'auto';
 
   const imageVariants = {
@@ -98,39 +91,26 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
   };
 
   const contentVariants = {
-    enter: (dir: number) => ({
-      y: dir > 0 ? 40 : -40,
-      opacity: 0,
-      scale: 0.97,
-    }),
-    center: {
-      y: 0,
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.6, ease: "circOut" },
-    },
-    exit: (dir: number) => ({
-      y: dir < 0 ? 40 : -40,
-      opacity: 0,
-      scale: 0.97,
-      transition: { duration: 0.4, ease: "circIn" },
-    }),
+    enter: { opacity: 0, y: 20, scale: 0.98 },
+    center: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: "circOut" } },
+    exit: { opacity: 0, y: -20, scale: 0.98, transition: { duration: 0.4, ease: "circIn" } },
   };
-  
+
   if (!products || products.length === 0) {
-    return null; 
+    return null;
   }
 
   return (
     <div
       ref={showcaseRootRef}
-      className="relative bg-background"
+      className="relative bg-background z-[5]" // Added z-index for stacking context relative to hero/marketplace
       style={{ height: showcaseHeight }}
     >
-      <div className="sticky top-16 h-[calc(100vh-4rem)] flex flex-col md:flex-row items-center overflow-hidden bg-background dark:bg-neutral-900/30">
+      {/* This div is sticky within the tall showcaseRootRef */}
+      <div className="sticky top-16 h-[calc(100vh-4rem)] flex flex-col md:flex-row items-center overflow-hidden bg-background dark:bg-neutral-900/30 z-30"> {/* Raised z-index */}
         <div className="relative w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-8 md:p-12 lg:p-16 overflow-hidden">
           <SvgBackgroundShapes />
-          <AnimatePresence initial={false} mode="wait">
+          <AnimatePresence initial={false}>
             <motion.div
               key={currentProduct?.id || 'placeholder-image'}
               className="relative z-10 w-full max-w-md aspect-[3/4] shadow-2xl rounded-xl overflow-hidden"
@@ -143,7 +123,7 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
                 src={currentProduct?.image || "https://placehold.co/600x800.png"}
                 alt={currentProduct?.name || "Product Image"}
                 fill
-                priority={activeIndex === 0} 
+                priority={activeIndex === 0}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover"
                 data-ai-hint={currentProduct?.dataAiHint || "product image"}
@@ -153,22 +133,22 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
         </div>
 
         <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-4 md:p-8 overflow-hidden">
+          {/* This container helps manage the AnimatePresence transitions for the text content */}
           <div className="w-full max-w-md relative h-auto md:h-auto flex flex-col justify-center text-center md:text-left">
-            <AnimatePresence initial={false} custom={direction}>
+            <AnimatePresence initial={false} >
               {currentProduct && (
                 <motion.div
                   key={currentProduct.id}
-                  custom={direction}
                   variants={contentVariants}
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="absolute w-full" // Ensure it's positioned for transitions
+                  className="absolute w-full" // Stack cards for transition
                 >
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-headline font-bold text-primary mb-3 md:mb-4 text-balance">
                     {currentProduct.name}
                   </h2>
-                  <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 line-clamp-3 min-h-[4.5rem] md:min-h-[5.25rem] text-balance">
+                  <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 min-h-[4.5rem] md:min-h-[5.25rem] text-balance line-clamp-3">
                     {currentProduct.tagline}
                   </p>
                   <Button variant="link" size="lg" asChild className="group text-lg text-primary hover:text-primary/80 px-0">
@@ -185,4 +165,3 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
     </div>
   );
 }
-
