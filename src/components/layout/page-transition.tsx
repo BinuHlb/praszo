@@ -15,22 +15,25 @@ const PageTransition = ({ children }: PageTransitionProps) => {
   const variants = {
     initial: {
       opacity: 0,
-      y: 15, // Subtle slide
+      y: 20, // Slightly more slide
+      scale: 0.98, // Slight scale up on enter
     },
     animate: {
       opacity: 1,
       y: 0,
+      scale: 1,
       transition: {
-        duration: 0.4, // Quicker transition
-        ease: [0.25, 0.1, 0.25, 1.0], // Bezier curve for smoother feel
+        duration: 0.5, // Slightly smoother
+        ease: [0.42, 0, 0.58, 1], // A common ease-in-out curve
       },
     },
     exit: {
       opacity: 0,
-      y: -15, // Subtle slide out
+      y: -20, // Slightly more slide out
+      scale: 0.98, // Slight scale down on exit
       transition: {
-        duration: 0.3, // Quicker exit
-        ease: [0.25, 0.1, 0.25, 1.0],
+        duration: 0.4, // Slightly smoother exit
+        ease: [0.42, 0, 0.58, 1],
       },
     },
   };
