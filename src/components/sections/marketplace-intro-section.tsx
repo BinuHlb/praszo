@@ -15,11 +15,10 @@ const sectionVariants = {
 export default function MarketplaceIntroSection() {
   return (
     <motion.section
-      // Changed from sticky top-0 to relative. Z-index remains to ensure it scrolls OVER HeroSection.
-      className="relative h-screen bg-card z-20 flex flex-col justify-center" 
+      className="sticky top-0 h-screen bg-card z-20 flex flex-col justify-center" // Ensured sticky, top-0, h-screen, z-20
       variants={sectionVariants}
       initial="hidden"
-      whileInView="visible" 
+      whileInView="visible"
       viewport={{ once: true, amount: 0.1 }}
     >
       <div className="container mx-auto px-4 md:px-6 py-16 md:py-24">
@@ -27,7 +26,7 @@ export default function MarketplaceIntroSection() {
           title="A Hub of Digital Excellence"
           subtitle="Praszo is your one-stop marketplace for a diverse range of cutting-edge digital products and expert services. We empower your business to thrive in the digital age."
           titleClassName="text-primary text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
-          subtitleClassName="text-lg sm:text-xl md:text-2xl text-foreground/80" // Ensure subtitle has good contrast on card bg
+          subtitleClassName="text-lg sm:text-xl md:text-2xl text-foreground/80"
           textAlignment="center"
         />
         

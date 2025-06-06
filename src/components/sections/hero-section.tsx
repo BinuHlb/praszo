@@ -147,14 +147,13 @@ export default function HeroSection() {
     },
   });
 
-  const heroContentRef = useRef<HTMLDivElement>(null); 
+  const sectionRef = useRef<HTMLElement>(null); // Ref for the main section for scroll progress
   const { scrollYProgress } = useScroll({
-    target: heroContentRef, // Target an inner div for scroll progress calculation if needed for internal animations
+    target: sectionRef, 
     offset: ["start start", "end start"] 
   });
 
-  // This transform applies to the blob container, not the HeroSection itself
-  const yBlobs = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const yBlobs = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]); // Blob parallax based on section scroll
 
   async function onSubmit(values: z.infer<typeof subscriptionFormSchema>) {
     await new Promise(resolve => setTimeout(resolve, 1000));
@@ -169,11 +168,12 @@ export default function HeroSection() {
 
   return (
     <section 
+      ref={sectionRef} // Added ref here
       className="sticky top-0 h-screen z-10" // Main sticky section
       style={{ backgroundColor: 'hsl(var(--secondary))' }} // Base background
     >
       {/* Inner container for overflow control, blobs, and backdrop */}
-      <div className="absolute inset-0 overflow-hidden"> {/* Moved overflow-hidden here */}
+      <div className="absolute inset-0 overflow-hidden"> {/* overflow-hidden is on this inner div */}
         <motion.div 
           className="absolute inset-0 z-0 opacity-70 dark:opacity-60" 
           style={{ y: yBlobs }} // Blob parallax
@@ -205,7 +205,7 @@ export default function HeroSection() {
       </div>
       
       {/* Content container, relative to HeroSection, z-index higher than blobs/backdrop */}
-      <div ref={heroContentRef} className="relative z-20 container mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32 flex flex-col justify-center h-full">
+      <div className="relative z-20 container mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32 flex flex-col justify-center h-full">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
