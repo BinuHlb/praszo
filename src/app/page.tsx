@@ -11,12 +11,19 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import SectionHeader from '@/components/layout/section-header';
-import { getProductBySlug } from '@/data/mock-data';
+import { getProductBySlug, products as allProducts } from '@/data/mock-data'; // Renamed products to allProducts
 import { motion } from 'framer-motion';
-import PageTransition from '@/components/layout/page-transition'; // Added
+import PageTransition from '@/components/layout/page-transition';
+import InteractiveProductShowcase from '@/components/sections/interactive-product-showcase'; // Added
+import React, { useRef } from 'react'; // Added useRef
 
 export default function HomePage() {
   const practiceProduct = getProductBySlug('practice');
+  const scrollContainerRef = useRef<HTMLDivElement>(null); // Added ref for the showcase scroll container
+
+  // Select first 3 products for the new showcase section
+  const showcaseProducts = allProducts.slice(0, 3);
+
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -26,6 +33,12 @@ export default function HomePage() {
   return (
     <>
       <HeroSection /> {/* HeroSection is outside PageTransition */}
+      
+      {/* New InteractiveProductShowcase section */}
+      <div ref={scrollContainerRef} className="relative h-[300vh] bg-background"> {/* Adjust height as needed, e.g., products.length * 100vh */}
+        <InteractiveProductShowcase products={showcaseProducts} scrollContainerRef={scrollContainerRef} />
+      </div>
+
       <PageTransition>
         <>
           <ProductList />
