@@ -20,8 +20,8 @@ import React from 'react';
 export default function HomePage() {
   const practiceProduct = getProductBySlug('practice');
 
-  // Select first 3 products for the new showcase section
-  const showcaseProducts = allProducts.slice(0, 3);
+  // Pass all products to the showcase section
+  const showcaseProducts = allProducts;
 
 
   const sectionVariants = {
