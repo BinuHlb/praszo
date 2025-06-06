@@ -61,7 +61,7 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
 
   const { scrollYProgress } = useScroll({
     target: showcaseRootRef,
-    offset: ['start start', 'end end'],
+    offset: ['start start', 'end end'], // Tracks scroll through the entire showcaseRootRef
   });
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -73,13 +73,11 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
         setActiveIndex(0);
         return;
       }
-      const rawIndex = latest * numProducts;
-      let newIndex = Math.floor(rawIndex);
-
-      if (latest >= 1.0) { // Ensure last item is selected when scrolled to the very end
-        newIndex = numProducts - 1;
+      // Ensure activeIndex is correctly calculated and clamped
+      let newIndex = Math.floor(latest * numProducts);
+      if (latest >= 1.0) { // Handle edge case where latest is exactly 1.0
+          newIndex = numProducts - 1;
       }
-      
       newIndex = Math.max(0, Math.min(numProducts - 1, newIndex));
       setActiveIndex(newIndex);
     });
@@ -94,7 +92,7 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
       opacity: 1, 
       scale: 1, 
       y: 0, 
-      transition: { duration: 0.7, ease: [0.42, 0, 0.58, 1] } 
+      transition: { duration: 0.7, ease: [0.42, 0, 0.58, 1], delay:0.05 } // Custom cubic-bezier
     },
     exit: { 
       opacity: 0, 
@@ -103,10 +101,10 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
       transition: { duration: 0.5, ease: [0.42, 0, 0.58, 1] }
     },
   };
-
+  
   const contentVariants = {
     initial: { opacity: 0, y: 20, scale: 0.98 },
-    animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: "circOut", delay: 0.1 } }, // Added slight delay
+    animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: "circOut", delay: 0.15 } },
     exit: { opacity: 0, y: -20, scale: 0.98, transition: { duration: 0.4, ease: "circIn" } },
   };
 
@@ -118,26 +116,27 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
   return (
     <div
       ref={showcaseRootRef}
-      className="relative bg-background z-[5]"
+      className="relative bg-background dark:bg-neutral-900/30 z-[5]" // Ensure this has a z-index if needed in page context
       style={{ height: showcaseHeight }}
     >
-      <div className="sticky top-16 h-[calc(100vh-4rem)] flex flex-col md:flex-row items-center overflow-hidden bg-background dark:bg-neutral-900/30 z-30">
+      {/* This div becomes sticky within showcaseRootRef */}
+      <div className="sticky top-16 h-[calc(100vh-4rem)] flex flex-col md:flex-row items-center overflow-hidden z-30">
         <div className="relative w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-8 md:p-12 lg:p-16 overflow-hidden">
           <SvgBackgroundShapes />
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={currentProduct?.id || 'placeholder-image'}
-              className="relative z-10 w-full max-w-xs sm:max-w-sm md:max-w-md aspect-[3/4] shadow-2xl rounded-xl overflow-hidden"
+              className="relative z-10 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-[3/4] shadow-2xl rounded-xl overflow-hidden"
               variants={imageVariants}
               initial="initial"
               animate="animate"
               exit="exit"
             >
               <Image
-                src={currentProduct?.image || "https://placehold.co/600x800.png"}
+                src={currentProduct?.image || "https://picsum.photos/seed/showcaseDefault/600/800"}
                 alt={currentProduct?.name || "Product Image"}
                 fill
-                priority={activeIndex === 0} // Prioritize first image
+                priority={activeIndex === 0} 
                 sizes="(max-width: 640px) 90vw, (max-width: 768px) 50vw, (max-width: 1024px) 40vw, 33vw"
                 className="object-cover"
                 data-ai-hint={currentProduct?.dataAiHint || "product image"}
@@ -146,8 +145,8 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
           </AnimatePresence>
         </div>
 
-        <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-4 md:p-8 overflow-hidden">
-          <div className="w-full max-w-md relative flex flex-col justify-center text-center md:text-left">
+        <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-4 sm:p-6 md:p-8 overflow-hidden">
+          <div className="w-full max-w-md flex flex-col justify-center text-center md:text-left">
             <AnimatePresence initial={false} mode="wait">
               {currentProduct && (
                 <motion.div
@@ -156,7 +155,7 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  className="w-full" // Removed absolute, let AnimatePresence handle layout
+                  className="w-full"
                 >
                   <h2 className="text-3xl md:text-4xl lg:text-5xl font-headline font-bold text-primary mb-3 md:mb-4 text-balance">
                     {currentProduct.name}
@@ -178,4 +177,3 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
     </div>
   );
 }
-

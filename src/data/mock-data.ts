@@ -9,7 +9,7 @@ export const products: Product[] = [
     tagline: 'Streamline Your Workflow, Amplify Results with Practice.', 
     description: 'Our flagship project management application, Practice, is designed for modern teams. Intuitive, powerful, and fully customizable to fit your unique processes.', 
     longDescription: 'Practice is more than just a task manager; it\'s a comprehensive platform that brings clarity, collaboration, and efficiency to your projects. From initial planning to final delivery, Practice empowers your team to achieve more with less stress. Features include advanced task management, real-time collaboration, resource allocation, progress tracking, and insightful reporting.', 
-    image: '/assets/images/hero-banner.png', 
+    image: '/assets/images/hero-banner.png', // Keep local asset
     dataAiHint: 'software interface',
     type: 'app',
     slug: 'practice', 
@@ -22,14 +22,14 @@ export const products: Product[] = [
     interactiveDemo: {
       title: "Explore Practice", 
       description: "See how Practice can transform your project management. Visualize workflows and feature integrations.", 
-      imageUrl: "https://placehold.co/1200x675.png", 
+      imageUrl: "https://picsum.photos/seed/practiceDemo/1200/675", 
       dataAiHint: 'dashboard analytics',
       link: "/products/practice#demo",
       videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" 
     },
     testimonials: [
-      { id: 't1', quote: "Practice revolutionized how we manage projects. It's a game changer!", author: "Jane Doe", company: "Innovatech Ltd.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile woman" }, 
-      { id: 't2', quote: "The best PM tool we've ever used. Highly recommended for Practice.", author: "John Smith", company: "Tech Solutions Inc.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile man" }, 
+      { id: 't1', quote: "Practice revolutionized how we manage projects. It's a game changer!", author: "Jane Doe", company: "Innovatech Ltd.", authorImage: "https://picsum.photos/seed/janeDoe/100/100", dataAiHint: "profile woman" }, 
+      { id: 't2', quote: "The best PM tool we've ever used. Highly recommended for Practice.", author: "John Smith", company: "Tech Solutions Inc.", authorImage: "https://picsum.photos/seed/johnSmith/100/100", dataAiHint: "profile man" }, 
     ],
   },
   {
@@ -38,7 +38,7 @@ export const products: Product[] = [
     tagline: 'Crafting Digital Experiences That Convert.',
     description: 'Custom web design and development services tailored to your brand. We build fast, responsive, and scalable websites that drive growth.',
     longDescription: 'Our web development services focus on creating unique digital platforms that not only look stunning but also perform exceptionally. We work with the latest technologies to build secure, SEO-friendly, and user-centric websites. Whether you need an e-commerce platform, a corporate website, or a complex web application, our team has the expertise to deliver.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://picsum.photos/seed/webSolutions/600/400',
     dataAiHint: 'website design',
     type: 'service',
     slug: 'web-development',
@@ -49,7 +49,7 @@ export const products: Product[] = [
       { title: 'Scalable Architecture', description: 'Solutions that grow with your business.', icon: Settings },
     ],
     caseStudies: [
-      { id: 'cs1', title: 'E-commerce Platform for Aura Boutique', clientName: 'Aura Boutique', problem: 'Low online sales and outdated website.', solution: 'Developed a modern, responsive e-commerce site with improved UX.', results: '50% increase in online sales within 3 months.', image: 'https://placehold.co/400x300.png', dataAiHint: 'fashion website' },
+      { id: 'cs1', title: 'E-commerce Platform for Aura Boutique', clientName: 'Aura Boutique', problem: 'Low online sales and outdated website.', solution: 'Developed a modern, responsive e-commerce site with improved UX.', results: '50% increase in online sales within 3 months.', image: 'https://picsum.photos/seed/auraBoutique/400/300', dataAiHint: 'fashion website' },
     ]
   },
   {
@@ -58,7 +58,7 @@ export const products: Product[] = [
     tagline: 'Amplify Your Reach, Maximize Your Impact.',
     description: 'Data-driven digital marketing strategies to boost your online presence. From SEO to social media, we cover all your marketing needs.',
     longDescription: 'Our digital marketing services are designed to help your business connect with its target audience and achieve measurable results. We offer a full suite of services including Search Engine Optimization (SEO), Pay-Per-Click (PPC) advertising, content marketing, social media management, and email marketing. Let us help you build a powerful online presence that drives engagement and conversions.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://picsum.photos/seed/digitalMarketing/600/400',
     dataAiHint: 'marketing campaign',
     type: 'service',
     slug: 'digital-marketing',
@@ -69,7 +69,7 @@ export const products: Product[] = [
       { title: 'Social Media Engagement', description: 'Build and nurture your online community.', icon: Zap },
     ],
     testimonials: [
-      { id: 't3', quote: "Praszo's marketing strategies took our brand to the next level.", author: "Mike Chan", company: "Growth Co.", authorImage: "https://placehold.co/100x100.png", dataAiHint: "profile asian man" },
+      { id: 't3', quote: "Praszo's marketing strategies took our brand to the next level.", author: "Mike Chan", company: "Growth Co.", authorImage: "https://picsum.photos/seed/mikeChan/100/100", dataAiHint: "profile asian man" },
     ]
   },
   {
@@ -78,7 +78,7 @@ export const products: Product[] = [
     tagline: 'Ensure Quality and Accuracy.',
     description: 'Comprehensive verification services to ensure your digital assets meet the highest standards.',
     longDescription: 'Our Verify service offers meticulous testing and quality assurance for software, websites, and digital campaigns. We help you identify issues before they impact your users or your bottom line.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://picsum.photos/seed/verifyService/600/400',
     dataAiHint: 'quality check',
     type: 'service',
     slug: 'verify',
@@ -94,7 +94,7 @@ export const products: Product[] = [
     tagline: 'Adapt and Evolve Your Solutions.',
     description: 'Flexible modification services to update, enhance, or refactor your existing digital products.',
     longDescription: 'The digital landscape is always changing. Our Modify service helps you adapt your existing applications, websites, and systems to new requirements, technologies, or user feedback, ensuring longevity and relevance.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://picsum.photos/seed/modifyService/600/400',
     dataAiHint: 'code editing',
     type: 'service',
     slug: 'modify',
@@ -110,7 +110,7 @@ export const products: Product[] = [
     tagline: 'Clear, Concise, Comprehensive Documentation.',
     description: 'Professional documentation services for your products, APIs, and internal processes.',
     longDescription: 'Effective documentation is key to user adoption, developer productivity, and knowledge retention. Our Docs service provides expert technical writing and information design to create clear, user-friendly documentation that empowers your users and team.',
-    image: 'https://placehold.co/600x400.png',
+    image: 'https://picsum.photos/seed/docsService/600/400',
     dataAiHint: 'technical writing',
     type: 'service',
     slug: 'docs',

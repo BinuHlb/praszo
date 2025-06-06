@@ -18,6 +18,9 @@ interface InteractiveDemoPlaceholderProps {
 
 export default function InteractiveDemoPlaceholder({ title, description, imageUrl, dataAiHint, link, videoUrl }: InteractiveDemoPlaceholderProps) {
   const [showVideo, setShowVideo] = useState(false);
+  const finalImageUrl = imageUrl || "https://picsum.photos/seed/genericDemo/1200/675";
+  const finalDataAiHint = dataAiHint || "technology interface";
+
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow rounded-lg">
@@ -36,15 +39,15 @@ export default function InteractiveDemoPlaceholder({ title, description, imageUr
             <X className="h-5 w-5" />
           </Button>
         </div>
-      ) : imageUrl ? (
+      ) : ( // Always show image container if not showing video, even if imageUrl is a fallback
         <div className="relative aspect-video">
           <Image 
-            src={imageUrl} 
+            src={finalImageUrl} 
             alt={title || "Interactive Demo"} 
             fill 
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
             className="object-cover" 
-            data-ai-hint={dataAiHint || "technology interface"}
+            data-ai-hint={finalDataAiHint}
           />
           {(videoUrl || link) && (
              <div className="absolute inset-0 flex items-center justify-center bg-black/30">
@@ -62,14 +65,14 @@ export default function InteractiveDemoPlaceholder({ title, description, imageUr
             </div>
           )}
         </div>
-      ) : null}
+      )}
 
       <CardHeader>
         <CardTitle className="text-2xl font-headline">{title}</CardTitle>
       </CardHeader>
       <CardContent>
         <CardDescription className="mb-4">{description}</CardDescription>
-        {!imageUrl && ( 
+        {!finalImageUrl && !showVideo && ( // Show this button area only if there's no image to display and video is not playing
           videoUrl ? (
             <Button variant="default" onClick={() => setShowVideo(true)}>
               <PlayCircle className="mr-2 h-5 w-5" /> Play Demo

@@ -71,7 +71,7 @@ export default function AboutPage() {
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <motion.div variants={imageVariants} initial="hidden" animate="visible" viewport={{ once: true }}>
                   <Image
-                    src="https://placehold.co/600x450.png"
+                    src="https://picsum.photos/seed/aboutTeam/600/450"
                     alt="Praszo team collaborating"
                     width={600}
                     height={450}
@@ -189,7 +189,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, ease: "easeOut" }}
               >
                 <Image
-                  src="https://placehold.co/800x400.png"
+                  src="https://picsum.photos/seed/innovatorsTeam/800/400"
                   alt="Praszo Team"
                   width={800}
                   height={400}
