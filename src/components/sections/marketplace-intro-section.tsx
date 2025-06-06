@@ -15,10 +15,11 @@ const sectionVariants = {
 export default function MarketplaceIntroSection() {
   return (
     <motion.section
-      className="h-screen bg-card sticky top-0 z-20 flex flex-col justify-center" // Changed to sticky top-0
+      // Changed from sticky top-0 to relative. Z-index remains to ensure it scrolls OVER HeroSection.
+      className="relative h-screen bg-card z-20 flex flex-col justify-center" 
       variants={sectionVariants}
       initial="hidden"
-      whileInView="visible" // This will apply when the section itself first comes into view before sticking
+      whileInView="visible" 
       viewport={{ once: true, amount: 0.1 }}
     >
       <div className="container mx-auto px-4 md:px-6 py-16 md:py-24">
@@ -26,19 +27,19 @@ export default function MarketplaceIntroSection() {
           title="A Hub of Digital Excellence"
           subtitle="Praszo is your one-stop marketplace for a diverse range of cutting-edge digital products and expert services. We empower your business to thrive in the digital age."
           titleClassName="text-primary text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
-          subtitleClassName="text-lg sm:text-xl md:text-2xl"
+          subtitleClassName="text-lg sm:text-xl md:text-2xl text-foreground/80" // Ensure subtitle has good contrast on card bg
           textAlignment="center"
         />
         
         <div className="mt-6 text-center">
-          <div className="flex items-center justify-center space-x-1 text-primary">
+          <div className="flex items-center justify-center space-x-1 text-primary mb-2">
             <Star className="h-6 w-6 fill-primary" />
             <Star className="h-6 w-6 fill-primary" />
             <Star className="h-6 w-6 fill-primary" />
             <Star className="h-6 w-6 fill-primary" />
             <Star className="h-6 w-6 fill-primary" />
           </div>
-          <p className="text-sm text-muted-foreground mt-2 mb-6">
+          <p className="text-sm text-muted-foreground mt-1 mb-6">
             Trusted by 1,000+ businesses for unparalleled quality and innovation.
           </p>
 
