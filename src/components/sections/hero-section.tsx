@@ -149,10 +149,11 @@ export default function HeroSection() {
 
   const heroContentRef = useRef<HTMLDivElement>(null); 
   const { scrollYProgress } = useScroll({
-    target: heroContentRef,
+    target: heroContentRef, // Target an inner div for scroll progress calculation if needed for internal animations
     offset: ["start start", "end start"] 
   });
 
+  // This transform applies to the blob container, not the HeroSection itself
   const yBlobs = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
 
   async function onSubmit(values: z.infer<typeof subscriptionFormSchema>) {
@@ -168,40 +169,43 @@ export default function HeroSection() {
 
   return (
     <section 
-      className="sticky top-0 h-screen z-10 overflow-hidden"
-      style={{ backgroundColor: 'hsl(var(--secondary))' }}
+      className="sticky top-0 h-screen z-10" // Main sticky section
+      style={{ backgroundColor: 'hsl(var(--secondary))' }} // Base background
     >
-      <motion.div 
-        className="absolute inset-0 z-0 opacity-70 dark:opacity-60" 
-        style={{ y: yBlobs }}
-      >
-        <AnimatedBlob
-          id="blob1"
-          color1Light="hsla(0, 0%, 100%, 0.8)" 
-          color2Light="hsla(0, 0%, 100%, 0.5)"
-          color1Dark="hsla(0, 0%, 100%, 0.3)" 
-          color2Dark="hsla(0, 0%, 100%, 0.15)"
-          className="absolute top-[-20%] left-[-25%] w-[150%] h-[130%] md:w-[120%] md:h-[110%]"
-          animationClass="animate-float-slow"
-          blurStdDeviation={60} 
-          shape="bubble1"
-        />
-        <AnimatedBlob
-          id="blob2"
-          color1Light="hsla(0, 0%, 100%, 0.7)" 
-          color2Light="hsla(0, 0%, 100%, 0.9)"
-          color1Dark="hsla(0, 0%, 100%, 0.25)" 
-          color2Dark="hsla(0, 0%, 100%, 0.4)"
-          className="absolute bottom-[-25%] right-[-30%] w-[160%] h-[120%] md:w-[130%] md:h-[100%]"
-          animationClass="animate-float-slower"
-          blurStdDeviation={55} 
-          shape="bubble2"
-        />
-      </motion.div>
-
-      <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-xl"></div>
-
-      <div ref={heroContentRef} className="container relative z-20 mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32 flex flex-col justify-center h-full">
+      {/* Inner container for overflow control, blobs, and backdrop */}
+      <div className="absolute inset-0 overflow-hidden"> {/* Moved overflow-hidden here */}
+        <motion.div 
+          className="absolute inset-0 z-0 opacity-70 dark:opacity-60" 
+          style={{ y: yBlobs }} // Blob parallax
+        >
+          <AnimatedBlob
+            id="blob1"
+            color1Light="hsla(0, 0%, 100%, 0.8)" 
+            color2Light="hsla(0, 0%, 100%, 0.5)"
+            color1Dark="hsla(0, 0%, 100%, 0.3)" 
+            color2Dark="hsla(0, 0%, 100%, 0.15)"
+            className="absolute top-[-20%] left-[-25%] w-[150%] h-[130%] md:w-[120%] md:h-[110%]"
+            animationClass="animate-float-slow"
+            blurStdDeviation={60} 
+            shape="bubble1"
+          />
+          <AnimatedBlob
+            id="blob2"
+            color1Light="hsla(0, 0%, 100%, 0.7)" 
+            color2Light="hsla(0, 0%, 100%, 0.9)"
+            color1Dark="hsla(0, 0%, 100%, 0.25)" 
+            color2Dark="hsla(0, 0%, 100%, 0.4)"
+            className="absolute bottom-[-25%] right-[-30%] w-[160%] h-[120%] md:w-[130%] md:h-[100%]"
+            animationClass="animate-float-slower"
+            blurStdDeviation={55} 
+            shape="bubble2"
+          />
+        </motion.div>
+        <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-xl"></div> {/* Overlay / Backdrop */}
+      </div>
+      
+      {/* Content container, relative to HeroSection, z-index higher than blobs/backdrop */}
+      <div ref={heroContentRef} className="relative z-20 container mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32 flex flex-col justify-center h-full">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
