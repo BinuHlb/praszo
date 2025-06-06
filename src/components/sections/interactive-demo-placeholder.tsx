@@ -5,7 +5,8 @@ import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { PlayCircle, X } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useInView } from 'framer-motion';
 
 interface InteractiveDemoPlaceholderProps {
   title: string;
@@ -21,12 +22,39 @@ export default function InteractiveDemoPlaceholder({ title, description, imageUr
   const finalImageUrl = imageUrl || "https://placehold.co/1200x675.png";
   const finalDataAiHint = dataAiHint || "technology interface";
 
+  const videoPlayerContainerRef = useRef<HTMLDivElement>(null); // Ref for the div that contains the video or image
+  const videoRef = useRef<HTMLVideoElement>(null); // Ref for the video element itself
+  
+  // isInView will track the visibility of videoPlayerContainerRef
+  // amount: 0.5 means 50% of the element needs to be visible to trigger true
+  // once: false means it will keep updating as visibility changes
+  const isInView = useInView(videoPlayerContainerRef, { amount: 0.5, once: false });
+
+  useEffect(() => {
+    if (showVideo && videoRef.current && videoUrl) {
+      if (isInView) {
+        videoRef.current.play().catch(error => {
+          console.error("Video autoplay failed:", error);
+          // Autoplay can be blocked by browsers if not muted or due to other policies.
+        });
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [isInView, showVideo, videoUrl]);
 
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-shadow rounded-lg">
       {showVideo && videoUrl ? (
-        <div className="relative aspect-video">
-          <video src={videoUrl} controls autoPlay className="w-full h-full object-cover bg-black">
+        <div ref={videoPlayerContainerRef} className="relative aspect-video">
+          <video 
+            ref={videoRef}
+            src={videoUrl} 
+            controls 
+            muted // Mute for better autoplay compatibility
+            loop // Loop the video for continuous demo
+            className="w-full h-full object-cover bg-black"
+          >
             Your browser does not support the video tag.
           </video>
           <Button
@@ -39,8 +67,8 @@ export default function InteractiveDemoPlaceholder({ title, description, imageUr
             <X className="h-5 w-5" />
           </Button>
         </div>
-      ) : ( // Always show image container if not showing video, even if imageUrl is a fallback
-        <div className="relative aspect-video">
+      ) : ( 
+        <div ref={videoPlayerContainerRef} className="relative aspect-video">
           <Image 
             src={finalImageUrl} 
             alt={title || "Interactive Demo"} 
@@ -72,7 +100,7 @@ export default function InteractiveDemoPlaceholder({ title, description, imageUr
       </CardHeader>
       <CardContent>
         <CardDescription className="mb-4">{description}</CardDescription>
-        {!finalImageUrl && !showVideo && ( // Show this button area only if there's no image to display and video is not playing
+        {!finalImageUrl && !showVideo && ( 
           videoUrl ? (
             <Button variant="default" onClick={() => setShowVideo(true)}>
               <PlayCircle className="mr-2 h-5 w-5" /> Play Demo
