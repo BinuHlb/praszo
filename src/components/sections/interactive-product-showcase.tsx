@@ -115,7 +115,7 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
   return (
     <div
       ref={showcaseRootRef}
-      className="relative bg-background dark:bg-neutral-900/30 z-[5]" 
+      className="relative bg-background dark:bg-neutral-900/30 z-[25]" // Changed z-index from z-[5] to z-[25]
       style={{ height: showcaseHeight }}
     >
       <div className="sticky top-16 h-[calc(100vh-4rem)] flex flex-col md:flex-row items-center overflow-hidden z-30">
@@ -175,3 +175,4 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
     </div>
   );
 }
+
