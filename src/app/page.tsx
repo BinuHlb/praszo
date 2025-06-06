@@ -35,8 +35,14 @@ export default function HomePage() {
       <HeroSection /> {/* HeroSection is outside PageTransition */}
       
       {/* New InteractiveProductShowcase section */}
-      <div ref={scrollContainerRef} className="relative h-[300vh] bg-background"> {/* Adjust height as needed, e.g., products.length * 100vh */}
-        <InteractiveProductShowcase products={showcaseProducts} scrollContainerRef={scrollContainerRef} />
+      <div 
+        ref={scrollContainerRef} 
+        className="relative bg-background"
+        style={{ height: showcaseProducts.length > 0 ? `${showcaseProducts.length * 100}vh` : '0px' }} // Dynamic height
+      >
+        {showcaseProducts.length > 0 && (
+          <InteractiveProductShowcase products={showcaseProducts} scrollContainerRef={scrollContainerRef} />
+        )}
       </div>
 
       <PageTransition>
