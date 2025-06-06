@@ -3,7 +3,6 @@
 
 import type { Product } from '@/lib/types';
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 import React, { useRef, useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
@@ -15,7 +14,7 @@ interface InteractiveProductShowcaseProps {
   products: Product[];
 }
 
-const SCROLL_DURATION_PER_PRODUCT_VH = 100; // Each product gets 100vh of scroll "time"
+const SCROLL_DURATION_PER_PRODUCT_VH = 100; 
 
 const SvgBackgroundShapes = () => {
   return (
@@ -62,7 +61,7 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
 
   const { scrollYProgress } = useScroll({
     target: showcaseRootRef,
-    offset: ['start start', 'end end'],
+    offset: ['start start', 'end end'], 
   });
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -70,14 +69,15 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
 
   useEffect(() => {
     return scrollYProgress.on("change", (latest) => {
-      const clampedLatest = Math.max(0, Math.min(1, latest));
-      let newIndex = Math.floor(clampedLatest * products.length);
-      if (newIndex >= products.length && products.length > 0) {
-        newIndex = products.length - 1;
+      const numProducts = products.length;
+      if (numProducts === 0) {
+        setActiveIndex(0);
+        return;
       }
-      if (products.length === 0) {
-        newIndex = 0;
-      }
+      let newIndex = Math.floor(latest * numProducts);
+      // Ensure newIndex is within bounds [0, numProducts - 1]
+      newIndex = Math.max(0, Math.min(numProducts - 1, newIndex));
+      
       setActiveIndex(newIndex);
     });
   }, [scrollYProgress, products.length]);
@@ -88,6 +88,8 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
 
   const direction = activeIndex > prevIndex ? 1 : -1;
   const currentProduct = products[activeIndex];
+  
+  const showcaseHeight = products.length > 0 ? `${products.length * SCROLL_DURATION_PER_PRODUCT_VH}vh` : 'auto';
 
   const imageVariants = {
     enter: { opacity: 0, scale: 0.95, y: 10 },
@@ -95,30 +97,28 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
     exit: { opacity: 0, scale: 0.95, y: -10, transition: { duration: 0.3, ease: "easeIn" } },
   };
 
-  const cardVariants = {
+  const contentVariants = {
     enter: (dir: number) => ({
-      y: dir > 0 ? 30 : -30,
+      y: dir > 0 ? 40 : -40,
       opacity: 0,
-      scale: 0.98,
+      scale: 0.97,
     }),
     center: {
       y: 0,
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.5, ease: "circOut" },
+      transition: { duration: 0.6, ease: "circOut" },
     },
     exit: (dir: number) => ({
-      y: dir < 0 ? 30 : -30,
+      y: dir < 0 ? 40 : -40,
       opacity: 0,
-      scale: 0.98,
-      transition: { duration: 0.3, ease: "circIn" },
+      scale: 0.97,
+      transition: { duration: 0.4, ease: "circIn" },
     }),
   };
   
-  const showcaseHeight = products.length > 0 ? `${products.length * SCROLL_DURATION_PER_PRODUCT_VH}vh` : 'auto';
-
   if (!products || products.length === 0) {
-    return null; // Don't render if no products
+    return null; 
   }
 
   return (
@@ -143,7 +143,7 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
                 src={currentProduct?.image || "https://placehold.co/600x800.png"}
                 alt={currentProduct?.name || "Product Image"}
                 fill
-                priority={activeIndex === 0} // Prioritize loading the first image
+                priority={activeIndex === 0} 
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover"
                 data-ai-hint={currentProduct?.dataAiHint || "product image"}
@@ -153,35 +153,29 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
         </div>
 
         <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-4 md:p-8 overflow-hidden">
-          <div className="w-full max-w-md relative h-[350px] md:h-[400px]">
+          <div className="w-full max-w-md relative h-auto md:h-auto flex flex-col justify-center text-center md:text-left">
             <AnimatePresence initial={false} custom={direction}>
               {currentProduct && (
                 <motion.div
                   key={currentProduct.id}
                   custom={direction}
-                  variants={cardVariants}
+                  variants={contentVariants}
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="absolute w-full"
+                  className="absolute w-full" // Ensure it's positioned for transitions
                 >
-                  <Card className="shadow-xl hover:shadow-2xl rounded-xl w-full border-primary ring-2 ring-primary bg-card transition-shadow duration-300">
-                    <CardHeader className="pb-3">
-                      <CardTitle className="text-2xl md:text-3xl font-headline text-primary">
-                        {currentProduct.name}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-sm md:text-base text-muted-foreground mb-4 line-clamp-3 min-h-[3.75rem] md:min-h-[4.5rem]">
-                        {currentProduct.tagline}
-                      </p>
-                      <Button variant="outline" size="sm" asChild className="group">
-                        <Link href={`/products/${currentProduct.slug}`}>
-                          Learn More <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                        </Link>
-                      </Button>
-                    </CardContent>
-                  </Card>
+                  <h2 className="text-3xl md:text-4xl lg:text-5xl font-headline font-bold text-primary mb-3 md:mb-4 text-balance">
+                    {currentProduct.name}
+                  </h2>
+                  <p className="text-base md:text-lg text-muted-foreground mb-6 md:mb-8 line-clamp-3 min-h-[4.5rem] md:min-h-[5.25rem] text-balance">
+                    {currentProduct.tagline}
+                  </p>
+                  <Button variant="link" size="lg" asChild className="group text-lg text-primary hover:text-primary/80 px-0">
+                    <Link href={`/products/${currentProduct.slug}`}>
+                      Learn More <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </Button>
                 </motion.div>
               )}
             </AnimatePresence>
@@ -191,3 +185,4 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
     </div>
   );
 }
+
