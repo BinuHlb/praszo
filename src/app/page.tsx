@@ -15,12 +15,12 @@ import { getProductBySlug, products as allProducts } from '@/data/mock-data';
 import { motion } from 'framer-motion';
 import PageTransition from '@/components/layout/page-transition';
 import InteractiveProductShowcase from '@/components/sections/interactive-product-showcase';
+import MarketplaceIntroSection from '@/components/sections/marketplace-intro-section'; // Added import
 import React from 'react';
 
 export default function HomePage() {
   const practiceProduct = getProductBySlug('practice');
 
-  // Pass all products to the showcase section
   const showcaseProducts = allProducts;
 
 
@@ -33,9 +33,9 @@ export default function HomePage() {
     <>
       <HeroSection /> {/* HeroSection is outside PageTransition */}
       
-      {/* InteractiveProductShowcase no longer needs a tall parent wrapper here for its scroll mechanics. */}
-      {/* It will manage its own height and scroll detection. */}
-      {showcaseProducts.length > 0 && (
+      <MarketplaceIntroSection /> {/* Added new section here */}
+
+      {showcaseProducts && showcaseProducts.length > 0 && (
         <InteractiveProductShowcase products={showcaseProducts} />
       )}
 
