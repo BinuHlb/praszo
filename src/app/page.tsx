@@ -11,15 +11,14 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import SectionHeader from '@/components/layout/section-header';
-import { getProductBySlug, products as allProducts } from '@/data/mock-data'; // Renamed products to allProducts
+import { getProductBySlug, products as allProducts } from '@/data/mock-data';
 import { motion } from 'framer-motion';
 import PageTransition from '@/components/layout/page-transition';
-import InteractiveProductShowcase from '@/components/sections/interactive-product-showcase'; // Added
-import React, { useRef } from 'react'; // Added useRef
+import InteractiveProductShowcase from '@/components/sections/interactive-product-showcase';
+import React from 'react';
 
 export default function HomePage() {
   const practiceProduct = getProductBySlug('practice');
-  const scrollContainerRef = useRef<HTMLDivElement>(null); // Added ref for the showcase scroll container
 
   // Select first 3 products for the new showcase section
   const showcaseProducts = allProducts.slice(0, 3);
@@ -34,16 +33,11 @@ export default function HomePage() {
     <>
       <HeroSection /> {/* HeroSection is outside PageTransition */}
       
-      {/* New InteractiveProductShowcase section */}
-      <div 
-        ref={scrollContainerRef} 
-        className="relative bg-background"
-        style={{ height: showcaseProducts.length > 0 ? `${showcaseProducts.length * 120}vh` : '0px' }} // Dynamic height: 120vh per product
-      >
-        {showcaseProducts.length > 0 && (
-          <InteractiveProductShowcase products={showcaseProducts} scrollContainerRef={scrollContainerRef} />
-        )}
-      </div>
+      {/* InteractiveProductShowcase no longer needs a tall parent wrapper here for its scroll mechanics. */}
+      {/* It will manage its own height and scroll detection. */}
+      {showcaseProducts.length > 0 && (
+        <InteractiveProductShowcase products={showcaseProducts} />
+      )}
 
       <PageTransition>
         <>
