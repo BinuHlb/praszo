@@ -38,7 +38,7 @@ export default function HomePage() {
       <div 
         ref={scrollContainerRef} 
         className="relative bg-background"
-        style={{ height: showcaseProducts.length > 0 ? `${showcaseProducts.length * 100}vh` : '0px' }} // Dynamic height
+        style={{ height: showcaseProducts.length > 0 ? `${showcaseProducts.length * 120}vh` : '0px' }} // Dynamic height: 120vh per product
       >
         {showcaseProducts.length > 0 && (
           <InteractiveProductShowcase products={showcaseProducts} scrollContainerRef={scrollContainerRef} />
