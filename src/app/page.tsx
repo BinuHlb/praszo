@@ -16,7 +16,7 @@ import { motion } from 'framer-motion';
 import PageTransition from '@/components/layout/page-transition';
 import InteractiveProductShowcase from '@/components/sections/interactive-product-showcase';
 import MarketplaceIntroSection from '@/components/sections/marketplace-intro-section';
-import CounterStatsSection from '@/components/sections/counter-stats-section'; // Added
+import CounterStatsSection from '@/components/sections/counter-stats-section';
 import React from 'react';
 
 export default function HomePage() {
@@ -42,41 +42,42 @@ export default function HomePage() {
 
       {/* Wrapper for subsequent sections to ensure they stack above previous sticky elements */}
       <div className="relative z-40 bg-background">
+        <motion.section
+          className="py-16 md:py-24 bg-background"
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+        >
+          <div className="container mx-auto px-4 md:px-6">
+            <SectionHeader
+              title="Experience Our Solutions"
+              subtitle="Dive deeper into how our flagship project management tool, Practice, can revolutionize your workflow."
+            />
+            <motion.div
+              className="max-w-3xl mx-auto"
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <InteractiveDemoPlaceholder
+                title="Practice: Visualize Your Success"
+                description="Get a hands-on feel for Practice's intuitive interface and powerful features. See how it simplifies complex project management tasks and boosts team productivity."
+                imageUrl="https://placehold.co/800x450.png"
+                dataAiHint="project dashboard"
+                link={practiceProduct?.interactiveDemo?.link}
+                videoUrl={practiceProduct?.interactiveDemo?.videoUrl}
+              />
+            </motion.div>
+          </div>
+        </motion.section>
+        
         <CounterStatsSection /> 
         <PageTransition>
           <>
             <ProductList />
             <ServicesOverview />
-            <motion.section
-              className="py-16 md:py-24 bg-background"
-              variants={sectionVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.1 }}
-            >
-              <div className="container mx-auto px-4 md:px-6">
-                <SectionHeader
-                  title="Experience Our Solutions"
-                  subtitle="Dive deeper into how our flagship project management tool, Practice, can revolutionize your workflow."
-                />
-                <motion.div
-                  className="max-w-3xl mx-auto"
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                  <InteractiveDemoPlaceholder
-                    title="Practice: Visualize Your Success"
-                    description="Get a hands-on feel for Practice's intuitive interface and powerful features. See how it simplifies complex project management tasks and boosts team productivity."
-                    imageUrl="https://placehold.co/800x450.png"
-                    dataAiHint="project dashboard"
-                    link={practiceProduct?.interactiveDemo?.link}
-                    videoUrl={practiceProduct?.interactiveDemo?.videoUrl}
-                  />
-                </motion.div>
-              </div>
-            </motion.section>
             <InteractiveQuestionnaire />
             <PartnerLogos />
             <motion.section

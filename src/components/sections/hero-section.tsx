@@ -189,8 +189,8 @@ export default function HeroSection() {
         >
           <AnimatedBlob
             id="blob1"
-            color1Light="hsla(0, 0%, 100%, 0.8)" 
-            color2Light="hsla(0, 0%, 100%, 0.5)"
+            color1Light="hsla(0, 0%, 100%, 0.1)" 
+            color2Light="hsla(0, 0%, 100%, 0.1)"
             color1Dark="hsla(0, 0%, 100%, 0.3)" 
             color2Dark="hsla(0, 0%, 100%, 0.15)"
             className="absolute top-[-20%] left-[-25%] w-[150%] h-[130%] md:w-[120%] md:h-[110%]"
@@ -200,8 +200,8 @@ export default function HeroSection() {
           />
           <AnimatedBlob
             id="blob2"
-            color1Light="hsla(0, 0%, 100%, 0.7)" 
-            color2Light="hsla(0, 0%, 100%, 0.9)"
+            color1Light="hsla(0, 0%, 100%, 0.1)" 
+            color2Light="hsla(0, 0%, 100%, 0.1)"
             color1Dark="hsla(0, 0%, 100%, 0.25)" 
             color2Dark="hsla(0, 0%, 100%, 0.4)"
             className="absolute bottom-[-25%] right-[-30%] w-[160%] h-[120%] md:w-[130%] md:h-[100%]"
