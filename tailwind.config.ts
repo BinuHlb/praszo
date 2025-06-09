@@ -70,6 +70,7 @@ export default {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
+        'hero-bg': 'hsl(var(--hero-background))',
       },
       borderRadius: {
         lg: 'var(--radius)',

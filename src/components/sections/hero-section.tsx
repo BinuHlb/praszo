@@ -176,8 +176,7 @@ export default function HeroSection() {
   return (
     <section 
       ref={sectionRef}
-      className="sticky top-0 h-screen z-10 py-16 md:py-0" // Ensure enough padding for content visibility if not md:h-screen
-      style={{ backgroundColor: 'hsl(var(--secondary))' }} // Solid secondary background
+      className="sticky top-0 h-screen z-10 py-16 md:py-0 bg-hero-bg"
     >
       <motion.div
         className="absolute inset-0 overflow-hidden" // Container for blobs
@@ -222,11 +221,11 @@ export default function HeroSection() {
       >
         {/* Main text content */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }} // Changed x to y for slide-up effect
+          initial={{ opacity: 0, y: 20 }} 
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="space-y-6 mb-10 md:mb-12" // Added bottom margin
+          className="space-y-6 mb-10 md:mb-12" 
         >
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-headline tracking-tight text-balance text-secondary-foreground">
             Elevate Your Business with <span className="text-accent-vibrant">Praszo</span> Solutions
@@ -240,7 +239,7 @@ export default function HeroSection() {
                 Explore Practice <ChevronRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button size="lg" variant="outline" asChild className="border-secondary text-secondary hover:bg-secondary/10 hover:border-secondary hover:text-secondary">
+            <Button size="lg" variant="outline" asChild>
               <Link href="/contact">
                 Start Your Project
               </Link>
@@ -250,7 +249,7 @@ export default function HeroSection() {
 
         {/* Subscription Form */}
         <motion.div
-          className="mt-5 md:mt-10 max-w-lg mx-auto" // Constrained width and centered
+          className="mt-5 md:mt-10 max-w-lg mx-auto" 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
