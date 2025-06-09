@@ -8,16 +8,17 @@ import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import SectionHeader from '@/components/layout/section-header';
 import { motion } from 'framer-motion';
+import Autoplay from 'embla-carousel-autoplay';
 
 const partnerLogosList = [
-  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 1', dataAiHint: 'company logo' },
-  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 2', dataAiHint: 'company logo' },
-  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 3', dataAiHint: 'company logo' },
-  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 4', dataAiHint: 'company logo' },
-  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 5', dataAiHint: 'company logo' },
-  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 6', dataAiHint: 'company logo' },
-  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 7', dataAiHint: 'company logo' },
-  { src: 'https://placehold.co/100x80.png', alt: 'Partner Logo 8', dataAiHint: 'company logo' },
+  { src: '/assets/images/p1.png', alt: 'Partner Logo 1', dataAiHint: 'company logo' },
+  { src: '/assets/images/p2.png', alt: 'Partner Logo 2', dataAiHint: 'company logo' },
+  { src: '/assets/images/p3.png', alt: 'Partner Logo 3', dataAiHint: 'company logo' },
+  { src: '/assets/images/p4.png', alt: 'Partner Logo 4', dataAiHint: 'company logo' },
+  { src: '/assets/images/p5.png', alt: 'Partner Logo 5', dataAiHint: 'company logo' },
+  { src: '/assets/images/p1.png', alt: 'Partner Logo 6', dataAiHint: 'company logo' },
+  { src: '/assets/images/p2.png', alt: 'Partner Logo 7', dataAiHint: 'company logo' },
+  { src: '/assets/images/p3.png', alt: 'Partner Logo 8', dataAiHint: 'company logo' },
 ];
 
 const sectionVariants = {
@@ -30,7 +31,9 @@ export default function PartnerLogos() {
     loop: true,
     align: 'start',
     slidesToScroll: 'auto',
-  });
+  },
+    [Autoplay({ delay: 3000, stopOnInteraction: false })]
+  );
 
   const scrollPrev = React.useCallback(() => {
     if (emblaApi) emblaApi.scrollPrev();
@@ -42,7 +45,7 @@ export default function PartnerLogos() {
 
   return (
     <motion.section
-      className="py-12 md:py-20 bg-secondary"
+      className="py-12 md:py-20 "
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
@@ -51,7 +54,6 @@ export default function PartnerLogos() {
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeader
           title="Trusted By Leading Companies"
-          titleClassName="text-accent-vibrant" // Changed from text-primary
           subtitleClassName="text-secondary-foreground/90" // Added for consistency with other secondary sections
           className="mb-10"
         />
@@ -61,7 +63,7 @@ export default function PartnerLogos() {
               {partnerLogosList.map((logo, index) => (
                 <div
                   key={index}
-                  className="relative flex-[0_0_auto] min-w-0 pl-4 basis-1/4 sm:basis-1/8"
+                  className="relative flex-[0_0_auto] min-w-0 pl-4 basis-1/7 sm:basis-1/6"
                 >
                   <div className="flex items-center justify-center h-[100px] p-3 rounded-lg duration-300 ease-in-out transform hover:scale-105">
                     <Image
