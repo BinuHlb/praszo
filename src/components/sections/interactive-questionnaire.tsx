@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -8,7 +9,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import SectionHeader from '@/components/layout/section-header';
 import { ArrowRight, CheckCircle, Mail, Send } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -58,6 +59,13 @@ const cardVariants = {
   visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
+const contentSwitchVariants = {
+  initial: { opacity: 0, y: 10 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeInOut", delay: 0.1 } },
+  exit: { opacity: 0, y: -10, transition: { duration: 0.3, ease: "easeInOut" } },
+};
+
+
 const subscriptionFormSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
 });
@@ -67,6 +75,7 @@ export default function InteractiveQuestionnaire() {
   const [answers, setAnswers] = useState<Answers>({});
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | undefined>(undefined);
+  const [showRecommendationDetails, setShowRecommendationDetails] = useState(false);
   const { toast } = useToast();
 
   const subscriptionForm = useForm<z.infer<typeof subscriptionFormSchema>>({
@@ -94,18 +103,20 @@ export default function InteractiveQuestionnaire() {
       setSelectedOption(undefined);
     } else {
       setQuizCompleted(true);
+      setShowRecommendationDetails(false); // Reset when quiz is completed
     }
   };
 
   async function onSubscriptionSubmit(values: z.infer<typeof subscriptionFormSchema>) {
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000)); 
     console.log('Quiz Subscription email:', values.email);
     toast({
       title: 'Subscribed!',
-      description: "Thanks for joining! We'll keep you in the loop.",
+      description: "Thanks for joining! We'll show your recommendation now.",
       variant: 'default',
     });
     subscriptionForm.reset();
+    setShowRecommendationDetails(true);
   }
 
   if (quizCompleted) {
@@ -114,78 +125,109 @@ export default function InteractiveQuestionnaire() {
         <div className="container mx-auto px-4 md:px-6 text-center">
           <SectionHeader
             title="Thanks for Your Insights!"
-            subtitle="Based on your answers, a comprehensive project management tool like Practice could be a great fit to streamline your workflows, enhance collaboration, and boost team productivity."
+            subtitle={
+              !showRecommendationDetails
+                ? "Enter your email below to unlock our tailored solution recommendation and receive our latest news, tips, and insights from Praszo."
+                : "Great! Based on your answers, here's what we recommend:"
+            }
             titleClassName="text-accent-vibrant"
             subtitleClassName="text-secondary-foreground/90"
           />
           <motion.div
-            variants={cardVariants}
-            initial="hidden"
-            animate="visible"
-            className="mt-8"
+            // Removed variants from outer motion.div if AnimatePresence handles direct children
+            initial="hidden" // Keep initial hidden for the block
+            animate="visible" // Animate to visible
+            viewport={{ once: true }} // Ensure this doesn't re-trigger on scroll if not desired
+            className="mt-0" // Adjusted margin
           >
             <CheckCircle className="h-20 w-20 md:h-24 md:w-24 text-accent-vibrant mx-auto mb-6" />
-            <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-balance text-secondary-foreground/90">
-              Ready to see how Practice can transform your project management and help you achieve your goals?
-            </p>
-            <Button size="lg" asChild className="text-lg py-6 px-8 mb-12">
-              <Link href="/products/practice">
-                <span className="flex items-center">
-                  Discover Practice <ArrowRight className="ml-2 h-5 w-5" />
-                </span>
-              </Link>
-            </Button>
-
-            <div className="mt-12 border-t border-secondary-foreground/20 pt-10">
-              <h3 className="text-2xl font-headline font-semibold mb-4 text-accent-vibrant">Stay Updated!</h3>
-              <p className="text-md text-secondary-foreground/80 mb-6 max-w-lg mx-auto text-balance">
-                Subscribe to our newsletter for the latest updates, tips, and insights from Praszo.
-              </p>
-              <Form {...subscriptionForm}>
-                <form onSubmit={subscriptionForm.handleSubmit(onSubscriptionSubmit)} className="max-w-md mx-auto space-y-3">
-                  <div className="relative">
-                    <FormField
-                      control={subscriptionForm.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <div className="relative">
-                              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-secondary-foreground/80 z-10" />
-                              <Input
-                                type="email"
-                                placeholder="Enter your email"
-                                {...field}
-                                className="pl-10 pr-[150px] h-14 text-base bg-background/20 dark:bg-input/50 text-secondary-foreground placeholder:text-secondary-foreground/70 border-border focus:bg-background/40 dark:focus:bg-input"
-                              />
-                            </div>
-                          </FormControl>
-                          <FormMessage className="mt-1 text-sm text-red-300 dark:text-destructive" />
-                        </FormItem>
-                      )}
-                    />
-                    <Button
-                      type="submit"
-                      variant="default" // Explicitly default, or choose another contrasting variant like 'outline' with light text if needed
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 h-11 px-5 flex items-center bg-accent-vibrant hover:bg-accent-vibrant/90 text-accent-vibrant-foreground"
-                      disabled={subscriptionForm.formState.isSubmitting}
-                    >
-                      {subscriptionForm.formState.isSubmitting ? (
-                        'Subscribing...'
-                      ) : (
-                        <>
-                          <Send className="mr-2 h-4 w-4" />
-                          Subscribe
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                   <p className="text-xs text-secondary-foreground/70 pt-1">
-                    No spam, ever. Unsubscribe anytime.
+            
+            <AnimatePresence mode="wait">
+              {!showRecommendationDetails ? (
+                <motion.div
+                  key="subscription"
+                  variants={contentSwitchVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  className="mt-6" // Add margin here if needed between CheckCircle and this block
+                >
+                  <h3 className="text-2xl font-headline font-semibold mb-4 text-accent-vibrant">
+                    Unlock Your Recommendation & Stay Updated
+                  </h3>
+                  <p className="text-md text-secondary-foreground/80 mb-6 max-w-lg mx-auto text-balance">
+                    Enter your email to see which Praszo solution best matches your needs and receive our latest news and tips.
                   </p>
-                </form>
-              </Form>
-            </div>
+                  <Form {...subscriptionForm}>
+                    <form onSubmit={subscriptionForm.handleSubmit(onSubscriptionSubmit)} className="max-w-md mx-auto space-y-3">
+                      <div className="relative">
+                        <FormField
+                          control={subscriptionForm.control}
+                          name="email"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormControl>
+                                <div className="relative">
+                                  <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-secondary-foreground/80 z-10" />
+                                  <Input
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    {...field}
+                                    className="pl-10 pr-[150px] h-14 text-base bg-background/20 dark:bg-input/50 text-secondary-foreground placeholder:text-secondary-foreground/70 border-border focus:bg-background/40 dark:focus:bg-input"
+                                  />
+                                </div>
+                              </FormControl>
+                              <FormMessage className="mt-1 text-sm text-red-300 dark:text-destructive" />
+                            </FormItem>
+                          )}
+                        />
+                        <Button
+                          type="submit"
+                          variant="default"
+                          className="absolute right-2.5 top-1/2 -translate-y-1/2 h-11 px-5 flex items-center bg-accent-vibrant hover:bg-accent-vibrant/90 text-accent-vibrant-foreground"
+                          disabled={subscriptionForm.formState.isSubmitting}
+                        >
+                          {subscriptionForm.formState.isSubmitting ? (
+                            'Submitting...'
+                          ) : (
+                            <>
+                              <Send className="mr-2 h-4 w-4" />
+                              Submit & See
+                            </>
+                          )}
+                        </Button>
+                      </div>
+                      <p className="text-xs text-secondary-foreground/70 pt-1">
+                        No spam, ever. Unsubscribe anytime.
+                      </p>
+                    </form>
+                  </Form>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="recommendation"
+                  variants={contentSwitchVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  className="mt-6" // Add margin here if needed
+                >
+                  <p className="text-lg md:text-xl mb-4 max-w-2xl mx-auto text-balance text-secondary-foreground/90">
+                    Based on your answers, a comprehensive project management tool like <strong className="text-accent-vibrant">Practice</strong> could be a great fit to streamline your workflows, enhance collaboration, and boost team productivity.
+                  </p>
+                  <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-balance text-secondary-foreground/90">
+                    Ready to see how Practice can transform your project management?
+                  </p>
+                  <Button size="lg" asChild className="text-lg py-6 px-8">
+                    <Link href="/products/practice">
+                      <span className="flex items-center">
+                        Discover Practice <ArrowRight className="ml-2 h-5 w-5" />
+                      </span>
+                    </Link>
+                  </Button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
         </div>
       </section>
@@ -251,3 +293,4 @@ export default function InteractiveQuestionnaire() {
     </section>
   );
 }
+
