@@ -212,7 +212,7 @@ export default function HeroSection() {
           />
         </motion.div>
         {/* Frosted glass effect layer */}
-        <div className="absolute inset-0 z-10 bg-primary/10 dark:bg-black/30 backdrop-blur-xl"></div>
+        <div className="absolute inset-0 z-10 dark:bg-black/30 backdrop-blur-xl"></div>
       </motion.div>
       
       <motion.div 
