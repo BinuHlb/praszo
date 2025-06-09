@@ -43,7 +43,7 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --hero-background: hsl(244 62% 40%); /* Light mode hero BG: current dark mode secondary hsl(244 62% 40%) */
+    --hero-background: hsl(var(--primary)); /* Light mode hero BG: primary color */
   }
 
   .dark {
@@ -67,9 +67,9 @@
     --destructive-foreground: 0 0% 98%;
     --border: 275 10% 25%;
     --input: 275 10% 20%;
-    --ring: 246 93% 63%; /* Adjusted to new dark primary */
+    --ring: 246 93% 63%; /* Adjusted to new primary */
 
-    --chart-1: 246 93% 63%; /* Adjusted to new dark primary */
+    --chart-1: 246 93% 63%; /* Adjusted to new primary */
     --chart-2: 217 44% 50%; /* New Dark Accent for charts */
     --chart-3: 275 60% 70%;
     --chart-4: 285 60% 80%;
