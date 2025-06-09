@@ -75,7 +75,7 @@ export default function CounterStatsSection() {
         <SectionHeader
           title="Our Achievements in Numbers"
           subtitle="We're proud of our journey and the impact we've made. Here's a glimpse of our milestones."
-          titleClassName="text-primary"
+          titleClassName="text-accent-vibrant"
         />
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8"

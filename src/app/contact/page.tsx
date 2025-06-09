@@ -66,7 +66,7 @@ export default function ContactPage() {
           </section>
            <section className="py-16 md:py-24 bg-secondary">
             <div className="container mx-auto px-4 md:px-6">
-              <SectionHeader title="Our Location" titleClassName="text-primary" />
+              <SectionHeader title="Our Location" titleClassName="text-accent-vibrant" />
               <Card className="rounded-xl shadow-xl overflow-hidden">
                 <div className="aspect-video">
                   {/* In a real app, use @vis.gl/react-google-maps or similar */}

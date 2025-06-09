@@ -101,7 +101,7 @@ export default function AboutPage() {
               <SectionHeader
                 title="Mission & Vision"
                 subtitle="Guiding our strategies and inspiring our actions."
-                titleClassName="text-primary"
+                titleClassName="text-accent-vibrant"
                 animateOnLoad={true} 
               />
               <motion.div

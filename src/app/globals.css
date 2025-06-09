@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -18,6 +19,8 @@
     --muted-foreground: 275 10% 45%;
     --accent: 217 44% 16%; /* New Accent: Dark Blue #17243a */
     --accent-foreground: 0 0% 98%; /* New Accent Foreground: Light for contrast */
+    --accent-vibrant: 170 88% 48%; /* New Vibrant Teal #0fe6c7 */
+    --accent-vibrant-foreground: 0 0% 100%; /* White text for on vibrant accent */
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
     --border: 275 10% 85%;
@@ -56,6 +59,8 @@
     --muted-foreground: 275 10% 65%;
     --accent: 217 44% 50%; /* New Dark Accent: Lighter shade of #17243a */
     --accent-foreground: 0 0% 98%; /* New Dark Accent Foreground: Light for contrast */
+    --accent-vibrant: 170 88% 58%; /* Lighter Vibrant Teal for Dark Mode */
+    --accent-vibrant-foreground: 0 0% 10%; /* Dark text for on vibrant accent in dark mode */
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
     --border: 275 10% 25%;

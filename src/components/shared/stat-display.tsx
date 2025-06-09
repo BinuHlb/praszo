@@ -48,10 +48,10 @@ export default function StatDisplay({
     <div className={cn("text-center p-6  transition-shadow duration-300", className)}>
       {Icon && (
         <div className="mb-4 flex justify-center">
-          <Icon className="h-12 w-12 text-primary" />
+          <Icon className="h-12 w-12 text-accent-vibrant" />
         </div>
       )}
-      <h3 className="text-4xl md:text-5xl font-bold font-headline text-primary mb-2">
+      <h3 className="text-4xl md:text-5xl font-bold font-headline text-accent-vibrant mb-2">
         {/* The span's content will be updated by the animation effect */}
         <span ref={ref}>{prefix}0{suffix}</span>
       </h3>

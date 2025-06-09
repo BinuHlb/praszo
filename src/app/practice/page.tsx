@@ -83,7 +83,7 @@ export default function PracticePage() { // Renamed from ProjectManagementAppPag
               <SectionHeader 
                 title="Powerful Features, Effortless Control in Practice" // Updated
                 subtitle={`${app.name} is packed with features designed to enhance productivity and collaboration.`} // app.name is Practice
-                titleClassName="text-primary"
+                titleClassName="text-accent-vibrant"
               />
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {features.map((feature, index) => (

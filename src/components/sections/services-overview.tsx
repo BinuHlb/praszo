@@ -53,7 +53,7 @@ export default function ServicesOverview() {
         <SectionHeader
           title="Why Choose Praszo?"
           subtitle="We combine cutting-edge technology with creative strategies to deliver solutions that not only meet but exceed expectations. Partner with us for digital excellence."
-          titleClassName="text-primary"
+          titleClassName="text-accent-vibrant"
         />
         <motion.div
           className="grid md:grid-cols-3 gap-8"
