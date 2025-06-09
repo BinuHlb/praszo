@@ -174,7 +174,7 @@ export default function HeroSection() {
   return (
     <section 
       ref={sectionRef}
-      className="sticky top-0 h-screen z-10"
+      className="sticky top-0 h-screen z-10 py-16 md:py-0"
       style={{ backgroundColor: 'hsl(var(--secondary))' }}
     >
       <motion.div
@@ -213,7 +213,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-xl"></div>
       </motion.div>
       
-      <div className="relative z-20 container mx-auto px-4 md:px-6 py-20 md:py-28 lg:py-32 flex flex-col justify-center h-full">
+      <div className="relative z-20 container mx-auto px-4 md:px-6 flex flex-col justify-center h-full">
         <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
@@ -222,14 +222,14 @@ export default function HeroSection() {
               transition={{ duration: 0.7, ease: "easeOut" }}
               className="space-y-6"
             >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-headline tracking-tight text-balance text-foreground">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-headline tracking-tight text-balance text-secondary-foreground">
                 Elevate Your Business with <span className="text-primary">Praszo</span> Solutions
               </h1>
-              <p className="text-lg md:text-xl text-foreground/90 text-balance">
+              <p className="text-lg md:text-xl text-secondary-foreground/90 text-balance">
                 We craft innovative digital experiences and powerful software to propel your brand forward. Discover the Apex advantage.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" variant="outline" asChild className="border-foreground/50 text-foreground hover:bg-foreground/10 dark:border-foreground/50 dark:text-foreground dark:hover:bg-foreground/10">
+                <Button size="lg" variant="outline" asChild className="border-secondary-foreground/50 text-secondary-foreground hover:bg-secondary-foreground/10">
                   <Link href="/contact">
                     <span className="flex items-center">
                       Start Your Project <ChevronRight className="ml-2 h-5 w-5" />
@@ -251,7 +251,7 @@ export default function HeroSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <h3 className="text-xl font-semibold mb-4 text-foreground text-center md:text-left">Stay Updated With Praszo</h3>
+              <h3 className="text-xl font-semibold mb-4 text-secondary-foreground text-center md:text-left">Stay Updated With Praszo</h3>
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
                   <div className="relative"> 
@@ -262,16 +262,16 @@ export default function HeroSection() {
                         <FormItem>
                           <FormControl>
                             <div className="relative"> 
-                              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground z-10" />
+                              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-secondary-foreground/80 z-10" />
                               <Input
                                 type="email"
                                 placeholder="Enter your email"
                                 {...field}
-                                className="pl-10 pr-[150px] h-14 text-base bg-background/70 dark:bg-input/50 border-border focus:bg-background dark:focus:bg-input" 
+                                className="pl-10 pr-[150px] h-14 text-base bg-white/30 dark:bg-input/50 text-secondary-foreground placeholder:text-secondary-foreground/60 border-border focus:bg-white/50 dark:focus:bg-input" 
                               />
                             </div>
                           </FormControl>
-                          <FormMessage className="mt-1 text-sm text-destructive" />
+                          <FormMessage className="mt-1 text-sm text-red-300 dark:text-destructive" /> {/* Adjusted error message color for light mode on dark bg */}
                         </FormItem>
                       )}
                     />
@@ -290,7 +290,7 @@ export default function HeroSection() {
                       )}
                     </Button>
                   </div>
-                  <p className="text-xs text-muted-foreground mt-2 text-center md:text-left">
+                  <p className="text-xs text-secondary-foreground/80 mt-2 text-center md:text-left">
                     No spam, ever. Unsubscribe at any time.
                   </p>
                 </form>
@@ -301,3 +301,4 @@ export default function HeroSection() {
     </section>
   );
 }
+
