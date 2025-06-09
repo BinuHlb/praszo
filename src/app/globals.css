@@ -84,7 +84,7 @@
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --hero-background: var(--accent); /* Dark mode hero BG: dark mode accent */
+    --hero-background: var(--background); /* Dark mode hero BG: same as general dark background */
   }
 }
 
@@ -119,3 +119,4 @@
     to { opacity: 1; transform: translateY(0); }
   }
 }
+
