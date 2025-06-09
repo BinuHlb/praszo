@@ -176,7 +176,7 @@ export default function HeroSection() {
   return (
     <section 
       ref={sectionRef}
-      className="sticky top-0 h-screen z-10 py-16 md:py-0 bg-hero-bg"
+      className="sticky top-0 h-screen z-10 py-16 md:py-0 bg-primary dark:bg-[hsl(var(--background))]"
     >
       <motion.div
         className="absolute inset-0 overflow-hidden" 
@@ -233,7 +233,7 @@ export default function HeroSection() {
             We craft innovative digital experiences and powerful software to propel your brand forward. Discover the Praszo advantage.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <Button size="lg" variant="secondary" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
+            <Button size="lg" variant="secondary" asChild>
               <Link href="/products/practice">
                 Explore Practice <ChevronRight className="ml-2 h-5 w-5" />
               </Link>
