@@ -138,7 +138,7 @@ export default function Navbar() {
   return (
     <header className={cn(
         "sticky top-0 z-50 w-full transition-all duration-300 h-16",
-        isScrolled ? "bg-card/80 backdrop-blur-md shadow-lg border-b border-border/30" : "bg-transparent"
+        isScrolled ? "bg-card/80 backdrop-blur-md " : "bg-transparent"
       )}>
       <div className="container mx-auto flex h-full items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
