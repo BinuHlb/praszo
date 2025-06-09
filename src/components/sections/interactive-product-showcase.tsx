@@ -59,7 +59,7 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
 
   const { scrollYProgress } = useScroll({
     target: showcaseRootRef,
-    offset: ['start start', 'end end'], // Triggers when showcaseRootRef top hits viewport top, ends when its bottom hits viewport bottom
+    offset: ['start start', 'end end'], 
   });
 
   const [activeIndex, setActiveIndex] = useState(0);
@@ -69,8 +69,12 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
     setIsMounted(true);
   }, []);
 
+  // Fixed height for the scroll track on desktop, e.g., 200vh.
+  // This means the interaction will happen over the user scrolling this much of the placeholder.
+  const showcaseDesktopHeight = '200vh';
+
   useEffect(() => {
-    if (!isMounted || !products || products.length === 0) {
+    if (!isMounted || !products || products.length === 0 ) {
       setActiveIndex(0);
       return;
     }
@@ -79,13 +83,10 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
       const numProducts = products.length;
       if (numProducts === 0) return;
 
-      // Ensure progress doesn't go beyond 1, which can happen with some scroll setups.
       const progress = Math.max(0, Math.min(latest, 1));
       
-      let newIndex = Math.floor(progress * numProducts);
-      
-      // Ensure newIndex is clamped to the last valid index, especially when progress is exactly 1.0
-      newIndex = Math.min(newIndex, numProducts - 1);
+      // Ensure newIndex is clamped to the last valid index
+      const newIndex = Math.min(Math.floor(progress * numProducts), numProducts - 1);
       
       setActiveIndex(newIndex);
     });
@@ -96,10 +97,6 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
 
   const currentProduct = products[activeIndex];
   
-  // Fixed height for the scroll track on desktop, e.g., 200vh.
-  // This means the interaction will happen over the user scrolling this much of the placeholder.
-  const showcaseDesktopHeight = '200vh';
-
   const imageVariants = {
     initial: { opacity: 0, scale: 0.92, y: 15 },
     animate: { 
@@ -131,15 +128,16 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
     <div
       ref={showcaseRootRef}
       className="relative bg-transparent z-[25]"
-      style={{ height: isMounted ? showcaseDesktopHeight : '0px' }} // Use dynamic height on desktop
+      style={{ height: isMounted ? showcaseDesktopHeight : '0px' }} 
     >
-      <div className="sticky top-16 h-[calc(100vh-4rem)] flex flex-col md:flex-row items-center overflow-hidden z-30 bg-background dark:bg-background">
-        <div className="relative w-full md:w-1/2 h-1/2 md:h-full  items-center justify-center p-8 md:p-12 lg:p-16 bg-primary overflow-hidden">
+      <div className="sticky top-16 h-[calc(100vh-4rem)] flex flex-col md:flex-row items-stretch overflow-hidden z-30 bg-background dark:bg-background">
+        {/* Image Pane */}
+        <div className="relative w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-8 md:p-12 lg:p-16 bg-primary overflow-hidden">
           <SvgBackgroundShapes />
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={currentProduct?.id || 'placeholder-image'}
-              className="relative z-10 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-[3/4]  rounded-xl overflow-hidden "
+              className="relative z-10 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-[3/4] rounded-xl overflow-hidden"
               variants={imageVariants}
               initial="initial"
               animate="animate"
@@ -149,15 +147,16 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
                 src={currentProduct?.image || "https://placehold.co/600x800.png"}
                 alt={currentProduct?.name || "Product Image"}
                 fill
-                priority={activeIndex === 0} 
                 sizes="(max-width: 640px) 90vw, (max-width: 768px) 50vw, (max-width: 1024px) 40vw, 33vw"
-                className="object-contain" // Changed from object-cover
+                className="object-contain rounded-xl" 
                 data-ai-hint={currentProduct?.dataAiHint || "product image"}
+                priority={activeIndex === 0} 
               />
             </motion.div>
           </AnimatePresence>
         </div>
 
+        {/* Content Pane */}
         <div className="w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-4 sm:p-6 md:p-8 overflow-hidden">
           <div className="w-full max-w-md flex flex-col justify-center text-center md:text-left">
             <AnimatePresence initial={false} mode="wait">
@@ -190,4 +189,4 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
     </div>
   );
 }
-
+    
