@@ -51,7 +51,8 @@ export default function PartnerLogos() {
       <div className="container mx-auto px-4 md:px-6">
         <SectionHeader
           title="Trusted By Leading Companies"
-          titleClassName="text-primary"
+          titleClassName="text-accent-vibrant" // Changed from text-primary
+          subtitleClassName="text-secondary-foreground/90" // Added for consistency with other secondary sections
           className="mb-10"
         />
         <div className="relative">
