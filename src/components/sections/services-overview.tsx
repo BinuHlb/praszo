@@ -79,7 +79,7 @@ export default function ServicesOverview() {
                   <CardTitle className="text-xl font-headline">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-secondary-foreground/90">{service.description}</p>
+                  <p className="text-muted-foreground">{service.description}</p>
                 </CardContent>
               </Card>
             </motion.div>
