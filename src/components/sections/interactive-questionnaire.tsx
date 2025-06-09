@@ -132,13 +132,13 @@ export default function InteractiveQuestionnaire() {
             }
             titleClassName="text-accent-vibrant"
             subtitleClassName="text-secondary-foreground/90"
+            animateOnLoad={true} 
           />
           <motion.div
-            // Removed variants from outer motion.div if AnimatePresence handles direct children
-            initial="hidden" // Keep initial hidden for the block
-            animate="visible" // Animate to visible
-            viewport={{ once: true }} // Ensure this doesn't re-trigger on scroll if not desired
-            className="mt-0" // Adjusted margin
+            initial="hidden" 
+            animate="visible" 
+            viewport={{ once: true }} 
+            className="mt-0" 
           >
             <CheckCircle className="h-20 w-20 md:h-24 md:w-24 text-accent-vibrant mx-auto mb-6" />
             
@@ -150,7 +150,7 @@ export default function InteractiveQuestionnaire() {
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  className="mt-6" // Add margin here if needed between CheckCircle and this block
+                  className="mt-6" 
                 >
                   <h3 className="text-2xl font-headline font-semibold mb-4 text-accent-vibrant">
                     Unlock Your Recommendation & Stay Updated
@@ -210,7 +210,7 @@ export default function InteractiveQuestionnaire() {
                   initial="initial"
                   animate="animate"
                   exit="exit"
-                  className="mt-6" // Add margin here if needed
+                  className="mt-6"
                 >
                   <p className="text-lg md:text-xl mb-4 max-w-2xl mx-auto text-balance text-secondary-foreground/90">
                     Based on your answers, a comprehensive project management tool like <strong className="text-accent-vibrant">Practice</strong> could be a great fit to streamline your workflows, enhance collaboration, and boost team productivity.
