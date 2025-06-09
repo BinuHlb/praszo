@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
@@ -77,6 +77,7 @@ export default function InteractiveQuestionnaire() {
   const [selectedOption, setSelectedOption] = useState<string | undefined>(undefined);
   const [showRecommendationDetails, setShowRecommendationDetails] = useState(false);
   const { toast } = useToast();
+  const quizCompletedSectionRef = useRef<HTMLElement>(null);
 
   const subscriptionForm = useForm<z.infer<typeof subscriptionFormSchema>>({
     resolver: zodResolver(subscriptionFormSchema),
@@ -107,6 +108,12 @@ export default function InteractiveQuestionnaire() {
     }
   };
 
+  useEffect(() => {
+    if (quizCompleted && quizCompletedSectionRef.current) {
+      quizCompletedSectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [quizCompleted]);
+
   async function onSubscriptionSubmit(values: z.infer<typeof subscriptionFormSchema>) {
     await new Promise(resolve => setTimeout(resolve, 1000)); 
     console.log('Quiz Subscription email:', values.email);
@@ -121,7 +128,7 @@ export default function InteractiveQuestionnaire() {
 
   if (quizCompleted) {
     return (
-      <section className="py-16 md:py-24 bg-secondary">
+      <section ref={quizCompletedSectionRef} className="py-16 md:py-24 bg-secondary">
         <div className="container mx-auto px-4 md:px-6 text-center">
           <SectionHeader
             title="Thanks for Your Insights!"
