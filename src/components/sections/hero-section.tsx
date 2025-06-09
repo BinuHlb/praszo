@@ -229,7 +229,7 @@ export default function HeroSection() {
                 We craft innovative digital experiences and powerful software to propel your brand forward. Discover the Apex advantage.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" variant="outline" asChild className="border-accent-vibrant text-accent-vibrant hover:bg-accent-vibrant/10 hover:text-accent-vibrant">
+                <Button size="lg" variant="outline" asChild className="text-secondary border-secondary hover:text-secondary hover:bg-secondary/10">
                   <Link href="/contact">
                     <span className="flex items-center">
                       Start Your Project <ChevronRight className="ml-2 h-5 w-5" />
