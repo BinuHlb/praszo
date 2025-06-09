@@ -223,13 +223,13 @@ export default function HeroSection() {
               className="space-y-6"
             >
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-headline tracking-tight text-balance text-secondary-foreground">
-                Elevate Your Business with <span className="text-primary">Praszo</span> Solutions
+                Elevate Your Business with <span className="text-accent-vibrant">Praszo</span> Solutions
               </h1>
               <p className="text-lg md:text-xl text-secondary-foreground/90 text-balance">
                 We craft innovative digital experiences and powerful software to propel your brand forward. Discover the Apex advantage.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" variant="outline" asChild className="border-secondary-foreground/50 text-secondary-foreground hover:bg-secondary-foreground/10">
+                <Button size="lg" variant="outline" asChild className="border-accent-vibrant text-accent-vibrant hover:bg-accent-vibrant/10 hover:text-accent-vibrant">
                   <Link href="/contact">
                     <span className="flex items-center">
                       Start Your Project <ChevronRight className="ml-2 h-5 w-5" />
@@ -271,7 +271,7 @@ export default function HeroSection() {
                               />
                             </div>
                           </FormControl>
-                          <FormMessage className="mt-1 text-sm text-red-300 dark:text-destructive" /> {/* Adjusted error message color for light mode on dark bg */}
+                          <FormMessage className="mt-1 text-sm text-red-300 dark:text-destructive" />
                         </FormItem>
                       )}
                     />
