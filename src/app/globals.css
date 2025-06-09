@@ -43,7 +43,7 @@
     --sidebar-border: 220 13% 91%;
     --sidebar-ring: 217.2 91.2% 59.8%;
 
-    --hero-background: 244 62% 40%; /* Light mode hero BG: current dark mode secondary hsl(244 62% 40%) */
+    --hero-background: hsl(244 62% 40%); /* Light mode hero BG: current dark mode secondary hsl(244 62% 40%) */
   }
 
   .dark {
@@ -53,8 +53,8 @@
     --card-foreground: 275 15% 90%;
     --popover: 275 15% 15%;
     --popover-foreground: 275 15% 90%;
-    --primary: 246 93% 75%; /* New Dark Primary Color (lighter shade of #5c49f7) */
-    --primary-foreground: 246 93% 20%; /* Darker color for text on dark primary */
+    --primary: 246 93% 63%; /* Consistent Primary Color #5c49f7 */
+    --primary-foreground: 0 0% 98%; /* Light color for text on dark primary */
     --secondary: 244 62% 40%; /* New Dark Secondary: #3c32a3 (related to #2f258b) */
     --secondary-foreground: 0 0% 98%; /* New Dark Secondary Foreground: Almost white */
     --muted: 275 10% 30%;
@@ -67,9 +67,9 @@
     --destructive-foreground: 0 0% 98%;
     --border: 275 10% 25%;
     --input: 275 10% 20%;
-    --ring: 246 93% 75%; /* Adjusted to new dark primary */
+    --ring: 246 93% 63%; /* Adjusted to new dark primary */
 
-    --chart-1: 246 93% 75%; /* Adjusted to new dark primary */
+    --chart-1: 246 93% 63%; /* Adjusted to new dark primary */
     --chart-2: 217 44% 50%; /* New Dark Accent for charts */
     --chart-3: 275 60% 70%;
     --chart-4: 285 60% 80%;
