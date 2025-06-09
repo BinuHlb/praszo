@@ -134,12 +134,12 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
       style={{ height: isMounted ? showcaseDesktopHeight : '0px' }} // Use dynamic height on desktop
     >
       <div className="sticky top-16 h-[calc(100vh-4rem)] flex flex-col md:flex-row items-center overflow-hidden z-30 bg-background dark:bg-background">
-        <div className="relative w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-8 md:p-12 lg:p-16 overflow-hidden">
+        <div className="relative w-full md:w-1/2 h-1/2 md:h-full  items-center justify-center p-8 md:p-12 lg:p-16 bg-primary overflow-hidden">
           <SvgBackgroundShapes />
           <AnimatePresence initial={false} mode="wait">
             <motion.div
               key={currentProduct?.id || 'placeholder-image'}
-              className="relative z-10 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-[3/4] shadow-2xl rounded-xl overflow-hidden bg-muted/30"
+              className="relative z-10 w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-[3/4]  rounded-xl overflow-hidden "
               variants={imageVariants}
               initial="initial"
               animate="animate"
