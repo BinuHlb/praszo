@@ -176,7 +176,7 @@ export default function HeroSection() {
   return (
     <section 
       ref={sectionRef}
-      className="sticky top-0 h-screen z-10 py-16 md:py-0 bg-primary dark:bg-[hsl(var(--background))]"
+      className="md:sticky top-0 h-screen z-10 py-16 md:py-0 bg-primary dark:bg-[hsl(var(--background))]"
     >
       <motion.div
         className="absolute inset-0 overflow-hidden" 
