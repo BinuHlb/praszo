@@ -59,7 +59,7 @@ const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, cl
             rx="200"
             ry="150"
             filter={`url(#${filterId})`}
-            className="block dark:hidden" 
+            className={`block dark:hidden ${animationClass || ''}`}
             transform="rotate(30 250 250)"
             fill={`url(#${internalGradIdLight})`}
           />
@@ -69,7 +69,7 @@ const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, cl
             rx="200"
             ry="150"
             filter={`url(#${filterId})`}
-            className="hidden dark:block" 
+            className={`hidden dark:block ${animationClass || ''}`}
             transform="rotate(30 250 250)"
             fill={`url(#${internalGradIdDark})`}
           />
@@ -84,7 +84,7 @@ const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, cl
             height="300"
             rx="100"
             filter={`url(#${filterId})`}
-            className="block dark:hidden"
+            className={`block dark:hidden ${animationClass || ''}`}
             transform="rotate(-20 250 250)"
             fill={`url(#${internalGradIdLight})`}
           />
@@ -95,7 +95,7 @@ const AnimatedBlob = ({ id, color1Light, color2Light, color1Dark, color2Dark, cl
             height="300"
             rx="100"
             filter={`url(#${filterId})`}
-            className="hidden dark:block"
+            className={`hidden dark:block ${animationClass || ''}`}
             transform="rotate(-20 250 250)"
             fill={`url(#${internalGradIdDark})`}
           />
@@ -154,6 +154,8 @@ export default function HeroSection() {
   });
 
   const yBlobs = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]); // Slower movement for text
+  const opacityText = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.7, 0]); // Fade out text faster
 
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
@@ -174,11 +176,11 @@ export default function HeroSection() {
   return (
     <section 
       ref={sectionRef}
-      className="sticky top-0 h-screen z-10 py-16 md:py-0"
-      style={{ backgroundColor: 'hsl(var(--secondary))' }}
+      className="sticky top-0 h-screen z-10 py-16 md:py-0" // Ensure enough padding for content visibility if not md:h-screen
+      style={{ backgroundColor: 'hsl(var(--secondary))' }} // Solid secondary background
     >
       <motion.div
-        className="absolute inset-0 overflow-hidden"
+        className="absolute inset-0 overflow-hidden" // Container for blobs
         initial={{ opacity: 0 }}
         animate={{ opacity: isMounted ? 1 : 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -188,9 +190,9 @@ export default function HeroSection() {
           style={{ y: yBlobs }}
         >
           <AnimatedBlob
-            id="blob1"
+            id="blobHero1"
             color1Light="hsla(0, 0%, 100%, 0.1)" 
-            color2Light="hsla(0, 0%, 100%, 0.1)"
+            color2Light="hsla(0, 0%, 100%, 0.1)" // Very subtle white blobs
             color1Dark="hsla(0, 0%, 100%, 0.3)" 
             color2Dark="hsla(0, 0%, 100%, 0.15)"
             className="absolute top-[-20%] left-[-25%] w-[150%] h-[130%] md:w-[120%] md:h-[110%]"
@@ -199,7 +201,7 @@ export default function HeroSection() {
             shape="bubble1"
           />
           <AnimatedBlob
-            id="blob2"
+            id="blobHero2"
             color1Light="hsla(0, 0%, 100%, 0.1)" 
             color2Light="hsla(0, 0%, 100%, 0.1)"
             color1Dark="hsla(0, 0%, 100%, 0.25)" 
@@ -210,95 +212,96 @@ export default function HeroSection() {
             shape="bubble2"
           />
         </motion.div>
+        {/* Frosted glass effect layer */}
         <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-xl"></div>
       </motion.div>
       
-      <div className="relative z-20 container mx-auto px-4 md:px-6 flex flex-col justify-center h-full">
-        <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, ease: "easeOut" }}
-              className="space-y-6"
-            >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-headline tracking-tight text-balance text-secondary-foreground">
-                Elevate Your Business with <span className="text-accent-vibrant">Praszo</span> Solutions
-              </h1>
-              <p className="text-lg md:text-xl text-secondary-foreground/90 text-balance">
-                We craft innovative digital experiences and powerful software to propel your brand forward. Discover the Apex advantage.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" variant="outline" asChild className="text-secondary border-secondary hover:text-secondary hover:bg-secondary/10">
-                  <Link href="/contact">
-                    <span className="flex items-center">
-                      Start Your Project <ChevronRight className="ml-2 h-5 w-5" />
-                    </span>
-                  </Link>
-                </Button>
-                <Button size="lg" variant="default" asChild>
-                  <Link href="/products/practice">
-                    Explore Practice
-                  </Link>
+      <motion.div 
+        className="relative z-20 container mx-auto px-4 md:px-6 flex flex-col justify-center h-full text-center"
+        style={{ y: yText, opacity: opacityText }}
+      >
+        {/* Main text content */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} // Changed x to y for slide-up effect
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="space-y-6 mb-10 md:mb-12" // Added bottom margin
+        >
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-headline tracking-tight text-balance text-secondary-foreground">
+            Elevate Your Business with <span className="text-accent-vibrant">Praszo</span> Solutions
+          </h1>
+          <p className="text-lg md:text-xl text-secondary-foreground/90 text-balance max-w-3xl mx-auto">
+            We craft innovative digital experiences and powerful software to propel your brand forward. Discover the Praszo advantage.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
+            <Button size="lg" variant="secondary" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground">
+              <Link href="/products/practice">
+                Explore Practice <ChevronRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button size="lg" variant="outline" asChild className="border-secondary text-secondary hover:bg-secondary/10 hover:border-secondary hover:text-secondary">
+              <Link href="/contact">
+                Start Your Project
+              </Link>
+            </Button>
+          </div>
+        </motion.div>
+
+        {/* Subscription Form */}
+        <motion.div
+          className="mt-5 md:mt-10 max-w-lg mx-auto" // Constrained width and centered
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
+          <h3 className="text-xl font-semibold mb-4 text-secondary-foreground">Stay Updated With Praszo</h3>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+              <div className="relative"> 
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="relative"> 
+                          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-secondary-foreground/80 z-10" />
+                          <Input
+                            type="email"
+                            placeholder="Enter your email"
+                            {...field}
+                            className="pl-10 pr-[150px] h-14 text-base bg-white/30 dark:bg-input/50 text-secondary-foreground placeholder:text-secondary-foreground/60 border-border focus:bg-white/50 dark:focus:bg-input" 
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage className="mt-1 text-sm text-red-300 dark:text-destructive" />
+                    </FormItem>
+                  )}
+                />
+                <Button
+                  type="submit"
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 h-11 px-5 flex items-center bg-accent hover:bg-accent/90 text-accent-foreground" 
+                  disabled={form.formState.isSubmitting}
+                >
+                  {form.formState.isSubmitting ? (
+                    'Subscribing...'
+                  ) : (
+                    <>
+                      <Send className="mr-2 h-4 w-4" />
+                      Subscribe
+                    </>
+                  )}
                 </Button>
               </div>
-            </motion.div>
-
-            <motion.div
-              className="mt-5 md:mt-0" 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <h3 className="text-xl font-semibold mb-4 text-secondary-foreground text-center md:text-left">Stay Updated With Praszo</h3>
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-                  <div className="relative"> 
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <div className="relative"> 
-                              <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-secondary-foreground/80 z-10" />
-                              <Input
-                                type="email"
-                                placeholder="Enter your email"
-                                {...field}
-                                className="pl-10 pr-[150px] h-14 text-base bg-white/30 dark:bg-input/50 text-secondary-foreground placeholder:text-secondary-foreground/60 border-border focus:bg-white/50 dark:focus:bg-input" 
-                              />
-                            </div>
-                          </FormControl>
-                          <FormMessage className="mt-1 text-sm text-red-300 dark:text-destructive" />
-                        </FormItem>
-                      )}
-                    />
-                    <Button
-                      type="submit"
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 h-11 px-5 flex items-center bg-accent hover:bg-accent/90 text-accent-foreground" 
-                      disabled={form.formState.isSubmitting}
-                    >
-                      {form.formState.isSubmitting ? (
-                        'Subscribing...'
-                      ) : (
-                        <>
-                          <Send className="mr-2 h-4 w-4" />
-                          Subscribe
-                        </>
-                      )}
-                    </Button>
-                  </div>
-                  <p className="text-xs text-secondary-foreground/80 mt-2 text-center md:text-left">
-                    No spam, ever. Unsubscribe at any time.
-                  </p>
-                </form>
-              </Form>
-            </motion.div>
-          </div>
-        </div>
+              <p className="text-xs text-secondary-foreground/80 mt-2">
+                No spam, ever. Unsubscribe at any time.
+              </p>
+            </form>
+          </Form>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
-
