@@ -154,8 +154,8 @@ export default function HeroSection() {
   });
 
   const yBlobs = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]); // Slower movement for text
-  const opacityText = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.7, 0]); // Fade out text faster
+  const yText = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]); 
+  const opacityText = useTransform(scrollYProgress, [0, 0.5, 1], [1, 0.7, 0]); 
 
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => {
@@ -179,7 +179,7 @@ export default function HeroSection() {
       className="sticky top-0 h-screen z-10 py-16 md:py-0 bg-hero-bg"
     >
       <motion.div
-        className="absolute inset-0 overflow-hidden" // Container for blobs
+        className="absolute inset-0 overflow-hidden" 
         initial={{ opacity: 0 }}
         animate={{ opacity: isMounted ? 1 : 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -191,7 +191,7 @@ export default function HeroSection() {
           <AnimatedBlob
             id="blobHero1"
             color1Light="hsla(0, 0%, 100%, 0.1)" 
-            color2Light="hsla(0, 0%, 100%, 0.1)" // Very subtle white blobs
+            color2Light="hsla(0, 0%, 100%, 0.1)" 
             color1Dark="hsla(0, 0%, 100%, 0.3)" 
             color2Dark="hsla(0, 0%, 100%, 0.15)"
             className="absolute top-[-20%] left-[-25%] w-[150%] h-[130%] md:w-[120%] md:h-[110%]"
@@ -212,14 +212,13 @@ export default function HeroSection() {
           />
         </motion.div>
         {/* Frosted glass effect layer */}
-        <div className="absolute inset-0 z-10 bg-white/20 dark:bg-black/20 backdrop-blur-xl"></div>
+        <div className="absolute inset-0 z-10 bg-primary/10 dark:bg-black/30 backdrop-blur-xl"></div>
       </motion.div>
       
       <motion.div 
         className="relative z-20 container mx-auto px-4 md:px-6 flex flex-col justify-center h-full text-center"
         style={{ y: yText, opacity: opacityText }}
       >
-        {/* Main text content */}
         <motion.div
           initial={{ opacity: 0, y: 20 }} 
           whileInView={{ opacity: 1, y: 0 }}
@@ -247,7 +246,6 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Subscription Form */}
         <motion.div
           className="mt-5 md:mt-10 max-w-lg mx-auto" 
           initial={{ opacity: 0, y: 20 }}
