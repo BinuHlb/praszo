@@ -84,6 +84,7 @@ export default function PracticePage() { // Renamed from ProjectManagementAppPag
                 title="Powerful Features, Effortless Control in Practice" // Updated
                 subtitle={`${app.name} is packed with features designed to enhance productivity and collaboration.`} // app.name is Practice
                 titleClassName="text-accent-vibrant"
+                subtitleClassName="text-secondary-foreground/90"
               />
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {features.map((feature, index) => (
@@ -96,7 +97,7 @@ export default function PracticePage() { // Renamed from ProjectManagementAppPag
                         </div>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-muted-foreground">{feature.description}</p>
+                        <p className="text-secondary-foreground/90">{feature.description}</p>
                       </CardContent>
                     </Card>
                   </div>
@@ -145,3 +146,4 @@ export default function PracticePage() { // Renamed from ProjectManagementAppPag
     </>
   );
 }
+

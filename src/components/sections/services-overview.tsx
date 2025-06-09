@@ -54,6 +54,7 @@ export default function ServicesOverview() {
           title="Why Choose Praszo?"
           subtitle="We combine cutting-edge technology with creative strategies to deliver solutions that not only meet but exceed expectations. Partner with us for digital excellence."
           titleClassName="text-accent-vibrant"
+          subtitleClassName="text-secondary-foreground/90"
         />
         <motion.div
           className="grid md:grid-cols-3 gap-8"
@@ -78,7 +79,7 @@ export default function ServicesOverview() {
                   <CardTitle className="text-xl font-headline">{service.title}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">{service.description}</p>
+                  <p className="text-secondary-foreground/90">{service.description}</p>
                 </CardContent>
               </Card>
             </motion.div>
@@ -88,3 +89,4 @@ export default function ServicesOverview() {
     </section>
   );
 }
+

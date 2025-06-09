@@ -55,7 +55,8 @@ export default function StatDisplay({
         {/* The span's content will be updated by the animation effect */}
         <span ref={ref}>{prefix}0{suffix}</span>
       </h3>
-      <p className="text-base md:text-lg text-muted-foreground">{label}</p>
+      <p className="text-base md:text-lg text-secondary-foreground">{label}</p>
     </div>
   );
 }
+
