@@ -175,7 +175,7 @@ export default function Navbar() {
                       key={item.label}
                       href={item.href}
                       className={cn(
-                        "group flex flex-col items-start p-3 rounded-lg hover:bg-accent/50 transition-colors",
+                        "group flex flex-col items-start p-3 rounded-lg hover:bg-primary/10 transition-colors",
                         pathname === item.href && "bg-accent/50"
                       )}
                       onClick={() => setIsMenuDropdownOpen(false)}
