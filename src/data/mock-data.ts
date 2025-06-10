@@ -94,7 +94,7 @@ export const products: Product[] = [
     tagline: 'Adapt and Evolve Your Solutions.',
     description: 'Flexible modification services to update, enhance, or refactor your existing digital products.',
     longDescription: 'The digital landscape is always changing. Our Modify service helps you adapt your existing applications, websites, and systems to new requirements, technologies, or user feedback, ensuring longevity and relevance.',
-    image: '/assets/images/c5.jpg',
+    image: '/assets/images/c5.png',
     dataAiHint: 'code editing',
     type: 'service',
     slug: 'modify',
