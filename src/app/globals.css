@@ -122,10 +122,10 @@
     border-radius: inherit;
     background-image: conic-gradient(
       from var(--angle),
-      #381D6A 80%,
-      #E0D1FF 88%,
-      #E0D1FF 92%,
-      #381D6A 100%
+      #000000 80%,
+      #ffffff 88%,
+      #ffffff 92%,
+      #000000 100%
     );
     background-origin: border-box;
 
