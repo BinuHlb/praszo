@@ -43,14 +43,23 @@ const SvgBackgroundShapes = () => {
         transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 2 }}
       >
         <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          <defs>
-            <linearGradient id="gradShape2Interactive" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="hsla(var(--accent), 0.25)" />
-              <stop offset="100%" stopColor="hsla(var(--accent), 0.05)" />
-            </linearGradient>
-          </defs>
-          <rect x="50" y="50" width="200" height="200" rx="50" fill="url(#gradShape2Interactive)" transform="rotate(30 150 150)" />
-        </svg>
+  <defs>
+    <linearGradient id="gradShape2Interactive" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stopColor="hsla(var(--accent), 0)" />
+      <stop offset="100%" stopColor="hsla(var(--accent), 0.25)" />
+    </linearGradient>
+  </defs>
+  <rect
+    x="50"
+    y="50"
+    width="200"
+    height="200"
+    rx="50"
+    fill="url(#gradShape2Interactive)"
+    transform="rotate(30 150 150)"
+  />
+</svg>
+
       </motion.div>
     </div>
   );
