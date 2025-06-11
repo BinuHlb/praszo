@@ -16,54 +16,7 @@ import { useRef, useState, useEffect } from 'react';
 const subscriptionFormSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address.' }),
 });
-const SvgBackgroundShapes = () => {
-  return (
-    <div className="absolute inset-0 z-0 overflow-hidden opacity-50 dark:opacity-30">
-      <motion.div
-        className="absolute -top-1/4 -left-1/4 w-[150%] h-[150%]"
-        animate={{ y: ['0%', '5%', '0%'], x: ['0%', '-3%', '0%'], rotate: [0, 2, 0] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-      >
-       <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-          <defs>
-            <radialGradient id="gradShape1Interactive" cx="100%" cy="100%" r="20%" fx="0%" fy="0%">
-              <stop offset="0%" stopColor="hsla(var(--primary), 0)" />
-              <stop offset="100%" stopColor="hsla(var(--primary), 0)" />
-            </radialGradient>
-            <filter id="blurShape1Interactive">
-              <feGaussianBlur stdDeviation="40" />
-            </filter>
-          </defs>
-          <circle cx="250" cy="250" r="200" fill="url(#gradShape1Interactive)" filter="url(#blurShape1Interactive)" />
-        </svg>
-      </motion.div>
-      <motion.div
-        className="absolute -bottom-1/4 -right-1/4 w-full h-full"
-        animate={{ y: ['0%', '-7%', '0%'], x: ['0%', '4%', '0%'], rotate: [0, -3, 0] }}
-        transition={{ duration: 25, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-      >
-        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-  <defs>
-    <linearGradient id="gradShape2Interactive" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stopColor="hsla(var(--accent), 0)" />
-      <stop offset="100%" stopColor="hsla(var(--accent), 0.25)" />
-    </linearGradient>
-  </defs>
-  <rect
-    x="50"
-    y="50"
-    width="200"
-    height="200"
-    rx="50"
-    fill="url(#gradShape2Interactive)"
-    transform="rotate(30 150 150)"
-  />
-</svg>
 
-      </motion.div>
-    </div>
-  );
-};
 
 
 
@@ -107,7 +60,7 @@ export default function HeroSection() {
       ref={sectionRef}
       className="md:sticky bg-grid-lines top-0 h-screen z-10 py-16 md:py-0 bg-primary dark:bg-[hsl(var(--background))]"
     >
-      <SvgBackgroundShapes />
+      
       <motion.div
         className="absolute inset-0 overflow-hidden" 
         initial={{ opacity: 0 }}
