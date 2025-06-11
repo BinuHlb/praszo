@@ -132,7 +132,7 @@ export default function InteractiveProductShowcase({ products }: InteractiveProd
     >
       <div className="sticky top-16 h-[calc(100vh-4rem)] flex flex-col md:flex-row items-stretch overflow-hidden z-30 bg-background dark:bg-background">
         {/* Image Pane */}
-        <div className="relative w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-8 md:p-12 lg:p-16 bg-primary overflow-hidden">
+        <div className="relative w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-8 md:p-12 lg:p-16 bg-primary bg-grid-lines overflow-hidden">
           <SvgBackgroundShapes />
           <AnimatePresence initial={false} mode="wait">
             <motion.div
