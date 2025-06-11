@@ -9,7 +9,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero-like section - outside PageTransition */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-primary to-indigo-700 text-primary-foreground">
+      <section className="py-20 md:py-28 bg-primary bg-grid-lines text-primary-foreground">
         <div className="container mx-auto px-4 md:px-6 text-center animate-slide-up">
           <h1 className="text-5xl md:text-6xl font-bold font-headline mb-4">Get in Touch</h1>
           <p className="text-lg md:text-xl max-w-2xl mx-auto text-balance">

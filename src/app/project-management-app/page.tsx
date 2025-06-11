@@ -26,7 +26,7 @@ export default function ProjectManagementAppPage() {
 
   return (
     <>
-      <section className="py-20 md:py-28 bg-gradient-to-b from-primary to-indigo-700 text-primary-foreground">
+      <section className="py-20 md:py-28 bg-primary bg-grid-lines text-primary-foreground">
         <div className="container mx-auto px-4 md:px-6 text-center animate-slide-up">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-headline mb-6">{app.name}</h1>
           <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto text-balance">{app.tagline}</p>

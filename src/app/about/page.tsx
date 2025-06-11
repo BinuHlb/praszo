@@ -48,7 +48,7 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero-like section - outside PageTransition */}
-      <section className="py-20 md:py-28 bg-gradient-to-b from-primary to-indigo-700 text-primary-foreground overflow-hidden">
+      <section className="py-20 md:py-28 bg-primary bg-grid-lines text-primary-foreground overflow-hidden">
         <motion.div
           className="container mx-auto px-4 md:px-6 text-center"
           initial="hidden"
