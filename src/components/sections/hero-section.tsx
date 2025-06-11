@@ -87,10 +87,10 @@ export default function HeroSection() {
           <p className="text-lg md:text-xl text-secondary-foreground/90 text-balance max-w-3xl mx-auto">
             We craft innovative digital experiences and powerful software to propel your brand forward. Discover the Praszo advantage.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4  media-object">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <Button size="lg" variant="secondary" asChild>
               <Link href="/products/practice">
-                Explore Practice <ChevronRight className="ml-2 h-5 w-5" />
+                Explore Practice <ChevronRight className="ml-2 h-5 w-5 media-object" />
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
