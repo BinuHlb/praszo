@@ -124,7 +124,7 @@ export default function HeroSection() {
                             type="email"
                             placeholder="Enter your email"
                             {...field}
-                            className="pl-10 pr-[150px] h-14 text-base bg-white/30 dark:bg-input/50 text-secondary-foreground placeholder:text-secondary-foreground/60 border-border focus:bg-white/50 dark:focus:bg-input" 
+                            className="pl-10 pr-[150px] h-14 text-base bg-white/30 dark:bg-input/50 text-secondary-foreground placeholder:text-secondary-foreground/60 border-border focus:bg-white/50 dark:focus:bg-input media-object" 
                           />
                         </div>
                       </FormControl>
