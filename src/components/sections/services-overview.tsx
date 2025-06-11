@@ -70,7 +70,7 @@ export default function ServicesOverview() {
               className="h-full" // Ensure motion.div takes full height for card inside
             >
               <Card
-                className="text-center h-full hover:shadow-lg transition-shadow rounded-lg"
+                className="text-center h-full hover:shadow-lg transition-shadow rounded-lg media-object"
               >
                 <CardHeader>
                   <div className="mx-auto flex items-center justify-center w-16 h-16 rounded-full bg-primary text-primary-foreground mb-4">

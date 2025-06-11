@@ -90,7 +90,7 @@ export default function HeroSection() {
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <Button size="lg" variant="secondary" asChild>
               <Link href="/products/practice">
-                Explore Practice <ChevronRight className="ml-2 h-5 w-5 media-object" />
+                Explore Practice <ChevronRight className="ml-2 h-5 w-5 " />
               </Link>
             </Button>
             <Button size="lg" variant="outline" asChild>
@@ -124,7 +124,7 @@ export default function HeroSection() {
                             type="email"
                             placeholder="Enter your email"
                             {...field}
-                            className="pl-10 pr-[150px] h-14 text-base bg-white/30 dark:bg-input/50 text-secondary-foreground placeholder:text-secondary-foreground/60 border-border focus:bg-white/50 dark:focus:bg-input media-object" 
+                            className="pl-10 pr-[150px] h-14 text-base bg-white/30 dark:bg-input/50 text-secondary-foreground placeholder:text-secondary-foreground/60 border-border focus:bg-white/50 dark:focus:bg-input" 
                           />
                         </div>
                       </FormControl>
