@@ -79,7 +79,7 @@ export default function HeroSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="space-y-6 mb-10 md:mb-12" 
+          className="space-y-6 pt-10 md:pb-12 pb-10 md:mb-12 media-object" 
         >
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-headline tracking-tight text-balance text-secondary-foreground">
             Elevate Your Business with <span className="text-accent-vibrant">Praszo</span> Solutions
