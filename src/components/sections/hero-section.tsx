@@ -67,8 +67,7 @@ export default function HeroSection() {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         
-        {/* Frosted glass effect layer */}
-        <div className="absolute inset-0 z-10 dark:bg-black/30 backdrop-blur-xl"></div>
+        
       </motion.div>
       
       <motion.div 
