@@ -32,7 +32,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   return (
     <>
       {/* Hero-like section - outside PageTransition */}
-      <section className="py-20 md:py-28 bg-primary bg-grid-lines text-primary-foreground">
+      <section className="py-20 md:py-28 bg-primary dark:bg-[hsl(var(--background))] bg-grid-lines text-primary-foreground">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-slide-up">
