@@ -24,10 +24,10 @@ const SvgBackgroundShapes = () => {
         animate={{ y: ['0%', '5%', '0%'], x: ['0%', '-3%', '0%'], rotate: [0, 2, 0] }}
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
       >
-        <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+       <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
           <defs>
-            <radialGradient id="gradShape1Interactive" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
-              <stop offset="0%" stopColor="hsla(var(--primary), 0.2)" />
+            <radialGradient id="gradShape1Interactive" cx="100%" cy="100%" r="20%" fx="0%" fy="0%">
+              <stop offset="0%" stopColor="hsla(var(--primary), 0)" />
               <stop offset="100%" stopColor="hsla(var(--primary), 0)" />
             </radialGradient>
             <filter id="blurShape1Interactive">
