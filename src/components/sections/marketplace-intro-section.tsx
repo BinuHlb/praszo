@@ -26,7 +26,7 @@ export default function MarketplaceIntroSection() {
           title="A Hub of Digital Excellence"
           subtitle="Praszo is your one-stop marketplace for a diverse range of cutting-edge digital products and expert services. We empower your business to thrive in the digital age."
           titleClassName="text-primary text-4xl sm:text-5xl md:text-6xl lg:text-7xl"
-          subtitleClassName="text-lg sm:text-xl md:text-2xl text-foreground/80"
+          subtitleClassName="text-lg sm:text-xl md:text-xl text-foreground/80"
           textAlignment="center"
         />
         
