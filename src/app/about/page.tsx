@@ -71,7 +71,7 @@ export default function AboutPage() {
               <div className="grid md:grid-cols-2 gap-12 items-center">
                 <motion.div variants={imageVariants} initial="hidden" animate="visible" viewport={{ once: true }}>
                   <Image
-                    src="https://placehold.co/600x450.png"
+                    src="/assets/images/about.png"
                     alt="Praszo team collaborating"
                     width={600}
                     height={450}
