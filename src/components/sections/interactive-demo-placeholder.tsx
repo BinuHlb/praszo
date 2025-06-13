@@ -44,7 +44,7 @@ export default function InteractiveDemoPlaceholder({ title, description, imageUr
     }
   }, [isInView, shouldShowVideo, videoUrl]);
 
-  const finalImageUrl = imageUrl || "https://placehold.co/1200x675.png";
+  const finalImageUrl = imageUrl || "/assets/images/vdo-thump.jpeg";
   const finalDataAiHint = dataAiHint || "technology interface";
 
   return (

@@ -22,7 +22,7 @@ export const products: Product[] = [
     interactiveDemo: {
       title: "Explore Practice", 
       description: "See how Practice can transform your project management. Visualize workflows and feature integrations.", 
-      imageUrl: "https://placehold.co/1200x675.png", 
+      imageUrl: "/assets/images/vdo-thump.jpeg", // Local asset for demo
       dataAiHint: 'dashboard analytics',
       link: "/products/practice#demo",
       videoUrl: "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" 
