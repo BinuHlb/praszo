@@ -64,7 +64,7 @@ export default function HomePage() {
               <InteractiveDemoPlaceholder
                 title="Practice: Visualize Your Success"
                 description="Get a hands-on feel for Practice's intuitive interface and powerful features. See how it simplifies complex project management tasks and boosts team productivity."
-                imageUrl="https://placehold.co/800x450.png"
+                imageUrl="/assets/images/vdo-thump.jpeg"
                 dataAiHint="project dashboard"
                 link={practiceProduct?.interactiveDemo?.link}
                 videoUrl={practiceProduct?.interactiveDemo?.videoUrl}
