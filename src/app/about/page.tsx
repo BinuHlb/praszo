@@ -189,7 +189,7 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, ease: "easeOut" }}
               >
                 <Image
-                  src="https://placehold.co/800x400.png"
+                  src="/assets/images/about-2.jpeg"
                   alt="Praszo Team"
                   width={800}
                   height={400}
