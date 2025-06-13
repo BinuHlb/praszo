@@ -221,7 +221,7 @@ export default function AboutPage() {
               <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-balance">
                 Let's discuss how Praszo's expertise can elevate your next project. We're excited to build something amazing together.
               </p>
-              <Button size="lg" variant="secondary" asChild className="text-primary hover:bg-background/90">
+              <Button size="lg" variant="secondary" asChild className="bg-background hover:bg-accent/90 text-accent  hover:text-accent-foreground">
                 <Link href="/contact">
                   <span className="flex items-center">
                     Get in Touch <ArrowRight className="ml-2 h-5 w-5" />
