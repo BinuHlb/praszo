@@ -171,7 +171,7 @@ export default function ContactForm() {
             control={form.control}
             name="timeline"
             render={({ field }) => (
-              <FormItem className="flex flex-col">
+              <FormItem >
                 <FormLabel>Expected Timeline (Optional)</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
