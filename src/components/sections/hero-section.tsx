@@ -58,7 +58,7 @@ export default function HeroSection() {
   return (
     <section 
       ref={sectionRef}
-      className="md:sticky bg-grid-lines top-0 h-screen z-10 py-16 md:py-0 bg-primary dark:bg-[hsl(var(--background))]"
+      className="bg-grid-lines top-0 h-screen z-10 py-16 md:py-0 bg-black/95 dark:bg-[hsl(var(--background))]"
     >
       
       <motion.div
@@ -83,10 +83,11 @@ export default function HeroSection() {
           className="space-y-6 pt-10 md:pb-12 pb-10 md:mb-12 media-object" 
         >
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold font-headline tracking-tight text-balance text-secondary-foreground">
-            Elevate Your Business with <span className="text-accent-vibrant">Praszo</span> Solutions
+            <span className="text-accent-vibrant">Praszo </span>Solutions. 
+Precision for Tax & Audit.
           </h1>
-          <p className="text-lg md:text-xl text-secondary-foreground/90 text-balance max-w-3xl mx-auto">
-            We craft innovative digital experiences and powerful software to propel your brand forward. Discover the Praszo advantage.
+          <p className="text-lg md:text-xl text-secondary-foreground/90 text-balance  mx-auto">
+            For the work that demands consistency, structure, and focus, Praszo makes it manageable.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
             <Button size="lg" variant="secondary" asChild>

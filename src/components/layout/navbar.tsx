@@ -137,8 +137,8 @@ export default function Navbar() {
 
   return (
     <header className={cn(
-        "sticky top-0 z-50 w-full transition-all duration-300 h-16",
-        isScrolled ? "bg-card/80 backdrop-blur-md " : "bg-transparent"
+        "sticky top-0 z-50 w-full transition-all duration-300 h-16 ",
+        isScrolled ? "bg-black/80 backdrop-blur-md " : "bg-black"
       )}>
       <div className="container mx-auto flex h-full items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
@@ -153,7 +153,7 @@ export default function Navbar() {
               onMouseLeave={handleMenuMouseLeave}
               className={cn(
                 buttonVariants({ variant: 'ghost' }),
-                "text-sm font-medium text-foreground px-3 py-2",
+                "text-sm font-medium text-white/80 px-3 py-2",
                 "hover:text-primary hover:bg-transparent", // Only change text color on hover
                 mounted && isMenuDropdownActive && "text-primary"
               )}
@@ -210,7 +210,7 @@ export default function Navbar() {
                 href={link.href}
                 className={cn(
                   buttonVariants({ variant: 'ghost', size: 'default' }),
-                  "text-sm font-medium hover:bg-transparent hover:text-primary", // only text color change on hover
+                  "text-sm text-white/80 font-medium hover:bg-transparent hover:text-primary", // only text color change on hover
                   pathname === link.href && "text-primary"
                 )}
               >

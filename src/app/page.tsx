@@ -33,6 +33,7 @@ export default function HomePage() {
     <>
       {/* Sections for sequential parallax effect */}
       <HeroSection /> {/* HeroSection is sticky top-0 h-screen z-10 */}
+      <ProductList />
       <MarketplaceIntroSection /> {/* MarketplaceIntro will be sticky top-0 h-screen z-20, scrolls over Hero */}
       
       {/* InteractiveProductShowcase scrolls within its own defined height, over MarketplaceIntroSection */}
@@ -76,7 +77,7 @@ export default function HomePage() {
         <CounterStatsSection /> 
         <PageTransition>
           <>
-            <ProductList />
+            
             <ServicesOverview />
             <InteractiveQuestionnaire />
             <PartnerLogos />

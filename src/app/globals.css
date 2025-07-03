@@ -177,5 +177,48 @@
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
+
+   .section-title {
+    position: relative;
+  }
+
+  .logo-part {
+    position: absolute;
+    width: 69px;
+    height: 90px;
+    transition: all 0.5s ease-in-out;
+    pointer-events: none;
+  }
+
+  /* Initial separated positions */
+  .part1 {
+    top: -60px;
+    left: 0px;
+    opacity: 0.4;
+  }
+
+  .part2 {
+    top: -92px;
+    right: 50%;
+    opacity: 0.4;
+  }
+
+  .part3 {
+    bottom: -30px;
+    left: 0px;
+    opacity: 0.4;
+  }
+
+  /* Final logo position (centered inside title) */
+  .section-title:hover .part1,
+  .section-title:hover .part2,
+  .section-title:hover .part3 {
+    top:-100px;
+    left: 30px;
+    bottom: auto;
+    right: auto;
+    transform: translate(-34.5px, -45px); /* center based on SVG size */
+    opacity: 1;
+  }
 }
 

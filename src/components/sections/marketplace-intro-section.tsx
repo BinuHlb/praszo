@@ -15,7 +15,7 @@ const sectionVariants = {
 export default function MarketplaceIntroSection() {
   return (
     <motion.section
-      className="sticky top-0 h-screen bg-card z-20 flex flex-col justify-center" // Ensured sticky, top-0, h-screen, z-20
+      className="h-screen bg-card z-20 flex flex-col justify-center" // Ensured sticky, top-0, h-screen, z-20
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"

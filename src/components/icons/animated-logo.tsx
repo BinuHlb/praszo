@@ -32,11 +32,11 @@ export default function AnimatedLogo(props: SVGProps<SVGSVGElement>) {
   if (!mounted) {
     // Render the light theme default during SSR or before hydration to avoid mismatch
     // You could also render a placeholder or null if preferred
-    return <LightModeSVG {...props} />;
+    return <AnimatedLogoDark {...props} />;
   }
 
   if (resolvedTheme === 'dark') {
-    return <AnimatedLogoDark {...props} />;
+    return <LightModeSVG {...props} />;
   }
-  return <LightModeSVG {...props} />;
+  return <AnimatedLogoDark {...props} />;
 }

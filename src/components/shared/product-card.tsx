@@ -1,7 +1,6 @@
 
 import Link from 'next/link';
-import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import type { Product } from '@/lib/types';
 import { ArrowRight } from 'lucide-react';
@@ -12,31 +11,31 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   return (
-    <Card className="h-full flex flex-col overflow-hidden  hover:shadow-lg transition-shadow duration-300 rounded-xl"> {/* Transferred h-full, set rounded-xl */}
-      <CardHeader className="p-0">
-        <Image
-          src={product.image}
-          alt={product.name}
-          width={400}
-          height={250}
-          className="w-full h-48 object-cover"
-          data-ai-hint={product.dataAiHint}
-        />
-      </CardHeader>
-      <CardContent className="p-6 flex flex-col flex-grow">
-        <CardTitle className="text-2xl font-headline mb-2">{product.name}</CardTitle>
-        <CardDescription className="text-muted-foreground mb-4 flex-grow">{product.tagline}</CardDescription>
-        <p className="text-sm mb-6 flex-grow">{product.description}</p>
-        <Button asChild className="mt-auto w-full group">
-          <Link href={`/products/${product.slug}`} legacyBehavior passHref> 
-            <a>
-              <span className="flex items-center justify-center w-full">
-                Learn More <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </span>
-            </a>
-          </Link>
-        </Button>
-      </CardContent>
-    </Card>
+   <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg hover:bg-primary/10  transition-shadow duration-300 rounded-xl">
+  <CardContent className="p-6 grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+    
+    {/* Title + Description Group */}
+    <div className="md:col-span-3 flex flex-col">
+      <CardTitle className="text-2xl text-primary font-headline mb-2">{product.name}</CardTitle>
+      <p className="text-lg">{product.description}</p>
+    </div>
+
+    {/* Button */}
+    <div className="flex justify-end h-full items-center">
+      <Button asChild className="group">
+        <Link href={`/products/${product.slug}`} legacyBehavior passHref>
+          <a>
+            <span className="flex items-center justify-end">
+              <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+            </span>
+          </a>
+        </Link>
+      </Button>
+    </div>
+    
+  </CardContent>
+</Card>
+
+
   );
 }
