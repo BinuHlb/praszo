@@ -154,7 +154,7 @@ export default function Navbar() {
               className={cn(
                 buttonVariants({ variant: 'ghost' }),
                 "text-sm font-medium text-white/80 px-3 py-2",
-                "hover:text-primary hover:bg-transparent", // Only change text color on hover
+                "hover:text-primary hover:bg-transparent outline-none", // Only change text color on hover
                 mounted && isMenuDropdownActive && "text-primary"
               )}
             >
@@ -221,7 +221,7 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
-          <Button asChild className="text-sm font-medium">
+          <Button asChild variant="outline" className="text-sm font-medium">
             <Link href={ctaLink.href}>
               {ctaLink.label}
             </Link>

@@ -111,6 +111,7 @@
     --border-width: 1px;
     position: relative;
     border: var(--border-width) solid transparent;
+    border-radius: 50px;
   }
 
   .media-object::before {

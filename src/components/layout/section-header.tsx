@@ -44,7 +44,7 @@ export default function SectionHeader({
       transition={{ duration: 0.6, ease: "easeInOut" }}
       className={cn("mb-12 flex flex-col", alignmentClasses[textAlignment], className)}
     >
-      <h2 className={cn("text-3xl md:text-4xl font-bold font-headline mb-4", titleClassName)}>
+      <h2 className={cn("text-3xl md:text-[48px] leading-[120%] font-medium font-headline mb-4", titleClassName)}>
         {title}
       </h2>
       {subtitle && (

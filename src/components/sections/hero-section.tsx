@@ -90,7 +90,7 @@ Precision for Tax & Audit.
             For the work that demands consistency, structure, and focus, Praszo makes it manageable.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-            <Button size="lg" variant="secondary" asChild>
+            <Button size="lg" variant="default" asChild>
               <Link href="/products/practice">
                 Explore Practice <ChevronRight className="ml-2 h-5 w-5 " />
               </Link>
